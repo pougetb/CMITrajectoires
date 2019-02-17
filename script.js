@@ -50,7 +50,7 @@ function reduire(div_reduire){
 	div_footer.addClass("onglet_fenetre_reduit");
 
 	//on cache la div fenetre
-	obj_fenetre.hide();
+	obj_fenetre.parent().hide();
 }
 
 function agrandire(div_footer){
@@ -63,9 +63,23 @@ function agrandire(div_footer){
 	let obj_fenetre = $(".map_fenetre").filter("[attr_type_traj='" + type_traj + "']");
 
 	//on l'affiche
-	obj_fenetre.show();
+	obj_fenetre.parent().show();
 
 	//on retire la couleur du footer
 	obj_footer.removeClass("onglet_fenetre_reduit");
 }
+
+// ---===UI jquery===--- //
+
+$( function() {
+    $( "#sortable" ).sortable({
+      revert: true
+    });
+    $( "#draggable" ).draggable({
+      connectToSortable: "#sortable",
+      helper: "clone",
+      revert: "invalid"
+    });
+    $( "ul, li" ).disableSelection();
+  } );
 
