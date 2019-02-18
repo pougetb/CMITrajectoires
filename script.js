@@ -1,4 +1,8 @@
-var map = L.map('map');
+function p(truc){
+	console.log(truc);
+}
+
+var map = L.map('divmap');
 map.setView([41.147519, -8.610814], 13);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
@@ -43,4 +47,53 @@ polyline.on('mouseout', function(e) {
         weight: 4
     });
 });
+
+
+function reduire(div_reduire){
+
+	//on recupère la div fenetre
+	let obj_reduire = $(div_reduire);
+	let obj_fenetre = obj_reduire.parent().parent();
+
+	//on récupère le type de trajectoire
+	let type_traj = obj_fenetre.attr("attr_type_traj");
+	p(type_traj);
+
+	//on cherche la div footer correspondante et on change sa couleur
+	let div_footer = $("#footer>div").filter("[attr_type_traj='" + type_traj + "']");
+	div_footer.addClass("onglet_fenetre_reduit");
+
+	//on cache la div fenetre
+	obj_fenetre.parent().hide();
+}
+
+function agrandire(div_footer){
+
+	//on récupère le type
+	let obj_footer = $(div_footer);
+	let type_traj = obj_footer.attr("attr_type_traj");
+
+	//on récupère la fenetre correspondante
+	let obj_fenetre = $(".map_fenetre").filter("[attr_type_traj='" + type_traj + "']");
+
+	//on l'affiche
+	obj_fenetre.parent().show();
+
+	//on retire la couleur du footer
+	obj_footer.removeClass("onglet_fenetre_reduit");
+}
+
+// ---===UI jquery===--- //
+
+$( function() {
+    $( "#sortable" ).sortable({
+      revert: true
+    });
+    $( "#draggable" ).draggable({
+      connectToSortable: "#sortable",
+      helper: "clone",
+      revert: "invalid"
+    });
+    $( "ul, li" ).disableSelection();
+  } );
 
