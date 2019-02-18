@@ -60,7 +60,6 @@ body{
 	border-width: 2px 0px 2px 1px;
 }
 
-
 /* ---===Body===--- */
 body>div{
 	display:block;
@@ -183,4 +182,17 @@ body>div{
 .ul_liste_fenetre{
 	padding:0;
 	list-style-type: none;
+  
+#info {
+	float:inherit;
+	position:fixed;
+	top:7px;
+	right:10px;
+	z-index:10000;
+	width: 200px;
+	height: 50px;
+	background-color: rgba(50, 50, 50, 0.2);
+	border: 2px solid black;
+	border-radius: 10px;
+
 }
