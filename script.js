@@ -6,13 +6,11 @@ let myJSON = '{"DonneesBrut" : {"1" : {"positions" : [{"x":41.154473,"y":-8.6449
 
 
 let myNewJSON = JSON.parse(myJSON);
-console.log(myNewJSON);
-//console.log(myNewJSON);
 var latlngs = new Array();
 
 var i=1;
 
-while(1){console.log(i + "   " + myNewJSON.DonneesBrut[i]);
+while(1){
 	if (typeof myNewJSON.DonneesBrut[i] === 'undefined'){
 		break;
 	}
@@ -24,9 +22,25 @@ while(1){console.log(i + "   " + myNewJSON.DonneesBrut[i]);
 	i++;
 }
 
+var polyline = L.polyline(latlngs, {color: 'blue', weight:4}).addTo(map);
 
+polyline.on('mouseover', function(e) {
+    var layer = e.target;
 
-console.log(latlngs);
+    layer.setStyle({
+        color: 'blue',
+        opacity: 1,
+        weight: 6
+    });
+});
 
-var polyline = L.polyline(latlngs, {color: 'blue'}).addTo(map);
+polyline.on('mouseout', function(e) {
+    var layer = e.target;
+
+    layer.setStyle({
+        color: 'blue',
+        opacity: 1,
+        weight: 4
+    });
+});
 
