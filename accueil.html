@@ -16,136 +16,57 @@
 
 	<!-- bootstrap -->
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-	
-	<!-- UI jquery
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
--->
+
+
 
 </head>
 
 <body>
 	<!-- nav bar -->
 	<div class="nav_bar">
-		<div>item 1  </div><div>  item 2</div>
+		<div>File</div><div>Upload</div><div>Help</div>
 	</div>
 	<!-- FIN nav bar -->
 
-	<!-- fenetre container -->
-	<div class="fenetre_container">
-
-		<ul id="sortable" class="ul_liste_fenetre">
-			<li class="ui-state-default li_fenetre">
-				<!-- Fenetre carte : Trajectoires Brutes -->
-				<div class="map_fenetre" id="trajectoireBrute" attr_type_traj="brutes">
-
-					<!-- Header fenetre -->
-					<div class="header_map_fenetre">
-						<div class="titre">trajectoires brutes</div>
-						<div class="bouton_reduire" onclick="reduire(this)"> _ </div>
-					</div>
-					<!-- FIN Header fenetre -->
+	<div id="titre_fichier"><strong>Trajectories of Porto taxis</strong></div>
 	
-					<!-- Body fenetre -->
-					<div class="body_fenetre">
-	
-						<div class="menuG_fenetre">
-							<ul class="ul_menuG_fenetre">
-								<li class="li_menuG_fenetre">10 premières trajectoires</li>
-								<li class="li_menuG_fenetre">20 premières trajectoires</li>
-							</ul>
-						</div>
-	
-						<div id="divmap" class="div_map">
-						</div>
-	
-					</div>
-					<!-- FIN Body fenetre -->
-				</div>
-				<!-- FIN Fenetre carte  -->
-			</li>
-
-			<li class="ui-state-default li_fenetre">
-				<div class="map_fenetre" id="trajectoireSwarm" attr_type_traj="swarm">
-
-						<div class="header_map_fenetre">
-							<div class="titre">trajectoires Swarm</div>
-							<div class="bouton_reduire" onclick="reduire(this)"> _ </div>
-						</div>
-						
-						<div class="body_fenetre">
-		
-							<div class="menuG_fenetre">
-								<ul class="ul_menuG_fenetre">
-									<li class="li_menuG_fenetre">10 premières trajectoires</li>
-									<li class="li_menuG_fenetre">20 premières trajectoires</li>
-								</ul>
-							</div>
-		
-							<div id="divmap2" class="div_map">
-							</div>
-		
-						</div>
-					</div>
-			</li>
-			
-			<!-- <li class="ui-state-default li_fenetre">
-				<div class="map_fenetre" id="trajectoireConvoy" attr_type_traj="convoy">
-
-						<div class="header_map_fenetre">
-							<div class="titre">trajectoires Convoy</div>
-							<div class="bouton_reduire" onclick="reduire(this)"> _ </div>
-						</div>
-						
-						<div class="body_fenetre">
-			
-							<div class="menuG_fenetre">
-								<ul class="ul_menuG_fenetre">
-									<li class="li_menuG_fenetre">10 premières trajectoires</li>
-									<li class="li_menuG_fenetre">20 premières trajectoires</li>
-								</ul>
-							</div>
-			
-							<div id="divmap3" class="div_map">
-							</div>
-			
-						</div>
-				</div>
-			</li>
-
-			<li class="ui-state-default li_fenetre">
-				<div class="map_fenetre" id="trajectoireTruc" attr_type_traj="truc">
-
-						<div class="header_map_fenetre">
-							<div class="titre">trajectoires Truc</div>
-							<div class="bouton_reduire" onclick="reduire(this)"> _ </div>
-						</div>
-						
-						<div class="body_fenetre">
-			
-							<div class="menuG_fenetre">
-								<ul class="ul_menuG_fenetre">
-									<li class="li_menuG_fenetre">10 premières trajectoires</li>
-									<li class="li_menuG_fenetre">20 premières trajectoires</li>
-								</ul>
-							</div>
-			
-							<div id="divmap4" class="div_map">
-							</div>
-			
-						</div>
-				</div>
-			</li> -->
-		</ul>
-
+	<div class="container">
+	  <div class="row">
+	    <div class="col-">
+	    	<div class="body_boite">
+	    		<div class="menu_boite">
+	    			<div class="titre_boite">
+	    				<strong>Raw</strong>	    				
+	    			</div>
+	    			<br/>10 traj<br/><br/><br/>20 traj
+	    		</div>
+	    		<div class="map">
+	    			<div id="divmap" class="div_map"></div>
+	    		</div>
+	    	</div>
+	    </div>
+	    <div class="col-">
+	    	<div class="body_boite">
+	    		<div class="menu_boite">
+	    			<div class="titre_boite">
+	    				<strong>Convoy</strong>	    				
+	    			</div>
+	    			<br/>10 traj<br/><br/><br/>20 traj
+	    		</div>
+	    		<div class="map">
+	    			<div id="divmap2" class="div_map"></div>
+	    		</div>
+	    	</div>
+	    </div>
+	  </div>
 	</div>
-	<!--  FIN fenetre container  -->
+
 	<!-- Footer -->
 	<div id="footer">
-		<div class="onglet_fenetre" attr_type_traj="brutes" onclick="agrandire(this)">Brutes</div>
+		<div class="onglet_fenetre" attr_type_traj="brutes" onclick="agrandire(this)">Raw</div>
 		<div class="onglet_fenetre" attr_type_traj="swarm" onclick="agrandire(this)">Swarm</div>
 		<div class="onglet_fenetre" attr_type_traj="convoy" onclick="agrandire(this)">Convoy</div>
-		<div class="onglet_fenetre" attr_type_traj="truc" onclick="agrandire(this)">Truc</div>
+		<div class="onglet_fenetre" attr_type_traj="truc" onclick="agrandire(this)">Thing</div>
 	</div>
 	<!-- FIN Footer -->
 </body>
