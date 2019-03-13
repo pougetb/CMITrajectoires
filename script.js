@@ -6,6 +6,14 @@ var map = L.map('divmap');
 map.setView([41.147519, -8.610814], 13);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
+var map2 = L.map('divmap2');
+map2.setView([41.147519, -8.610814], 13);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map2);
+
+
+
+
+
 let myJSON = '{"DonneesBrut" : {"1" : {"positions" : [{"x":41.154473,"y":-8.644918,"date":"01/01/01"},{"x":41.166420,"y":-8.643001,"date":"02/01/01"},{"x":41.172972,"y":-8.625212,"date":"03/01/01"}]},"2" : {"positions" : [{"x":41.172103,"y":-8.605885,"date":"04/01/01"},{"x":41.162420,"y":-8.607168,"date":"05/01/01"},{"x":41.153670,"y":-8.604588,"date":"06/01/01"}]},"3" : {"positions" : [{"x":41.149048,"y":-8.585653,"date":"07/01/01"},{"x":41.156342,"y":-8.594473,"date":"08/01/01"},{"x":41.153428,"y":-8.610291,"date":"09/01/01"},{"x":41.155698,"y":-8.621481,"date":"10/01/01"}]}}}';
 
 
@@ -27,27 +35,6 @@ while(1){
 }
 
 var polyline = L.polyline(latlngs, {color: 'blue', weight:4}).addTo(map);
-
-polyline.on('mouseover', function(e) {
-    var layer = e.target;
-
-    layer.setStyle({
-        color: 'blue',
-        opacity: 1,
-        weight: 6
-    });
-});
-
-polyline.on('mouseout', function(e) {
-    var layer = e.target;
-
-    layer.setStyle({
-        color: 'blue',
-        opacity: 1,
-        weight: 4
-    });
-});
-
 
 function reduire(div_reduire){
 
@@ -82,18 +69,3 @@ function agrandire(div_footer){
 	//on retire la couleur du footer
 	obj_footer.removeClass("onglet_fenetre_reduit");
 }
-
-// ---===UI jquery===--- //
-
-$( function() {
-    $( "#sortable" ).sortable({
-      revert: true
-    });
-    $( "#draggable" ).draggable({
-      connectToSortable: "#sortable",
-      helper: "clone",
-      revert: "invalid"
-    });
-    $( "ul, li" ).disableSelection();
-  } );
-
