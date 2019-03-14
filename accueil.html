@@ -31,8 +31,8 @@
 	<div id="titre_fichier"><strong>Trajectories of Porto taxis</strong></div>
 	
 	<div class="container">
-
 		<div class="row">
+			
 			<div class="col- fenetre_traj" indice="0">
 				<div class="body_boite" attr_type_traj="raw">
 					<div class="menu_boite">
@@ -42,7 +42,22 @@
 						</div>
 						
 						<div class="bouton_reduire" onclick="reduire(this)">REDUIRE</div>
-						<br/>10 traj<br/><br/><br/>20 traj
+
+						<br/>
+						<div>
+							<input type="radio" id="dixRaw" name="nombreRaw" value="10" checked>
+							<label for="10">10 Trajectories</label>
+						</div>
+
+						<div>
+							<input type="radio" id="vingtRaw" name="nombreRaw" value="20">
+							<label for="20">20 Trajectories</label>
+						</div>
+
+						<div>
+							<input type="radio" id="tousRaw" name="nombreRaw" value="1">
+							<label for="1">All Trajectories</label>
+						</div>
 						
 					</div>
 					<div class="map">
@@ -52,29 +67,78 @@
 			</div>
 
 			<div class="col- fenetre_traj" indice="1">
+				
+				<div class="body_boite" attr_type_traj="swarm">
+					<div class="menu_boite">
+
+						<div class="titre_boite">
+							<strong>Swarm</strong>	    				
+						</div>
+						
+						<div class="bouton_reduire" onclick="reduire(this)">REDUIRE</div>
+						<br/>
+						<div>
+							<input type="radio" id="dixSwarm" name="nombreSwarm" value="10" checked>
+							<label for="10">10 Trajectories</label>
+						</div>
+
+						<div>
+							<input type="radio" id="vingtSwarm" name="nombreSwarm" value="20">
+							<label for="20">20 Trajectories</label>
+						</div>
+
+						<div>
+							<input type="radio" id="tousSwarm" name="nombreSwarm" value="1">
+							<label for="1">All Trajectories</label>
+						</div>
+						
+					</div>
+					<div class="map">
+						<div id="divmap2" class="div_map"></div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="row">
+
+			<div class="col- fenetre_traj" indice="2">
+				
 				<div class="body_boite" attr_type_traj="convoy">
 					<div class="menu_boite">
 						<div class="titre_boite">
 							<strong>Convoy</strong>	    				
 						</div>
 						<div class="bouton_reduire" onclick="reduire(this)">REDUIRE</div>
-						<br/>10 traj<br/><br/><br/>20 traj
+						<br/>
+						<div>
+							<input type="radio" id="dixConvoy" name="nombreConvoy" value="10" checked>
+							<label for="10">10 Trajectories</label>
+						</div>
+
+						<div>
+							<input type="radio" id="vingtConvoy" name="nombreConvoy" value="20">
+							<label for="20">20 Trajectories</label>
+						</div>
+
+						<div>
+							<input type="radio" id="tousConvoy" name="nombreConvoy" value="1">
+							<label for="1">All Trajectories</label>
+						</div>
 					</div>
 					<div class="map">
-						<div id="divmap2" class="div_map"></div>
+						<div id="divmap3" class="div_map"></div>
 					</div>
 				</div>
-				</div>
-
 			</div>
 
-		<div class="row">
-			<div class="col- fenetre_traj" indice="2">
-				<div class="body_boite" attr_type_traj="swarm">
+			<div class="col- fenetre_traj"  indice="3" style="display:none">
+				<!-- <div class="body_boite" attr_type-traj="thing" style="display:none">
 					<div class="menu_boite">
 
 						<div class="titre_boite">
-							<strong>Swarm</strong>	    				
+							<strong>Thing</strong>	    				
 						</div>
 						
 						<div class="bouton_reduire" onclick="reduire(this)">REDUIRE</div>
@@ -84,30 +148,74 @@
 					<div class="map">
 						<div id="divmap3" class="div_map"></div>
 					</div>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col- fenetre_traj"  indice="3" style="display:none">
-					<!-- <div class="body_boite" attr_type-traj="thing" style="display:none">
-						<div class="menu_boite">
-	
-							<div class="titre_boite">
-								<strong>Thing</strong>	    				
-							</div>
-							
-							<div class="bouton_reduire" onclick="reduire(this)">REDUIRE</div>
-							<br/>10 traj<br/><br/><br/>20 traj
-							
-						</div>
-						<div class="map">
-							<div id="divmap3" class="div_map"></div>
-						</div>
-					</div> -->
-				</div>
+				</div> -->
 			</div>
 
 		</div>
+
+
+	<!--
+	  <div class="row">
+	    <div class="col-">
+	    	<div class="body_boite">
+	    		<div class="menu_boite">
+	    			<div class="titre_boite">
+	    				<strong>Raw</strong>	    				
+	    			</div>
+	    			
+	    			<br/>
+					<div>
+						<input type="radio" id="dixRaw" name="nombreRaw" value="10" checked>
+					  	<label for="10">10 Trajectories</label>
+					</div>
+
+					<div>
+					  	<input type="radio" id="vingtRaw" name="nombreRaw" value="20">
+					  	<label for="20">20 Trajectories</label>
+					</div>
+
+					<div>
+					  	<input type="radio" id="tousRaw" name="nombreRaw" value="1">
+					  	<label for="1">All Trajectories</label>
+					</div>
+	    		</div>
+	    		<div class="map">
+	    			<div id="divmap" class="div_map"></div>
+	    		</div>
+	    	</div>
+	    </div>
+	    <div class="col-">
+	    	<div class="body_boite">
+	    		<div class="menu_boite">
+
+	    			<div class="titre_boite">
+	    				<strong>Swarm</strong>	    				
+	    			</div>
+
+	    			<br/>
+					<div>
+						<input type="radio" id="dixSwarm" name="nombreSwarm" value="10" checked>
+					  	<label for="10">10 Trajectories</label>
+					</div>
+
+					<div>
+					  	<input type="radio" id="vingtSwarm" name="nombreSwarm" value="20">
+					  	<label for="20">20 Trajectories</label>
+					</div>
+
+					<div>
+					  	<input type="radio" id="tousSwarm" name="nombreSwarm" value="1">
+					  	<label for="1">All Trajectories</label>
+					</div>
+
+	    		</div>
+	    		<div class="map">
+	    			<div id="divmap2" class="div_map"></div>
+	    		</div>
+	    	</div>
+	    </div>
+	  </div>
+	-->
 
 	</div>
 
