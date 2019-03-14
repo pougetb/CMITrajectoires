@@ -84,20 +84,29 @@ function afficherClosedSwarm(n){
 			}
 		}
 	}
-	console.log(latlngs.length);
 	polylineClosedSwarm = L.polyline(latlngs, {color: 'blue', weight:1.5}).addTo(map2);
 	map2.fitBounds(polylineClosedSwarm.getBounds());
 }
 
-// $('#dixRaw').click(function(){
-// 	afficherRaws(10);
-// });
-// $('#vingtRaw').click(function(){
-// 	afficherRaws(20);
-// });
-// $('#allRaw').click(function(){
-// 	afficherRaws(-1);
-// });
+$('#dixRaw').click(function(){
+	afficherRaws(10);
+});
+$('#vingtRaw').click(function(){
+	afficherRaws(20);
+});
+$('#allRaw').click(function(){
+	afficherRaws(-1);
+});
+
+$('#dixClosedSwarm').click(function(){
+	afficherClosedSwarm(10);
+});
+$('#vingtClosedSwarm').click(function(){
+	afficherClosedSwarm(20);
+});
+$('#allClosedSwarm').click(function(){
+	afficherClosedSwarm(-1);
+});
 
 /*
 function reduire(div_reduire){
