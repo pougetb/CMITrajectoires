@@ -32,7 +32,7 @@
 	
 	<div class="container">
 		<div class="row">
-			
+
 			<div class="col- fenetre_traj" indice="0">
 				<div class="body_boite" attr_type_traj="raw">
 					<div class="menu_boite">
@@ -72,23 +72,23 @@
 					<div class="menu_boite">
 
 						<div class="titre_boite">
-							<strong>Swarm</strong>	    				
+							<strong>Closed Swarm</strong>	    				
 						</div>
 						
 						<div class="bouton_reduire" onclick="reduire(this)">REDUIRE</div>
 						<br/>
 						<div>
-							<input type="radio" id="dixSwarm" name="nombreSwarm" value="10" checked>
+							<input type="radio" id="dixClosedSwarm" name="nombreClosedSwarm" value="10" checked>
 							<label for="10">10 Trajectories</label>
 						</div>
 
 						<div>
-							<input type="radio" id="vingtSwarm" name="nombreSwarm" value="20">
+							<input type="radio" id="vingtClosedSwarm" name="nombreClosedSwarm" value="20">
 							<label for="20">20 Trajectories</label>
 						</div>
 
 						<div>
-							<input type="radio" id="tousSwarm" name="nombreSwarm" value="1">
+							<input type="radio" id="allClosedSwarm" name="nombreClosedSwarm" value="1">
 							<label for="1">All Trajectories</label>
 						</div>
 						
@@ -175,7 +175,7 @@
 					</div>
 
 					<div>
-					  	<input type="radio" id="tousRaw" name="nombreRaw" value="1">
+					  	<input type="radio" id="allRaw" name="nombreRaw" value="1">
 					  	<label for="1">All Trajectories</label>
 					</div>
 	    		</div>
@@ -189,22 +189,22 @@
 	    		<div class="menu_boite">
 
 	    			<div class="titre_boite">
-	    				<strong>Swarm</strong>	    				
+	    				<strong>Closed Swarm</strong>	    				
 	    			</div>
 
 	    			<br/>
 					<div>
-						<input type="radio" id="dixSwarm" name="nombreSwarm" value="10" checked>
+						<input type="radio" id="dixClosedSwarm" name="nombreClosedSwarm" value="10" checked>
 					  	<label for="10">10 Trajectories</label>
 					</div>
 
 					<div>
-					  	<input type="radio" id="vingtSwarm" name="nombreSwarm" value="20">
+					  	<input type="radio" id="vingtClosedSwarm" name="nombreClosedSwarm" value="20">
 					  	<label for="20">20 Trajectories</label>
 					</div>
 
 					<div>
-					  	<input type="radio" id="tousSwarm" name="nombreSwarm" value="1">
+					  	<input type="radio" id="allClosedSwarm" name="nombreClosedSwarm" value="1">
 					  	<label for="1">All Trajectories</label>
 					</div>
 
@@ -222,7 +222,7 @@
 	<!-- Footer -->
 	<div id="footer">
 		<div class="onglet_fenetre couleur_onglet" attr_type_traj="raw" onclick="agrandire(this)">Raw</div>
-		<div class="onglet_fenetre couleur_onglet" attr_type_traj="swarm" onclick="agrandire(this)">Swarm</div>
+		<div class="onglet_fenetre couleur_onglet" attr_type_traj="swarm" onclick="agrandire(this)">Closed Swarm</div>
 		<div class="onglet_fenetre couleur_onglet" attr_type_traj="convoy" onclick="agrandire(this)">Convoy</div>
 		<!-- <div class="onglet_fenetre couleur_onglet" attr_type_traj="thing" onclick="agrandire(this)">Thing</div> -->
 	</div>
