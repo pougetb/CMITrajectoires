@@ -42,10 +42,13 @@ body>div{
 .row{
 	height: 500px;
 }
+.body_boite{
+	border : solid 1px grey;
+}
 
 .col-{
 	width:50%;
-	border : solid 1px grey;
+	/* border : solid 1px grey; */
 }
 
 .body_boite{
@@ -93,9 +96,12 @@ body>div{
 }
 
 .onglet_fenetre{
-	background-color: #ffe9a8;
+	
 	padding : 0 5%;
 	border : solid 1px grey;
+}
+.couleur_onglet{
+	background-color: #ffe9a8;
 }
 .onglet_fenetre_reduit{
 	background-color: #d1ad43;
@@ -116,3 +122,11 @@ body>div{
 	border-radius: 10px;
 
 }
+
+
+/*Modif Simon bouton reduire*/
+.bouton_reduire{
+	text-align: center;
+	background-color: rosybrown;
+}
+/*Modif Simon bouton reduire*/

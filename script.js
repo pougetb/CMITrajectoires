@@ -2,6 +2,10 @@ function p(truc){
 	console.log(truc);
 }
 
+/*Variables Globales*/
+var tab_fenetre_red = Array();
+/*FIN Variables Globales*/
+
 var map = L.map('divmap');
 map.setView([41.147519, -8.610814], 13);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
@@ -10,7 +14,9 @@ var map2 = L.map('divmap2');
 map2.setView([41.147519, -8.610814], 13);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map2);
 
-
+var map3 = L.map('divmap3');
+map3.setView([41.147519, -8.610814], 13);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map3);
 
 
 
@@ -36,23 +42,72 @@ while(1){
 
 var polyline = L.polyline(latlngs, {color: 'blue', weight:4}).addTo(map);
 
-function reduire(div_reduire){
+// function reduire(div_reduire){
 
-	//on recupère la div fenetre
-	let obj_reduire = $(div_reduire);
-	let obj_fenetre = obj_reduire.parent().parent();
+// 	//on recupère la div fenetre
+// 	let obj_reduire = $(div_reduire);
+// 	let obj_fenetre = obj_reduire.parent().parent();
 
-	//on récupère le type de trajectoire
+// 	//on récupère le type de trajectoire
+// 	let type_traj = obj_fenetre.attr("attr_type_traj");
+// 	p(type_traj);
+
+// 	//on cherche la div footer correspondante et on change sa couleur
+// 	let div_footer = $("#footer>div").filter("[attr_type_traj='" + type_traj + "']");
+// 	div_footer.addClass("onglet_fenetre_reduit");
+
+// 	//on cache la div fenetre
+// 	obj_fenetre.parent().hide();
+// }
+
+function reduire(div_red){
+
+	//on recupere la fenetre
+	let obj_fenetre = $(div_red).parent().parent();
+	// p(obj_fenetre);
+	//on recupere le type traj
 	let type_traj = obj_fenetre.attr("attr_type_traj");
-	p(type_traj);
+	// p(type_traj);
+	//on recupere l'indice de la fenetre
+	let indice_fenetre = obj_fenetre.parent().attr("indice");
+	// p(indice_fenetre);
 
-	//on cherche la div footer correspondante et on change sa couleur
-	let div_footer = $("#footer>div").filter("[attr_type_traj='" + type_traj + "']");
-	div_footer.addClass("onglet_fenetre_reduit");
+	//on chnage la couleur de la barre de tache
+	p("[attr_type_traj='" + type_traj + "']");
+	let onglet_fenetre = $(".onglet_fenetre").filter("[attr_type_traj='" + type_traj + "']");
+	onglet_fenetre.removeClass("couleur_onglet");
+	onglet_fenetre.addClass("onglet_fenetre_reduit");
 
-	//on cache la div fenetre
-	obj_fenetre.parent().hide();
+	//on recupere toute les fenetres
+	let tab_fenetre = $(".body_boite");
+	// p(tab_fenetre);
+
+	//on stock la fenetre dans la var globale
+	tab_fenetre_red.push(obj_fenetre);
+	
+	if(indice_fenetre == (tab_fenetre.length - 1)){
+		//c'est le dernier element, on le display none
+		obj_fenetre.parent().empty();
+	}
+	else{
+		for(let i=indice_fenetre; i<(tab_fenetre.length - 1); i++){
+			//colone a remplacer
+			let col_cible = $(".fenetre_traj").filter("[indice='" + i + "']");
+			//fenetre qui ira dans la colone a remplacer
+			let fenetre_cible = $(".fenetre_traj").filter("[indice='"+ (parseInt(i)+1) + "']").children();
+
+			col_cible.empty();
+			col_cible.append(fenetre_cible);
+		}
+	}
+	// p(tab_fenetre_red);
 }
+
+// function initFenetreLeaflet(ind_map){
+// 	let map_add = L.map(ind_map);
+// 	map_add.setView([41.147519, -8.610814], 13);
+// 	L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map_add);
+// }
 
 function agrandire(div_footer){
 
