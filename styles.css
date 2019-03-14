@@ -96,7 +96,7 @@ body>div{
 }
 
 .onglet_fenetre{
-	
+	text-align:center;
 	padding : 0 5%;
 	border : solid 1px grey;
 }
