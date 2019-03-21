@@ -127,6 +127,35 @@ body>div{
 /*Modif Simon bouton reduire*/
 .bouton_reduire{
 	text-align: center;
-	background-color: rosybrown;
+	flex-grow: 1;
+	/* background-color: rosybrown; */
 }
+.bouton_full_screen{
+	text-align:center;
+	flex-grow: 1;
+}
+.menu_bouton_affichage{
+	display:flex;
+	flex-direction: row;
+}
+.menu_bouton_affichage>div:hover{
+	background-color: black;
+	color:white;
+}
+.line_separator{
+	border-top:1px solid black;
+}
+.menu_bouton_mouvement{
+	display:flex;
+	flex-direction:column;
+}
+.menu_bouton_mouvement>div{
+	flex-grow: 1;
+	text-align:center;
+}
+.menu_bouton_mouvement>div:hover{
+	background-color: black;
+	color:white;
+}
+
 /*Modif Simon bouton reduire*/

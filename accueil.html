@@ -33,15 +33,27 @@
 	<div class="container">
 		<div class="row">
 
-			<div class="col- fenetre_traj" indice="0">
-				<div class="body_boite" attr_type_traj="raw">
+			<div class="col- fenetre_traj" attr_estVide="false" indice="0">
+				<div class="body_boite" attr_indice="0" attr_type_traj="raw">
 					<div class="menu_boite">
 
 						<div class="titre_boite">
 							<strong>Raw</strong>	    				
 						</div>
 						
-						<div class="bouton_reduire" onclick="reduire(this)">REDUIRE</div>
+						
+						<div class="line_separator"></div>
+						<div class="menu_bouton_affichage">
+							<div class="bouton_reduire" onclick="reduire(this)">-</div>
+							<div class="bouton_full_screen" onclick="full_screen()">+</div>
+						</div>
+						<div class="line_separator"></div>
+						<div class="menu_bouton_mouvement">
+							<div class="bouton_mouvement_haut" onclick="mouvement_haut(this)">^</div>
+							<div class="bouton_mouvement_lateral" onclick="mouvement_lateral(this)"><-></div>
+							<div class="bouton_mouvement_bas" onclick="mouvement_bas(this)">v</div>
+						</div>
+						<div class="line_separator"></div>						
 
 						<br/>
 						<div>
@@ -66,16 +78,28 @@
 				</div>
 			</div>
 
-			<div class="col- fenetre_traj" indice="1">
+			<div class="col- fenetre_traj" attr_estVide="false" indice="1">
 				
-				<div class="body_boite" attr_type_traj="swarm">
+				<div class="body_boite" attr_indice="1" attr_type_traj="swarm">
 					<div class="menu_boite">
 
 						<div class="titre_boite">
 							<strong>Closed Swarm</strong>	    				
 						</div>
 						
-						<div class="bouton_reduire" onclick="reduire(this)">REDUIRE</div>
+						
+						<div class="line_separator"></div>
+						<div class="menu_bouton_affichage">
+							<div class="bouton_reduire" onclick="reduire(this)">-</div>
+							<div class="bouton_full_screen" onclick="full_screen()">+</div>
+						</div>
+						<div class="line_separator"></div>
+						<div class="menu_bouton_mouvement">
+							<div class="bouton_mouvement_haut" onclick="mouvement_haut(this)">^</div>
+							<div class="bouton_mouvement_lateral" onclick="mouvement_lateral(this)"><-></div>
+							<div class="bouton_mouvement_bas" onclick="mouvement_bas(this)">v</div>
+						</div>
+						<div class="line_separator"></div>						
 						<br/>
 						<div>
 							<input type="radio" id="dixClosedSwarm" name="nombreClosedSwarm" value="10" checked>
@@ -103,14 +127,27 @@
 
 		<div class="row">
 
-			<div class="col- fenetre_traj" indice="2">
+			<div class="col- fenetre_traj" attr_estVide="false" indice="2">
 				
-				<div class="body_boite" attr_type_traj="convoy">
+				<div class="body_boite" attr_indice="2" attr_type_traj="convoy">
 					<div class="menu_boite">
 						<div class="titre_boite">
 							<strong>Convoy</strong>	    				
 						</div>
-						<div class="bouton_reduire" onclick="reduire(this)">REDUIRE</div>
+						
+						<div class="line_separator"></div>
+						<div class="menu_bouton_affichage">
+							<div class="bouton_reduire" onclick="reduire(this)">-</div>
+							<div class="bouton_full_screen" onclick="full_screen()" target="_blank">+</div>
+						</div>
+						<div class="line_separator"></div>
+						<div class="menu_bouton_mouvement">
+							<div class="bouton_mouvement_haut" onclick="mouvement_haut(this)">^</div>
+							<div class="bouton_mouvement_lateral" onclick="mouvement_lateral(this)"><-></div>
+							<div class="bouton_mouvement_bas" onclick="mouvement_bas(this)">v</div>
+						</div>
+						<div class="line_separator"></div>						
+						
 						<br/>
 						<div>
 							<input type="radio" id="dixConvoy" name="nombreConvoy" value="10" checked>
@@ -133,89 +170,49 @@
 				</div>
 			</div>
 
-			<div class="col- fenetre_traj"  indice="3" style="display:none">
-				<!-- <div class="body_boite" attr_type-traj="thing" style="display:none">
+			<div class="col- fenetre_traj" attr_estVide="false"  indice="3">
+				<div class="body_boite" attr_indice="3" attr_type_traj="thing">
 					<div class="menu_boite">
-
 						<div class="titre_boite">
 							<strong>Thing</strong>	    				
 						</div>
 						
-						<div class="bouton_reduire" onclick="reduire(this)">REDUIRE</div>
-						<br/>10 traj<br/><br/><br/>20 traj
+						<div class="line_separator"></div>
+						<div class="menu_bouton_affichage">
+							<div class="bouton_reduire" onclick="reduire(this)">-</div>
+							<div class="bouton_full_screen" onclick="full_screen()" target="_blank">+</div>
+						</div>
+						<div class="line_separator"></div>
+						<div class="menu_bouton_mouvement">
+							<div class="bouton_mouvement_haut" onclick="mouvement_haut(this)">^</div>
+							<div class="bouton_mouvement_lateral" onclick="mouvement_lateral(this)"><-></div>
+							<div class="bouton_mouvement_bas" onclick="mouvement_bas(this)">v</div>
+						</div>
+						<div class="line_separator"></div>						
 						
+						<br/>
+						<div>
+							<input type="radio" id="dixThing" name="nombreThing" value="10" checked>
+							<label for="10">10 Trajectories</label>
+						</div>
+
+						<div>
+							<input type="radio" id="vingtThing" name="nombreThing" value="20">
+							<label for="20">20 Trajectories</label>
+						</div>
+
+						<div>
+							<input type="radio" id="tousThing" name="nombreThing" value="1">
+							<label for="1">All Trajectories</label>
+						</div>
 					</div>
 					<div class="map">
-						<div id="divmap3" class="div_map"></div>
+						<div id="divmap4" class="div_map"></div>
 					</div>
-				</div> -->
+				</div>
 			</div>
 
 		</div>
-
-
-	<!--
-	  <div class="row">
-	    <div class="col-">
-	    	<div class="body_boite">
-	    		<div class="menu_boite">
-	    			<div class="titre_boite">
-	    				<strong>Raw</strong>	    				
-	    			</div>
-	    			
-	    			<br/>
-					<div>
-						<input type="radio" id="dixRaw" name="nombreRaw" value="10" checked>
-					  	<label for="10">10 Trajectories</label>
-					</div>
-
-					<div>
-					  	<input type="radio" id="vingtRaw" name="nombreRaw" value="20">
-					  	<label for="20">20 Trajectories</label>
-					</div>
-
-					<div>
-					  	<input type="radio" id="allRaw" name="nombreRaw" value="1">
-					  	<label for="1">All Trajectories</label>
-					</div>
-	    		</div>
-	    		<div class="map">
-	    			<div id="divmap" class="div_map"></div>
-	    		</div>
-	    	</div>
-	    </div>
-	    <div class="col-">
-	    	<div class="body_boite">
-	    		<div class="menu_boite">
-
-	    			<div class="titre_boite">
-	    				<strong>Closed Swarm</strong>	    				
-	    			</div>
-
-	    			<br/>
-					<div>
-						<input type="radio" id="dixClosedSwarm" name="nombreClosedSwarm" value="10" checked>
-					  	<label for="10">10 Trajectories</label>
-					</div>
-
-					<div>
-					  	<input type="radio" id="vingtClosedSwarm" name="nombreClosedSwarm" value="20">
-					  	<label for="20">20 Trajectories</label>
-					</div>
-
-					<div>
-					  	<input type="radio" id="allClosedSwarm" name="nombreClosedSwarm" value="1">
-					  	<label for="1">All Trajectories</label>
-					</div>
-
-	    		</div>
-	    		<div class="map">
-	    			<div id="divmap2" class="div_map"></div>
-	    		</div>
-	    	</div>
-	    </div>
-	  </div>
-	-->
 
 	</div>
 
@@ -224,7 +221,7 @@
 		<div class="onglet_fenetre couleur_onglet" attr_type_traj="raw" onclick="agrandire(this)">Raw</div>
 		<div class="onglet_fenetre couleur_onglet" attr_type_traj="swarm" onclick="agrandire(this)">Closed Swarm</div>
 		<div class="onglet_fenetre couleur_onglet" attr_type_traj="convoy" onclick="agrandire(this)">Convoy</div>
-		<!-- <div class="onglet_fenetre couleur_onglet" attr_type_traj="thing" onclick="agrandire(this)">Thing</div> -->
+		<div class="onglet_fenetre couleur_onglet" attr_type_traj="thing" onclick="agrandire(this)">Thing</div>
 	</div>
 	<!-- FIN Footer -->
 </body>

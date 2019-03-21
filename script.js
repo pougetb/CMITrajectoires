@@ -20,6 +20,10 @@ var map3 = L.map('divmap3');
 map3.setView([41.147519, -8.610814], 13);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map3);
 
+var map4 = L.map('divmap4');
+map4.setView([41.147519, -8.610814], 13);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map4);
+
 
 
 // let myJSON = '{"DonneesBrut" : {"1" : {"positions" : [{"x":41.154473,"y":-8.644918,"date":"01/01/01"},{"x":41.166420,"y":-8.643001,"date":"02/01/01"},{"x":41.172972,"y":-8.625212,"date":"03/01/01"}]},"2" : {"positions" : [{"x":41.172103,"y":-8.605885,"date":"04/01/01"},{"x":41.162420,"y":-8.607168,"date":"05/01/01"},{"x":41.153670,"y":-8.604588,"date":"06/01/01"}]},"3" : {"positions" : [{"x":41.149048,"y":-8.585653,"date":"07/01/01"},{"x":41.156342,"y":-8.594473,"date":"08/01/01"},{"x":41.153428,"y":-8.610291,"date":"09/01/01"},{"x":41.155698,"y":-8.621481,"date":"10/01/01"}]}}}';
@@ -148,7 +152,7 @@ function agrandire(div_footer){
 function reduire(div_red){
 
 	//on recupere la fenetre
-	let obj_fenetre = $(div_red).parent().parent();
+	let obj_fenetre = $(div_red).parent().parent().parent();
 	// p(obj_fenetre);
 	//on recupere le type traj
 	let type_traj = obj_fenetre.attr("attr_type_traj");
@@ -184,12 +188,28 @@ function reduire(div_red){
 			col_cible.append(fenetre_cible);
 		}
 	}
+
+	//on met l'attribut estVide au col vide
+	var tab_col = $(".fenetre_traj");
+	p(tab_col);
+	for(let i=0;i<tab_col.length;i++){
+		if($(tab_col[i]).has("div").length){
+			$(tab_col[i]).attr("attr_estVide","false");
+		}
+		else{
+			$(tab_col[i]).attr("attr_estVide","true");
+		}
+	}
 	// p(tab_fenetre_red);
 }
 
 function agrandire(div_onglet){
 	//on récupère le type
 	let obj_onglet = $(div_onglet);
+	if(!(obj_onglet.hasClass("onglet_fenetre_reduit"))){
+		p("non réduit");
+		return;
+	}
 	let type_traj = obj_onglet.attr("attr_type_traj");
 
 	//recherche de la bonne fenetre
@@ -200,27 +220,167 @@ function agrandire(div_onglet){
 		}
 	}
 
-	//on cherche la dernière col libre
-	let tab_col = $(".col-");
-	let col_libre;
-	for(let i=0;i<tab_col.length;i++){
-		let col = $(tab_col[i]);
-		if(col.children().length === 0){
-			col_libre = col;
-			break;
+	//on recupere l'indice de la fenetre
+	let indice_fenetre = obj_fenetre.attr("attr_indice");
+	p("indice obj_fenetre:");
+	p(indice_fenetre);
+	//on recupere toute les fenetres
+	let tab_fenetre = $(".body_boite");
+	p(tab_fenetre);
+	// let col_cible = $(".fenetre_traj").filter("[indice='" + indice_fenetre + "']");
+	let indice_tab=0;
+	let nb_fenetre = 0;
+	let bool_place = false;
+	while(nb_fenetre<tab_fenetre.length+1){
+		p("indice de la col:");
+		p(nb_fenetre);
+		let col_cible = $(".fenetre_traj").filter("[indice='" + (parseInt(nb_fenetre)) + "']");
+		let temp_obj_fenetre = $(tab_fenetre[indice_tab]);
+		p("indice temp_obj_f:");
+		p(parseInt(temp_obj_fenetre.attr("attr_indice")));
+		p("temp_obj_f:");
+		p(temp_obj_fenetre);
+		if(!bool_place){
+			if((parseInt(temp_obj_fenetre.attr("attr_indice")) < indice_fenetre)){
+				p("indice plus grand, pas sa place");
+				col_cible.empty();
+				col_cible.append(temp_obj_fenetre);
+				indice_tab++;
+				nb_fenetre++;
+			}
+			else{
+				p("indice moins grand, sa place");
+				col_cible.empty();
+				col_cible.append(obj_fenetre);
+				nb_fenetre++;
+				bool_place=true;
+			}
 		}
+		else{
+			p("objet déjà placé");
+			col_cible.empty();
+			col_cible.append(temp_obj_fenetre);
+			indice_tab++;
+			nb_fenetre++;
+		}
+		
 	}
 
-	p("obj_fenetre");
-	p(obj_fenetre);
-	p("col_libre");
-	p(col_libre);
-	col_libre.append(obj_fenetre);
+	//on retire l'attribut estVide au col vide
+	var tab_col = $(".fenetre_traj");
+	for(let i=0;i<tab_col.length;i++){
+		if($(tab_col[i]).has("div").length){
+			$(tab_col[i]).attr("attr_estVide","false");
+		}
+		else{
+			$(tab_col[i]).attr("attr_estVide","true");
+		}
+	}
 	
 	//on retire la couleur de l'onglet
 	let onglet_fenetre = $(".onglet_fenetre").filter("[attr_type_traj='" + type_traj + "']");
 	onglet_fenetre.removeClass("onglet_fenetre_reduit");
 	onglet_fenetre.addClass("couleur_onglet");
+}
+
+function mouvement_haut(p_this){
+	
+	let obj_fenetre = $(p_this).parent().parent().parent();
+	let obj_col = obj_fenetre.parent();
+	let col_indice = obj_col.attr("indice");
+	p(obj_fenetre);
+	p(obj_col);
+	p(obj_fenetre.attr("attr_indice"));
+	p(obj_col.attr("indice"));
+	//on verifie si la fenetre est au bord
+	if(obj_col.attr("indice") == 0 || obj_col.attr("indice") == 1){
+		p("impossible de monter");
+		return ;
+	}
+
+
+	let col_cible =  $(".fenetre_traj").filter("[indice='" + (parseInt(col_indice) - 2) + "']");
+	if(col_cible.attr("attr_estVide")==="true"){
+		p("mouvement impossible");
+		return;
+	}
+	let fenetre_cible = col_cible.children();
+
+	col_cible.empty().append(obj_fenetre);
+	obj_col.empty().append(fenetre_cible);
+
+	obj_fenetre.attr("attr_indice",(parseInt(col_indice) - 2));
+	fenetre_cible.attr("attr_indice",col_indice);
+
+
+}
+
+function mouvement_lateral(p_this){
+	let obj_fenetre = $(p_this).parent().parent().parent();
+	let obj_col = obj_fenetre.parent();
+	let col_indice = obj_col.attr("indice");
+	p(obj_fenetre);
+	p(obj_col);
+	p(obj_fenetre.attr("attr_indice"));
+	p(obj_col.attr("indice"));
+
+	let col_cible;
+	let fenetre_cible;
+	//deplacement à droite
+	if((parseInt(col_indice)%2) == 0){
+		col_cible =  $(".fenetre_traj").filter("[indice='" + (parseInt(col_indice) + 1) + "']");
+		if(col_cible.attr("attr_estVide")==="true"){
+			p("mouvement impossible");
+			return;
+		}
+		obj_fenetre.attr("attr_indice",(parseInt(col_indice) + 1));
+		fenetre_cible = col_cible.children();	
+	}
+	else{//deplacement à gauche
+		col_cible =  $(".fenetre_traj").filter("[indice='" + (parseInt(col_indice) - 1) + "']");
+		if(col_cible.attr("attr_estVide")==="true"){
+			p("mouvement impossible");
+			return;
+		}
+		obj_fenetre.attr("attr_indice",(parseInt(col_indice) - 1));
+		fenetre_cible = col_cible.children();
+	}
+
+	col_cible.empty().append(obj_fenetre);
+	obj_col.empty().append(fenetre_cible);
+
+}
+
+function mouvement_bas(p_this){
+	let obj_fenetre = $(p_this).parent().parent().parent();
+	let obj_col = obj_fenetre.parent();
+	let col_indice = obj_col.attr("indice");
+	p(obj_fenetre);
+	p(obj_col);
+	p(obj_fenetre.attr("attr_indice")==="true");
+	p(obj_col.attr("indice"));
+	//on verifie si la fenetre est au bord
+	if(obj_col.attr("indice") == 2 || obj_col.attr("indice") == 3){
+		p("impossible de monter");
+		return ;
+	}
+	p("on echange");
+	let col_cible =  $(".fenetre_traj").filter("[indice='" + (parseInt(col_indice) + 2) + "']");
+	if(col_cible.attr("attr_estVide")){
+		p("mouvement impossible");
+		return;
+	}
+	let fenetre_cible = col_cible.children();
+
+	col_cible.empty().append(obj_fenetre);
+	obj_col.empty().append(fenetre_cible);
+
+	obj_fenetre.attr("attr_indice",(parseInt(col_indice) + 2));
+	fenetre_cible.attr("attr_indice",col_indice);
+}
+
+function full_screen(){
+	window.open('full_screen.html', 'window name', 'window settings');
 }
 
 // function initFenetreLeaflet(ind_map){
