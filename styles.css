@@ -5,6 +5,7 @@
 /* ---===Body===--- */
 body>div{
 	display:block;
+	background-color: #ecf8fc
 }
 
 /* ---===FIN Body===--- */
@@ -13,7 +14,7 @@ body>div{
 .nav_bar{
 	width : 100%;
 	height: 40px;
-	background-color: blanchedalmond;
+	background-color: #ADD8E6;
 	border : solid 1px grey;
 	position: relative;
 	display:flex;
@@ -31,19 +32,22 @@ body>div{
 /* ---===Container===--- */
 #titre_fichier{
 	text-align: center;
-	margin: 10px;
+	padding: 10px;
+	background-color:white;
+	border:0.5px solid grey;
 }
 
 .container{
 	max-width:100%;
 	padding: 0;
 	margin: 0;
-	padding-left: 15px;
+	/* padding-left: 15px; */
 }
 
 .row{
 	height: 500px;
-	margin-bottom: 10px;
+	max-width:100%;
+	margin: 0 0 0.5% 0 !important;
 }
 .body_boite{
 	border : solid 1px grey;
@@ -52,6 +56,7 @@ body>div{
 
 .col-{
 	width:50%;
+	
 	/* border : solid 1px grey; */
 }
 
@@ -59,6 +64,8 @@ body>div{
 	display:flex;
 	flex-direction: row;
 	height:100%;
+	background-color: #dbe1e8;
+	margin-right:1%;
 }
 
 
@@ -66,13 +73,16 @@ body>div{
 	width: 20%;
 	height: 100%;
 	border-right : solid 1px grey;
+	background-color: #f0f6fd;
 }
 
 .titre_boite{
 	text-align: center;
+	background-color:#ced4da;
 }
 .map{
-	width: 80%;
+	/* width: 80%; */
+	flex-grow: 1;
 	height: 100%;
 }
 
@@ -91,11 +101,12 @@ body>div{
 	position:fixed;
 	height:30px;
 	bottom:0px;
-	background-color: darksalmon;
+	background-color: #789ba6;
 	width:100%;
 	display:flex;
 	flex-direction: row;
 	z-index:10000;
+	border:1px solid black; 
 }
 
 .onglet_fenetre{
@@ -103,11 +114,17 @@ body>div{
 	padding : 0 5%;
 	border : solid 1px grey;
 }
+
+.onglet_fenetre:hover{
+	background-color: #a3aab3;
+	color:white;
+}
 .couleur_onglet{
-	background-color: #ffe9a8;
+	background-color: #dbe1e8;
 }
 .onglet_fenetre_reduit{
-	background-color: #d1ad43;
+	background-color: #a3aab3;
+	color:white;
 }
 /* ---===FIN Footer===--- */
 
@@ -142,7 +159,7 @@ body>div{
 	flex-direction: row;
 }
 .menu_bouton_affichage>div:hover{
-	background-color: black;
+	background-color: #a3aab3;
 	color:white;
 }
 .line_separator{
@@ -157,8 +174,25 @@ body>div{
 	text-align:center;
 }
 .menu_bouton_mouvement>div:hover{
-	background-color: black;
+	background-color: #a3aab3;
 	color:white;
 }
+.bouton_reduire_menu{
+	display:flex;
+	width:2%;
+	max-width:5%;
+	border-right:1px black solid;
 
+}
+.bouton_reduire_menu:hover{
+	background-color: #a3aab3;
+	color:white;
+}
+.bouton_reduire_menu_actif{
+	background-color: #a3aab3;
+	color:white;
+}
+.logo_reduire_menu{
+	margin: auto;
+}
 /*Modif Simon bouton reduire*/

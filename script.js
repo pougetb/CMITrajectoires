@@ -226,42 +226,7 @@ $('#allConvergent').click(function(){
 	afficherConvergent(-1);
 });
 
-/*
-function reduire(div_reduire){
 
-	//on recupère la div fenetre
-	let obj_reduire = $(div_reduire);
-	let obj_fenetre = obj_reduire.parent().parent();
-
-	//on récupère le type de trajectoire
-	let type_traj = obj_fenetre.attr("attr_type_traj");
-	p(type_traj);
-
-	//on cherche la div footer correspondante et on change sa couleur
-	let div_footer = $("#footer>div").filter("[attr_type_traj='" + type_traj + "']");
-	div_footer.addClass("onglet_fenetre_reduit");
-
-	//on cache la div fenetre
-	obj_fenetre.parent().hide();
-}
-*/
-/*
-function agrandire(div_footer){
-
-	//on récupère le type
-	let obj_footer = $(div_footer);
-	let type_traj = obj_footer.attr("attr_type_traj");
-
-	//on récupère la fenetre correspondante
-	let obj_fenetre = $(".map_fenetre").filter("[attr_type_traj='" + type_traj + "']");
-
-	//on l'affiche
-	obj_fenetre.parent().show();
-
-	//on retire la couleur du footer
-	obj_footer.removeClass("onglet_fenetre_reduit");
-}
-*/
 
 function reduire(div_red){
 
@@ -320,8 +285,12 @@ function reduire(div_red){
 function agrandire(div_onglet){
 	//on récupère le type
 	let obj_onglet = $(div_onglet);
-	if(!(obj_onglet.hasClass("onglet_fenetre_reduit"))){
-		p("non réduit");
+	if(!(obj_onglet.hasClass("onglet_fenetre_reduit"))){//fenetre déjà augmentée, on la réduit
+
+		let type_traj = obj_onglet.attr("attr_type_traj");
+		//recherche de la bonne fenetre
+		let obj_bouton_reduire = $(".body_boite").filter("[attr_type_traj=" + type_traj + "]").find(".menu_boite").find(".menu_bouton_affichage").find(".bouton_reduire");
+		reduire(obj_bouton_reduire);
 		return;
 	}
 	let type_traj = obj_onglet.attr("attr_type_traj");
@@ -493,6 +462,23 @@ function mouvement_bas(p_this){
 	fenetre_cible.attr("attr_indice",col_indice);
 }
 
+
+function reduire_menu(div_reduire_menu){
+	let menu = $(div_reduire_menu).parent().find(".menu_boite");
+	
+	if($(div_reduire_menu).hasClass("bouton_reduire_menu_actif")){
+		menu.show();
+		$(div_reduire_menu).removeClass("bouton_reduire_menu_actif");
+		$(div_reduire_menu).children().html("<");
+	}
+	else{
+		menu.hide();
+		$(div_reduire_menu).addClass("bouton_reduire_menu_actif");
+		$(div_reduire_menu).children().html(">");
+	}
+	
+	p(menu);
+}
 function full_screen(){
 	window.open('full_screen.html', 'window name', 'window settings');
 }
