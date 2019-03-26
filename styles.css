@@ -194,8 +194,9 @@ body>div{
 
 /* Menu Select trajectoires */
 .item-list-traj{
-	padding: 5% 5% !important;
 	margin: 1% 0 !important;
+	padding: 5% 5% !important;
+	
 }
 .item-list-traj>i,.item-list-traj>div{
 	display:inline;
