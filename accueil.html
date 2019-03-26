@@ -1,22 +1,469 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="utf-8">
-    <title>Trajectoires</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles.css">
+	<meta charset="utf-8">
+	<title>Trajectoires</title>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	
+
+	<!-- Leaflet -->
+	<link rel="stylesheet" href="leaflet/leaflet.css"/>
+	<script src="leaflet/leaflet.js"></script>
+
+	<!-- plug-in leaflet -->
+	<!-- PolylineDecorator -->
+	<script src="PolylineDecorator/leaflet.polylineDecorator.js"></script>
+
+	<!-- JQuery -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+	<!-- Bootstrap -->
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+	<!-- Materialize -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+	<link rel="stylesheet" href="styles.css">
+
 </head>
 
 <body>
-	<div id="main">
-		<div id="sidebar"></div>
-		<div id="map"></div>
+	<!-- nav bar -->
+	<div class="">
+
+		<ul class="nav nav-tabs">
+			
+			<!-- Menu des options -->
+			<li class="disabled onglet_options">
+				<div class="label_nav_options">
+					<img class="logo_nav_options" src="Images/Icons/file.svg">
+					<div class="espace"> </div>
+					<div>File</div>
+				</div>
+			</li>
+			<!-- string logo download: get_app -->
+			<li class="disabled onglet_options">
+				<div class="label_nav_options">
+					<img class="logo_nav_options" src="Images/Icons/cloud-upload.svg">
+					<div class="espace"> </div>
+					<div>Upload</div>
+				</div>
+			</li>
+			<li class="disabled onglet_options">
+				<div class="label_nav_options">
+					<img class="logo_nav_options" src="Images/Icons/cloud-download.svg">
+					<div class="espace"> </div>
+					<div>Import</div>
+				</div>
+			</li>
+			<li class="disabled onglet_options">
+				<div class="label_nav_options">
+					<img class="logo_nav_options" src="Images/Icons/info.svg">
+					<div class="espace"> </div>
+					<div>Help</div>
+				</div>
+			</li>
+			<!-- Fin Menu des options -->
+			<li class="disabled li_vide"></li>
+			<li class="active onglet_fullscreen"><a data-toggle="tab" href="#home">All Trajectories</a></li>
+			<li class="onglet_fullscreen"><a data-toggle="tab" href="#menu1">Raws</a></li>
+			<li class="onglet_fullscreen"><a data-toggle="tab" href="#menu2">Closed Swarms</a></li>
+			<li class="onglet_fullscreen"><a data-toggle="tab" href="#menu3">Convoys</a></li>
+			<li class="onglet_fullscreen"><a data-toggle="tab" href="#menu4">Divergents</a></li>
+			<li class="onglet_fullscreen"><a data-toggle="tab" href="#menu4">Convergents</a></li>
+			
+		</ul>
+
+		<!-- <div class="nav_clusters">
+			<div class="bouton_cluster_fullscreen">All</div>
+			<div class="vertical_separator_grey"></div>
+			<div class="bouton_cluster_fullscreen">Closed Swarms</div>
+			<div class="vertical_separator_grey"></div>
+			<div class="bouton_cluster_fullscreen">Convoy</div>
+			<div class="vertical_separator_grey"></div>
+			<div class="bouton_cluster_fullscreen">Convergents</div>
+			<div class="vertical_separator_grey"></div>
+			<div class="bouton_cluster_fullscreen">Divergents</div>
+			
+		</div> -->
+		
 	</div>
+	<!-- FIN nav bar -->
+	<div class="tab-content">
+		
+			<div id="home" class="tab-pane fade in active">
+				<div class="titre_fichier">Tajectories of Portos taxis</div>
+				<div class="container_fenetre">
+					<div class="row">
+			
+						<div class="col- fenetre_traj" attr_estVide="false" indice="0">
+							<div class="body_boite" attr_indice="0" attr_type_traj="raw">
+								<div class="bouton_reduire_menu" onclick="reduire_menu(this)"><div class="logo_reduire_menu"><img src="Images/Icons/chevron-left.svg"></div></div>
+								<div class="menu_boite">
+			
+									<div class="titre_boite">
+										<strong>Raws</strong>	    				
+									</div>
+									
+									
+									
+									<div class="menu_bouton_affichage">
+										<div class="bouton_reduire" onclick="reduire(this)"><i class="tiny material-icons">remove</i></div>
+										<div class="bouton_full_screen" onclick="full_screen()"><i class="tiny material-icons">open_in_new</i></div>
+									</div>
+									
+									<div class="menu_bouton_mouvement">
+										<div class="bouton_mouvement_haut" onclick="mouvement_haut(this)"><i class="tiny material-icons">keyboard_arrow_up</i></div>
+										<div class="bouton_mouvement_lateral" onclick="mouvement_lateral(this)"><i class="tiny material-icons">code</i></div>
+										<div class="bouton_mouvement_bas" onclick="mouvement_bas(this)"><i class="tiny material-icons">keyboard_arrow_down</i></div>
+									</div>
+															
+			
+									
+									<div class="menu_choix_traj">
+
+										
+										<!-- <div class="label_select_trajectory">Select Trajectory</div> -->
+										<!-- <div class="label_select_trajectory">Select Trajectory</div> -->
+										
+										<div class="bouton-select_traj" onclick="reverse_dropdown(this)"  data-toggle="collapse" data-target="#collapse_list_traj-raw" aria-expanded="true" aria-controls="collapse_list_traj-raw">
+											<div class="label_select_trajectory">Select Trajectory</div>
+											
+											<i class="material-icons">arrow_drop_down</i>
+										</div>
+										<div id="collapse_list_traj-raw" class="collapse collapse_list_traj">
+											<div class="card-body">
+												<ul class="list_traj" attr_type="raw">
+													<li class="bouton_select_all-none" onclick=selectAll(this)><i class="material-icons">check_box</i><div class="label_select_traj">: All</div></li>
+													<li class="bouton_select_all-none" onclick=unselectAll(this)><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">: None</div></li>
+													<li class="unselectable li_search"><input type="text" placeholder="Search" class="input_bouton-select_traj" onkeyup=search(this)></li>
+													<li class="unselectable li_separator"></li>
+													<!-- <li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">Taxis 1</div></li>
+													<li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">Taxis 2</div></li>
+													<li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">Taxis 3</div></li>
+													<li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">Taxis 4</div></li>
+													<li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">Taxis 5</div></li>
+													<li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">Taxis 6</div></li>
+													<li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">Taxis 7</div></li>
+													<li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">Taxis 8</div></li>
+													<li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">Taxis 9</div></li>
+													<li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">Taxis 10</div></li>
+													<li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">Taxis 11</div></li>
+													<li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">Taxis 12</div></li>
+													<li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">Taxis 13</div></li>
+													<li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">Taxis 14</div></li>
+													<li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">Taxis 15</div></li>
+													<li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">Taxis 16</div></li>
+													<li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">Taxis 17</div></li>
+													<li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">Taxis1800000000</div></li> -->
+												</ul>
+											</div>
+										</div>
+										
+									</div>
+									
+								</div>
+								<div class="map">
+									<div id="map_raw" class="div_map" attr_type_traj="raw"></div>
+								</div>
+							</div>
+						</div>
+			
+						<div class="col- fenetre_traj" attr_estVide="false" indice="1">
+							
+							<div class="body_boite" attr_indice="1" attr_type_traj="closedswarm">
+								<div class="bouton_reduire_menu" onclick="reduire_menu(this)"><div class="logo_reduire_menu"><img src="Images/Icons/chevron-left.svg"></div></div>
+								<div class="menu_boite">
+			
+									<div class="titre_boite">
+										<strong>Closed Swarms</strong>	    				
+									</div>
+			
+									
+									<div class="menu_bouton_affichage">
+										<div class="bouton_reduire" onclick="reduire(this)"><i class="tiny material-icons">remove</i></div>
+										<div class="bouton_full_screen" onclick="full_screen()"><i class="tiny material-icons">open_in_new</i></div>
+									</div>
+									
+									<div class="menu_bouton_mouvement">
+										<div class="bouton_mouvement_haut" onclick="mouvement_haut(this)"><i class="tiny material-icons">keyboard_arrow_up</i></div>
+										<div class="bouton_mouvement_lateral" onclick="mouvement_lateral(this)"><i class="tiny material-icons">code</i></div>
+										<div class="bouton_mouvement_bas" onclick="mouvement_bas(this)"><i class="tiny material-icons">keyboard_arrow_down</i></div>
+									</div>
+															
+			
+									
+									<div class="menu_choix_traj">
+
+										
+										<!-- <div class="label_select_trajectory">Select Trajectory</div> -->
+										<!-- <div class="label_select_trajectory">Select Trajectory</div> -->
+										
+										<div class="bouton-select_traj" onclick="reverse_dropdown(this)"  data-toggle="collapse" data-target="#collapse_list_traj-closedswarm" aria-expanded="true" aria-controls="collapse_list_traj-closedswarm">
+											<div class="label_select_trajectory">Select Trajectory</div>
+											
+											<i class="material-icons">arrow_drop_down</i>
+										</div>
+										<div id="collapse_list_traj-closedswarm" class="collapse collapse_list_traj">
+											<div class="card-body">
+												<ul class="list_traj" attr_type="closedswarm">
+													<li class="bouton_select_all-none" onclick=selectAll(this)><i class="material-icons">check_box</i><div class="label_select_traj">: All</div></li>
+													<li class="bouton_select_all-none" onclick=unselectAll(this)><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">: None</div></li>
+													<li class="unselectable li_search"><input type="text" placeholder="Search" class="input_bouton-select_traj" onkeyup=search(this) onkeyup=search(this)></li>
+													<li class="unselectable li_separator"></li>
+													<!-- <li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">closedswarm 1</div></li>
+													<li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">closedswarm 2</div></li>
+													<li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">closedswarm 3</div></li>
+													<li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">closedswarm 4</div></li> -->
+												</ul>
+											</div>
+										</div>
+										
+									</div>
+									
+								</div>
+								<div class="map">
+									<div id="map_closedswarm" class="div_map" attr_type_traj="closedswarm"></div>
+								</div>
+							</div>
+						</div>
+			
+					</div>
+			
+					<div class="row">
+			
+						<div class="col- fenetre_traj" attr_estVide="false" indice="2">
+							
+							<div class="body_boite" attr_indice="2" attr_type_traj="convoy">
+								<div class="bouton_reduire_menu" onclick="reduire_menu(this)"><div class="logo_reduire_menu"><img src="Images/Icons/chevron-left.svg"></div></div>
+								<div class="menu_boite">
+									<div class="titre_boite">
+										<strong>Convoys</strong>	    				
+									</div>
+									
+									
+									<div class="menu_bouton_affichage">
+										<div class="bouton_reduire" onclick="reduire(this)"><i class="tiny material-icons">remove</i></div>
+										<div class="bouton_full_screen" onclick="full_screen()"><i class="tiny material-icons">open_in_new</i></div>
+									</div>
+									
+									<div class="menu_bouton_mouvement">
+										<div class="bouton_mouvement_haut" onclick="mouvement_haut(this)"><i class="tiny material-icons">keyboard_arrow_up</i></div>
+										<div class="bouton_mouvement_lateral" onclick="mouvement_lateral(this)"><i class="tiny material-icons">code</i></div>
+										<div class="bouton_mouvement_bas" onclick="mouvement_bas(this)"><i class="tiny material-icons">keyboard_arrow_down</i></div>
+									</div>
+															
+			
+									
+									<div class="menu_choix_traj">
+
+										
+										<!-- <div class="label_select_trajectory">Select Trajectory</div> -->
+										<!-- <div class="label_select_trajectory">Select Trajectory</div> -->
+										
+										<div class="bouton-select_traj" onclick="reverse_dropdown(this)"  data-toggle="collapse" data-target="#collapse_list_traj-convoy" aria-expanded="true" aria-controls="collapse_list_traj-convoy">
+											<div class="label_select_trajectory">Select Trajectory</div>
+											
+											<i class="material-icons">arrow_drop_down</i>
+										</div>
+										<div id="collapse_list_traj-convoy" class="collapse collapse_list_traj">
+											<div class="card-body">
+												<ul class="list_traj" attr_type="convoy">
+													<li class="bouton_select_all-none" onclick=selectAll(this)><i class="material-icons">check_box</i><div class="label_select_traj">: All</div></li>
+													<li class="bouton_select_all-none" onclick=unselectAll(this)><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">: None</div></li>
+													<li class="unselectable li_search"><input type="text" placeholder="Search" class="input_bouton-select_traj" onkeyup=search(this)></li>
+													<li class="unselectable li_separator"></li>
+													<!-- <li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">Convoy 1</div></li>
+													<li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">Convoy 2</div></li>
+													<li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">Convoy 3</div></li>
+													<li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">Convoy 4</div></li>
+												</ul> -->
+											</div>
+										</div>
+										
+									</div>
+
+								</div>
+								<div class="map">
+									<div id="map_convoy" class="div_map" attr_type_traj="convoy"></div>
+								</div>
+							</div>
+						</div>
+			
+			
+						<div class="col- fenetre_traj" attr_estVide="false" indice="3">
+							
+							<div class="body_boite" attr_indice="3" attr_type_traj="divergent">
+			
+								<div class="bouton_reduire_menu" onclick="reduire_menu(this)"><div class="logo_reduire_menu"><img src="Images/Icons/chevron-left.svg"></div></div>
+								<div class="menu_boite">
+									<div class="titre_boite">
+										<strong>Divergents</strong>	    				
+									</div>
+									
+									<div class="menu_bouton_affichage">
+										<div class="bouton_reduire" onclick="reduire(this)"><i class="tiny material-icons">remove</i></div>
+										<div class="bouton_full_screen" onclick="full_screen()"><i class="tiny material-icons">open_in_new</i></div>
+									</div>
+									
+									<div class="menu_bouton_mouvement">
+										<div class="bouton_mouvement_haut" onclick="mouvement_haut(this)"><i class="tiny material-icons">keyboard_arrow_up</i></div>
+										<div class="bouton_mouvement_lateral" onclick="mouvement_lateral(this)"><i class="tiny material-icons">code</i></div>
+										<div class="bouton_mouvement_bas" onclick="mouvement_bas(this)"><i class="tiny material-icons">keyboard_arrow_down</i></div>
+									</div>
+															
+			
+									
+									<div class="menu_choix_traj">
+
+										
+										<!-- <div class="label_select_trajectory">Select Trajectory</div> -->
+										<!-- <div class="label_select_trajectory">Select Trajectory</div> -->
+										
+										<div class="bouton-select_traj" onclick="reverse_dropdown(this)"  data-toggle="collapse" data-target="#collapse_list_traj-divergent" aria-expanded="true" aria-controls="collapse_list_traj-divergent">
+											<div class="label_select_trajectory">Select Trajectory</div>
+											
+											<i class="material-icons">arrow_drop_down</i>
+										</div>
+										<div id="collapse_list_traj-divergent" class="collapse collapse_list_traj">
+											<div class="card-body">
+												<ul class="list_traj" attr_type="divergent">
+													<li class="bouton_select_all-none" onclick=selectAll(this)><i class="material-icons">check_box</i><div class="label_select_traj">: All</div></li>
+													<li class="bouton_select_all-none" onclick=unselectAll(this)><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">: None</div></li>
+													<li class="unselectable li_search"><input type="text" placeholder="Search" class="input_bouton-select_traj" onkeyup=search(this)></li>
+													<li class="unselectable li_separator"></li>
+													<!-- <li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">Divergent 1</div></li>
+													<li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">Divergent 2</div></li>
+													<li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">Divergent 3</div></li>
+													<li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">Divergent 4</div></li> -->
+												</ul>
+											</div>
+										</div>
+										
+									</div>
+			
+								</div>
+								<div class="map">
+									<div id="map_divergent" class="div_map" attr_type_traj="divergent"></div>
+								</div>
+							</div>
+						</div>
+			
+					</div>
+			
+			
+					<div class="row">
+			
+						<div class="col- fenetre_traj" attr_estVide="false" indice="4">
+							
+							<div class="body_boite" attr_indice = "4" attr_type_traj="convergent">
+								<div class="bouton_reduire_menu" onclick="reduire_menu(this)"><div class="logo_reduire_menu"><img src="Images/Icons/chevron-left.svg"></div></div>
+								<div class="menu_boite">
+									<div class="titre_boite">
+										<strong>Convergents</strong>	    				
+									</div>
+									
+									<div class="menu_bouton_affichage">
+										<div class="bouton_reduire" onclick="reduire(this)"><i class="tiny material-icons">remove</i></div>
+										<div class="bouton_full_screen" onclick="full_screen()"><i class="tiny material-icons">open_in_new</i></div>
+									</div>
+									
+									<div class="menu_bouton_mouvement">
+										<div class="bouton_mouvement_haut" onclick="mouvement_haut(this)"><i class="tiny material-icons">keyboard_arrow_up</i></div>
+										<div class="bouton_mouvement_lateral" onclick="mouvement_lateral(this)"><i class="tiny material-icons">code</i></div>
+										<div class="bouton_mouvement_bas" onclick="mouvement_bas(this)"><i class="tiny material-icons">keyboard_arrow_down</i></div>
+									</div>
+															
+			
+									
+									<div class="menu_choix_traj">
+
+										
+										<!-- <div class="label_select_trajectory">Select Trajectory</div> -->
+										<!-- <div class="label_select_trajectory">Select Trajectory</div> -->
+										
+										<div class="bouton-select_traj" onclick="reverse_dropdown(this)"  data-toggle="collapse" data-target="#collapse_list_traj-convergent" aria-expanded="true" aria-controls="collapse_list_traj-convergent">
+											<div class="label_select_trajectory">Select Trajectory</div>
+											
+											<i class="material-icons">arrow_drop_down</i>
+										</div>
+										<div id="collapse_list_traj-convergent" class="collapse collapse_list_traj">
+											<div class="card-body">
+												<ul class="list_traj" attr_type="convergent">
+													<li class="bouton_select_all-none" onclick=selectAll(this)><i class="material-icons">check_box</i><div class="label_select_traj">: All</div></li>
+													<li class="bouton_select_all-none" onclick=unselectAll(this)><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">: None</div></li>
+													<li class="unselectable li_search"><input type="text" placeholder="Search" class="input_bouton-select_traj" onkeyup=search(this)></li>
+													<li class="unselectable li_separator"></li>
+													<!-- <li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">Convergent 1</div></li>
+													<li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">Convergent 2</div></li>
+													<li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">Convergent 3</div></li>
+													<li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">Convergent 4</div></li>
+												</ul> -->
+											</div>
+										</div>
+											
+										</div>
+								</div>
+								<div class="map">
+									<div id="map_convergent" class="div_map" attr_type_traj="convergent"></div>
+								</div>
+							</div>
+						</div>
+						<div class="col- fenetre_traj" attr_estVide="true" indice="5">
+						</div>
+						
+			
+					</div>
+			
+				</div>
+			</div>
+				<div id="menu1" class="tab-pane fade">
+				
+				<div>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+			</div>
+			<div id="menu2" class="tab-pane fade">
+				
+				<div>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</div>
+			</div>
+			<div id="menu3" class="tab-pane fade">
+				
+				<div>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</div>
+			</div>
+	</div>
+	<!-- <div id="titre_fichier"><strong>Trajectories of Porto taxis</strong></div> -->
+	
+	
+
+	<!-- Footer -->
+	<div id="footer">
+
+		<div class="onglet_fenetre couleur_onglet" attr_type_traj="raw" onclick="agrandire(this)">Raws</div>
+		<div class="onglet_fenetre couleur_onglet" attr_type_traj="closedswarm" onclick="agrandire(this)">Closed Swarms</div>
+		<div class="onglet_fenetre couleur_onglet" attr_type_traj="convoy" onclick="agrandire(this)">Convoys</div>
+		<div class="onglet_fenetre couleur_onglet" attr_type_traj="convergent" onclick="agrandire(this)">Convergents</div>
+		<div class="onglet_fenetre couleur_onglet" attr_type_traj="divergent" onclick="agrandire(this)">Divergents</div>
+		<!-- <div class="onglet_fenetre couleur_onglet" attr_type_traj="thing" onclick="agrandire(this)">Thing</div> -->
+	</div>
+	<!-- FIN Footer -->
 </body>
 
+<!-- SCRIPTS -->
+
+<!-- Fonctions principales -->
 <script src="script.js"></script>
 
+<!-- Fonctions d'affichage -->
+<!-- <script src="spript-affichage.js"></script> -->
+
+
+<!-- FIN SCRIPTS -->
+
 </html>
+
+
