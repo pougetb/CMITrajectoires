@@ -29,7 +29,9 @@
 	<!-- Materialize -->
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+	<!-- CSS Persos -->
 	<link rel="stylesheet" href="styles.css">
+	<link rel="stylesheet" href="styles_fenetre_fullscreen.css">
 
 </head>
 
@@ -71,12 +73,12 @@
 			</li>
 			<!-- Fin Menu des options -->
 			<li class="disabled li_vide"></li>
-			<li class="active onglet_fullscreen"><a data-toggle="tab" href="#home">All Trajectories</a></li>
-			<li class="onglet_fullscreen"><a data-toggle="tab" href="#menu1">Raws</a></li>
-			<li class="onglet_fullscreen"><a data-toggle="tab" href="#menu2">Closed Swarms</a></li>
-			<li class="onglet_fullscreen"><a data-toggle="tab" href="#menu3">Convoys</a></li>
-			<li class="onglet_fullscreen"><a data-toggle="tab" href="#menu4">Divergents</a></li>
-			<li class="onglet_fullscreen"><a data-toggle="tab" href="#menu4">Convergents</a></li>
+			<li class="active onglet_fullscreen"><a data-toggle="tab" href="#all_trajectories">All Trajectories</a></li>
+			<li class="onglet_fullscreen"><a data-toggle="tab" href="#raw">Raws</a></li>
+			<li class="onglet_fullscreen"><a data-toggle="tab" href="#closedswarm">Closed Swarms</a></li>
+			<li class="onglet_fullscreen"><a data-toggle="tab" href="#convoy">Convoys</a></li>
+			<li class="onglet_fullscreen"><a data-toggle="tab" href="#divergent">Divergents</a></li>
+			<li class="onglet_fullscreen"><a data-toggle="tab" href="#convergent">Convergents</a></li>
 			
 		</ul>
 
@@ -97,7 +99,7 @@
 	<!-- FIN nav bar -->
 	<div class="tab-content">
 		
-			<div id="home" class="tab-pane fade in active">
+			<div id="all_trajectories" class="tab-pane fade in active">
 				<div class="titre_fichier">Tajectories of Portos taxis</div>
 				<div class="container_fenetre">
 					<div class="row">
@@ -417,22 +419,124 @@
 						</div>
 						<div class="col- fenetre_traj" attr_estVide="true" indice="5">
 						</div>
-						
-			
 					</div>
 			
 				</div>
+				<!-- Footer -->
+				<div id="footer">
+					<div class="onglet_fenetre couleur_onglet" attr_type_traj="raw" onclick="agrandire(this)">Raws</div>
+					<div class="onglet_fenetre couleur_onglet" attr_type_traj="closedswarm" onclick="agrandire(this)">Closed Swarms</div>
+					<div class="onglet_fenetre couleur_onglet" attr_type_traj="convoy" onclick="agrandire(this)">Convoys</div>
+					<div class="onglet_fenetre couleur_onglet" attr_type_traj="convergent" onclick="agrandire(this)">Convergents</div>
+					<div class="onglet_fenetre couleur_onglet" attr_type_traj="divergent" onclick="agrandire(this)">Divergents</div>
+					<!-- <div class="onglet_fenetre couleur_onglet" attr_type_traj="thing" onclick="agrandire(this)">Thing</div> -->
+				</div>
+				<!-- FIN Footer -->
 			</div>
-				<div id="menu1" class="tab-pane fade">
-				
-				<div>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+
+			<div id="raw" class="tab-pane fade ">
+
+				<div class="titre_fichier">Tajectories of Portos taxis : Raws</div>
+
+				<div class="body_boite fenetre_fullscreen" attr_indice="2" attr_type_traj="convoy">
+					<div class="bouton_reduire_menu" onclick="reduire_menu(this)"><div class="logo_reduire_menu"><img src="Images/Icons/chevron-left.svg"></div></div>
+					<div class="menu_boite">
+						<div class="titre_boite">
+							<strong>Raws</strong>	    				
+						</div>
+						
+						
+						<div class="menu_bouton_affichage">
+							<div class="bouton_full_screen" onclick="full_screen()"><i class="tiny material-icons">open_in_new</i></div>
+						</div>
+												
+
+						
+						<div class="menu_choix_traj">
+							
+							<div class="bouton-select_traj" onclick="reverse_dropdown(this)"  data-toggle="collapse" data-target="#collapse_list_traj-convoy" aria-expanded="true" aria-controls="collapse_list_traj-convoy">
+								<div class="label_select_trajectory">Select Trajectory</div>
+								
+								<i class="material-icons">arrow_drop_down</i>
+							</div>
+							<div id="collapse_list_traj-convoy" class="collapse collapse_list_traj">
+								<div class="card-body">
+									<ul class="list_traj" attr_type="convoy">
+										<li class="bouton_select_all-none" onclick=selectAll(this)><i class="material-icons">check_box</i><div class="label_select_traj">: All</div></li>
+										<li class="bouton_select_all-none" onclick=unselectAll(this)><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">: None</div></li>
+										<li class="unselectable li_search"><input type="text" placeholder="Search" class="input_bouton-select_traj" onkeyup=search(this)></li>
+										<li class="unselectable li_separator"></li>
+								</div>
+							</div>
+							
+						</div>
+
+					</div>
+					<div class="map">
+						<div id="map_raw_fullscreen" class="div_map" attr_type_traj="convoy"></div>
+					</div>
+				</div>
 			</div>
-			<div id="menu2" class="tab-pane fade">
-				
+
+			<div id="closedswarm" class="tab-pane fade">
+
+				<div class="body_boite" attr_indice="2" attr_type_traj="convoy">
+					<div class="bouton_reduire_menu" onclick="reduire_menu(this)"><div class="logo_reduire_menu"><img src="Images/Icons/chevron-left.svg"></div></div>
+					<div class="menu_boite">
+						<div class="titre_boite">
+							<strong>Convoys</strong>	    				
+						</div>
+						
+						
+						<div class="menu_bouton_affichage">
+							<div class="bouton_reduire" onclick="reduire(this)"><i class="tiny material-icons">remove</i></div>
+							<div class="bouton_full_screen" onclick="full_screen()"><i class="tiny material-icons">open_in_new</i></div>
+						</div>
+						
+						<div class="menu_bouton_mouvement">
+							<div class="bouton_mouvement_haut" onclick="mouvement_haut(this)"><i class="tiny material-icons">keyboard_arrow_up</i></div>
+							<div class="bouton_mouvement_lateral" onclick="mouvement_lateral(this)"><i class="tiny material-icons">code</i></div>
+							<div class="bouton_mouvement_bas" onclick="mouvement_bas(this)"><i class="tiny material-icons">keyboard_arrow_down</i></div>
+						</div>
+												
+
+						
+						<div class="menu_choix_traj">
+							
+							<div class="bouton-select_traj" onclick="reverse_dropdown(this)"  data-toggle="collapse" data-target="#collapse_list_traj-convoy" aria-expanded="true" aria-controls="collapse_list_traj-convoy">
+								<div class="label_select_trajectory">Select Trajectory</div>
+								
+								<i class="material-icons">arrow_drop_down</i>
+							</div>
+							<div id="collapse_list_traj-convoy" class="collapse collapse_list_traj">
+								<div class="card-body">
+									<ul class="list_traj" attr_type="convoy">
+										<li class="bouton_select_all-none" onclick=selectAll(this)><i class="material-icons">check_box</i><div class="label_select_traj">: All</div></li>
+										<li class="bouton_select_all-none" onclick=unselectAll(this)><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">: None</div></li>
+										<li class="unselectable li_search"><input type="text" placeholder="Search" class="input_bouton-select_traj" onkeyup=search(this)></li>
+										<li class="unselectable li_separator"></li>
+								</div>
+							</div>
+							
+						</div>
+
+					</div>
+					<div class="map">
+						<div id="" class="div_map" attr_type_traj="convoy"></div>
+					</div>
+				</div>
+
+			</div>
+
+			<div id="convoy" class="tab-pane fade">
 				<div>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</div>
 			</div>
-			<div id="menu3" class="tab-pane fade">
-				
+
+			<div id="divergent" class="tab-pane fade">
+				<div>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</div>
+			</div>
+
+			<div id="convergent" class="tab-pane fade">
 				<div>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</div>
 			</div>
 	</div>
@@ -440,22 +544,13 @@
 	
 	
 
-	<!-- Footer -->
-	<div id="footer">
-
-		<div class="onglet_fenetre couleur_onglet" attr_type_traj="raw" onclick="agrandire(this)">Raws</div>
-		<div class="onglet_fenetre couleur_onglet" attr_type_traj="closedswarm" onclick="agrandire(this)">Closed Swarms</div>
-		<div class="onglet_fenetre couleur_onglet" attr_type_traj="convoy" onclick="agrandire(this)">Convoys</div>
-		<div class="onglet_fenetre couleur_onglet" attr_type_traj="convergent" onclick="agrandire(this)">Convergents</div>
-		<div class="onglet_fenetre couleur_onglet" attr_type_traj="divergent" onclick="agrandire(this)">Divergents</div>
-		<!-- <div class="onglet_fenetre couleur_onglet" attr_type_traj="thing" onclick="agrandire(this)">Thing</div> -->
-	</div>
-	<!-- FIN Footer -->
+	
 </body>
 
 <!-- SCRIPTS -->
 
 <!-- Fonctions principales -->
+<!-- <script src="data.json"></script> -->
 <script src="script.js"></script>
 
 <!-- Fonctions d'affichage -->

@@ -3,3 +3,4 @@
 -> nouvelle fenetre full screen
 -> orientation des fleches PolylineDecorator correct ?
 -> les fleches PolylineDecorator ne s'enlèvent pas quand on cache une traj
+-> fix width de "menu select traj"

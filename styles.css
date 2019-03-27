@@ -154,6 +154,7 @@ body>div{
 	font-size:0px;
 	background-color:white;
 	margin:0 1%;
+	border-radius: 7px;
 }
 .bouton_reduire{
 	text-align: center;
@@ -184,7 +185,7 @@ body>div{
 	background-color: white;
 	opacity: 1;
 	margin:1%;
-
+	border-radius: 6px;
 }
 .menu_bouton_mouvement>div:hover{
 	background-color: #33658A;
@@ -238,6 +239,7 @@ body>div{
 	padding:5% 5% !important;
 	display:flex;
 	flex-direction:column;
+	/* border-radius:6px; */
 }
 .card-body{
 	background-color:white;
