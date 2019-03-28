@@ -99,6 +99,7 @@
 	<!-- FIN nav bar -->
 	<div class="tab-content">
 		
+			<!-- PAGE ALL TRAJECTORIES -->
 			<div id="all_trajectories" class="tab-pane fade in active">
 				<div class="titre_fichier">Tajectories of Portos taxis</div>
 				<div class="container_fenetre">
@@ -141,7 +142,7 @@
 										</div>
 										<div id="collapse_list_traj-raw" class="collapse collapse_list_traj">
 											<div class="card-body">
-												<ul class="list_traj" attr_type="raw">
+												<ul class="list_traj" attr_fullscreen="false" attr_type="raw">
 													<li class="bouton_select_all-none" onclick=selectAll(this)><i class="material-icons">check_box</i><div class="label_select_traj">: All</div></li>
 													<li class="bouton_select_all-none" onclick=unselectAll(this)><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">: None</div></li>
 													<li class="unselectable li_search"><input type="text" placeholder="Search" class="input_bouton-select_traj" onkeyup=search(this)></li>
@@ -214,7 +215,7 @@
 										</div>
 										<div id="collapse_list_traj-closedswarm" class="collapse collapse_list_traj">
 											<div class="card-body">
-												<ul class="list_traj" attr_type="closedswarm">
+												<ul class="list_traj" attr_fullscreen="false" attr_type="closedswarm">
 													<li class="bouton_select_all-none" onclick=selectAll(this)><i class="material-icons">check_box</i><div class="label_select_traj">: All</div></li>
 													<li class="bouton_select_all-none" onclick=unselectAll(this)><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">: None</div></li>
 													<li class="unselectable li_search"><input type="text" placeholder="Search" class="input_bouton-select_traj" onkeyup=search(this) onkeyup=search(this)></li>
@@ -276,7 +277,7 @@
 										</div>
 										<div id="collapse_list_traj-convoy" class="collapse collapse_list_traj">
 											<div class="card-body">
-												<ul class="list_traj" attr_type="convoy">
+												<ul class="list_traj" attr_fullscreen="false" attr_type="convoy">
 													<li class="bouton_select_all-none" onclick=selectAll(this)><i class="material-icons">check_box</i><div class="label_select_traj">: All</div></li>
 													<li class="bouton_select_all-none" onclick=unselectAll(this)><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">: None</div></li>
 													<li class="unselectable li_search"><input type="text" placeholder="Search" class="input_bouton-select_traj" onkeyup=search(this)></li>
@@ -335,7 +336,7 @@
 										</div>
 										<div id="collapse_list_traj-divergent" class="collapse collapse_list_traj">
 											<div class="card-body">
-												<ul class="list_traj" attr_type="divergent">
+												<ul class="list_traj" attr_fullscreen="false" attr_type="divergent">
 													<li class="bouton_select_all-none" onclick=selectAll(this)><i class="material-icons">check_box</i><div class="label_select_traj">: All</div></li>
 													<li class="bouton_select_all-none" onclick=unselectAll(this)><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">: None</div></li>
 													<li class="unselectable li_search"><input type="text" placeholder="Search" class="input_bouton-select_traj" onkeyup=search(this)></li>
@@ -397,7 +398,7 @@
 										</div>
 										<div id="collapse_list_traj-convergent" class="collapse collapse_list_traj">
 											<div class="card-body">
-												<ul class="list_traj" attr_type="convergent">
+												<ul class="list_traj" attr_fullscreen="false" attr_type="convergent">
 													<li class="bouton_select_all-none" onclick=selectAll(this)><i class="material-icons">check_box</i><div class="label_select_traj">: All</div></li>
 													<li class="bouton_select_all-none" onclick=unselectAll(this)><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">: None</div></li>
 													<li class="unselectable li_search"><input type="text" placeholder="Search" class="input_bouton-select_traj" onkeyup=search(this)></li>
@@ -427,18 +428,18 @@
 					<div class="onglet_fenetre couleur_onglet" attr_type_traj="raw" onclick="agrandire(this)">Raws</div>
 					<div class="onglet_fenetre couleur_onglet" attr_type_traj="closedswarm" onclick="agrandire(this)">Closed Swarms</div>
 					<div class="onglet_fenetre couleur_onglet" attr_type_traj="convoy" onclick="agrandire(this)">Convoys</div>
-					<div class="onglet_fenetre couleur_onglet" attr_type_traj="convergent" onclick="agrandire(this)">Convergents</div>
 					<div class="onglet_fenetre couleur_onglet" attr_type_traj="divergent" onclick="agrandire(this)">Divergents</div>
-					<!-- <div class="onglet_fenetre couleur_onglet" attr_type_traj="thing" onclick="agrandire(this)">Thing</div> -->
+					<div class="onglet_fenetre couleur_onglet" attr_type_traj="convergent" onclick="agrandire(this)">Convergents</div>
 				</div>
 				<!-- FIN Footer -->
 			</div>
 
+			<!-- PAGE RAW -->
 			<div id="raw" class="tab-pane fade ">
 
 				<div class="titre_fichier">Tajectories of Portos taxis : Raws</div>
 
-				<div class="body_boite fenetre_fullscreen" attr_indice="2" attr_type_traj="convoy">
+				<div class="fenetre_fullscreen" attr_type_traj="raw">
 					<div class="bouton_reduire_menu" onclick="reduire_menu(this)"><div class="logo_reduire_menu"><img src="Images/Icons/chevron-left.svg"></div></div>
 					<div class="menu_boite">
 						<div class="titre_boite">
@@ -459,13 +460,14 @@
 								
 								<i class="material-icons">arrow_drop_down</i>
 							</div>
-							<div id="collapse_list_traj-convoy" class="collapse collapse_list_traj">
+							<div id="collapse_list_traj-raw" class="collapse collapse_list_traj">
 								<div class="card-body">
-									<ul class="list_traj" attr_type="convoy">
+									<ul class="list_traj" attr_fullscreen="true" attr_type="raw">
 										<li class="bouton_select_all-none" onclick=selectAll(this)><i class="material-icons">check_box</i><div class="label_select_traj">: All</div></li>
 										<li class="bouton_select_all-none" onclick=unselectAll(this)><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">: None</div></li>
 										<li class="unselectable li_search"><input type="text" placeholder="Search" class="input_bouton-select_traj" onkeyup=search(this)></li>
 										<li class="unselectable li_separator"></li>
+									</ul>
 								</div>
 							</div>
 							
@@ -473,14 +475,15 @@
 
 					</div>
 					<div class="map">
-						<div id="map_raw_fullscreen" class="div_map" attr_type_traj="convoy"></div>
+						<div id="map_raw_fullscreen" class="div_map" attr_type_traj="raw"></div>
 					</div>
 				</div>
 			</div>
 
+			<!-- PAGE CLOSEDSWARM -->
 			<div id="closedswarm" class="tab-pane fade">
 
-				<div class="body_boite" attr_indice="2" attr_type_traj="convoy">
+				<div class="fenetre_fullscreen" attr_indice="2" attr_type_traj="convoy">
 					<div class="bouton_reduire_menu" onclick="reduire_menu(this)"><div class="logo_reduire_menu"><img src="Images/Icons/chevron-left.svg"></div></div>
 					<div class="menu_boite">
 						<div class="titre_boite">
@@ -510,7 +513,7 @@
 							</div>
 							<div id="collapse_list_traj-convoy" class="collapse collapse_list_traj">
 								<div class="card-body">
-									<ul class="list_traj" attr_type="convoy">
+									<ul class="list_traj" attr_fullscreen="true" attr_type="convoy">
 										<li class="bouton_select_all-none" onclick=selectAll(this)><i class="material-icons">check_box</i><div class="label_select_traj">: All</div></li>
 										<li class="bouton_select_all-none" onclick=unselectAll(this)><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">: None</div></li>
 										<li class="unselectable li_search"><input type="text" placeholder="Search" class="input_bouton-select_traj" onkeyup=search(this)></li>
@@ -528,14 +531,17 @@
 
 			</div>
 
+			<!-- PAGE CONVOY -->
 			<div id="convoy" class="tab-pane fade">
 				<div>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</div>
 			</div>
 
+			<!-- PAGE DIVERGENT -->
 			<div id="divergent" class="tab-pane fade">
 				<div>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</div>
 			</div>
 
+			<!-- PAGE CONVERGENT -->
 			<div id="convergent" class="tab-pane fade">
 				<div>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</div>
 			</div>

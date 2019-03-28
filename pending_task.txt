@@ -1,6 +1,3 @@
--> Fix bouton réduire fenetre : après swap de place puis reduire puis augmenter -> mauvaise postion 
 -> onglet fullscreen
 -> nouvelle fenetre full screen
--> orientation des fleches PolylineDecorator correct ?
--> les fleches PolylineDecorator ne s'enlèvent pas quand on cache une traj
 -> fix width de "menu select traj"

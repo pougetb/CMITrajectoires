@@ -53,7 +53,7 @@ function p(truc){
 /*Variables Globales*/
 
 //tableau contenant les objets fenetres réduites
-var tab_fenetre_red = Array();
+var gloabl_tabFenetreReduite = Array();
 
 var polylineRaw;
 var polylineClosedSwarm;
@@ -138,7 +138,7 @@ function initMaps(){
 }
 
 /* Test Leaflet Simon*/
-function genereListeTrajectoires(p_type){
+function genereListeTrajectoires(p_type,p_fullscreen=false){
 
 	// verif s'il s'agit d'un pattern
 	let isPattern = true;
@@ -181,14 +181,14 @@ function genereListeTrajectoires(p_type){
 			list.append(li);
 
 			//affichage de la traj
-			generePolyline(p_type,obj_id,color,isPattern);
+			generePolyline(p_type,obj_id,color,isPattern,p_fullscreen);
 		}
 	}
 	p('global_tabPolyline["raw"]');
 	p(global_tabPolyline["raw"]);
 }
 
-function generePolyline(p_type_traj,p_id_traj, p_color_traj,p_isPattern){
+function generePolyline(p_type_traj,p_id_traj, p_color_traj,p_isPattern,p_fullscreen){
 
 	//verif s'il s'agit d'un patern
 	if(p_isPattern){//Methode de generation des patterns
@@ -209,8 +209,22 @@ function generePolyline(p_type_traj,p_id_traj, p_color_traj,p_isPattern){
 				}
 			}
 		}
-		global_tabPolyline[p_type_traj]["traj"][p_id_traj]=L.polyline(latlngs, {color: p_color_traj, weight:3});
+		global_tabPolyline[p_type_traj]["traj"][p_id_traj]=L.polyline(latlngs, {
+			color: p_color_traj,
+			weight:4,
+			clickable:true,
+			attr_id:p_id_traj,
+		});
 		global_tabPolyline[p_type_traj]["traj"][p_id_traj].addTo(global_tabMap["map_" + p_type_traj]);
+		global_tabPolyline[p_type_traj]["traj"][p_id_traj].on('click', function(event) {
+			let popupContent = 
+			"<div class='popup_content'>"
+			+ "<div class='popup_infos'><div class='popup_labels'>id : </div> " + event.sourceTarget.options.attr_id + "</div>"
+			+ "<div class='container_textInfoTraj'><div class='popup_labels'>Infos :</div><textarea id='story' name='story' rows='5' cols='20'></textarea></div>"
+			+ "<div class='popup_boutonHide' onclick='hideTraj(this)' attr_id_traj='" + p_id_traj + "' attr_type_traj='" + p_type_traj + "' attr_fullscreen='" + p_fullscreen + "'>Hide this trajectorie</div>"
+			+ "</div>";
+			event.target.bindPopup(popupContent).openPopup();
+		});
 
 		global_tabPolyline[p_type_traj]["decorator"][p_id_traj] = L.polylineDecorator(global_tabPolyline[p_type_traj]["traj"][p_id_traj], {
 			patterns: [
@@ -229,8 +243,23 @@ function generePolyline(p_type_traj,p_id_traj, p_color_traj,p_isPattern){
 		for(let pos in tab_traj){
 			latlngs.push([tab_traj[pos].lat,tab_traj[pos].lon]);
 		}
-		global_tabPolyline[p_type_traj]["traj"][p_id_traj]=L.polyline(latlngs, {color: p_color_traj, weight:3});
+		global_tabPolyline[p_type_traj]["traj"][p_id_traj]=L.polyline(latlngs, {
+			color: p_color_traj,
+			weight:4,
+			clickable:true,
+			attr_id:p_id_traj,
+		});
 		global_tabPolyline[p_type_traj]["traj"][p_id_traj].addTo(global_tabMap["map_" + p_type_traj]);
+		global_tabPolyline[p_type_traj]["traj"][p_id_traj].on('click', function(event) {
+			let popupContent = 
+			"<div class='popup_content'>"
+			+ "<div class='popup_infos'><div class='popup_labels'>id : </div> " + event.sourceTarget.options.attr_id + "</div>"
+			+ "<div class='container_textInfoTraj'><div class='popup_labels'>Infos :</div><textarea id='story' name='story' rows='5' cols='20'></textarea></div>"
+			+ "<div class='popup_boutonHide' onclick='hideTraj(this)' attr_id_traj='" + p_id_traj + "' attr_type_traj='" + p_type_traj + "' attr_fullscreen='" + p_fullscreen + "'>Hide this trajectorie</div>"
+			+ "</div>";
+			
+			event.target.bindPopup(popupContent).openPopup();
+		});
 
 		global_tabPolyline[p_type_traj]["decorator"][p_id_traj] = L.polylineDecorator(global_tabPolyline[p_type_traj]["traj"][p_id_traj], {
 			patterns: [
@@ -244,6 +273,18 @@ function generePolyline(p_type_traj,p_id_traj, p_color_traj,p_isPattern){
 		global_tabPolyline[p_type_traj]["decorator"][p_id_traj].addTo(global_tabMap["map_" + p_type_traj]);
 	}
 	
+}
+
+function hideTraj(p_this){
+	p("wesh alors");
+	let id_traj = $(p_this).attr("attr_id_traj");
+	let type_traj = $(p_this).attr("attr_type_traj");
+	let is_fullscreen = $(p_this).attr("attr_fullscreen");
+	let list_traj = $(".list_traj").filter("[attr_type='" + type_traj + "']" && "[attr_fullscreen='" + is_fullscreen + "']");
+	let li_traj = list_traj.find(".li_select_traj").filter("[attr_id='" + id_traj + "']");
+
+	hideShowTraj(li_traj);
+
 }
 
 function afficherClosedSwarm(n){
@@ -281,11 +322,15 @@ function hideShowTraj(div_li){
 	p(global_tabPolyline[type_traj]);
 	let id = li.attr("attr_id");
 	if(li.hasClass("selected")){//hide
+		//polyline
 		global_tabMap["map_"+type_traj].removeLayer(global_tabPolyline[type_traj]["traj"][id]);
+		//arrowHeader
 		global_tabMap["map_"+type_traj].removeLayer(global_tabPolyline[type_traj]["decorator"][id]);
 	}
 	else{//show
+		//polyline
 		global_tabPolyline[type_traj]["traj"][id].addTo(global_tabMap["map_"+type_traj]);
+		//arrowHeader
 		global_tabPolyline[type_traj]["decorator"][id].addTo(global_tabMap["map_"+type_traj]);
 	}
 
@@ -497,13 +542,10 @@ function reduire(div_red){
 
 	//on recupere la fenetre
 	let obj_fenetre = $(div_red).parent().parent().parent();
-	// p(obj_fenetre);
 	//on recupere le type traj
 	let type_traj = obj_fenetre.attr("attr_type_traj");
-	// p(type_traj);
 	//on recupere l'indice de la fenetre
 	let indice_fenetre = obj_fenetre.parent().attr("indice");
-	// p(indice_fenetre);
 
 	//on chnage la couleur de la barre de tache
 	let onglet_fenetre = $(".onglet_fenetre").filter("[attr_type_traj='" + type_traj + "']");
@@ -515,7 +557,7 @@ function reduire(div_red){
 	// p(tab_fenetre);
 
 	//on stock la fenetre dans la var globale
-	tab_fenetre_red.push(obj_fenetre);
+	gloabl_tabFenetreReduite.push(obj_fenetre);
 	
 	if(indice_fenetre == (tab_fenetre.length - 1)){
 		//c'est le dernier element, on le display none
@@ -544,14 +586,14 @@ function reduire(div_red){
 			$(tab_col[i]).attr("attr_estVide","true");
 		}
 	}
-	// p(tab_fenetre_red);
+	p("tabfenetrereduite");
+	p(gloabl_tabFenetreReduite);
 }
 
 function agrandire(div_onglet){
 	//on récupère le type
 	let obj_onglet = $(div_onglet);
 	if(!(obj_onglet.hasClass("onglet_fenetre_reduit"))){//fenetre déjà augmentée, on la réduit
-
 		let type_traj = obj_onglet.attr("attr_type_traj");
 		//recherche de la bonne fenetre
 		let obj_bouton_reduire = $(".body_boite").filter("[attr_type_traj=" + type_traj + "]").find(".menu_boite").find(".menu_bouton_affichage").find(".bouton_reduire");
@@ -562,26 +604,22 @@ function agrandire(div_onglet){
 
 	//recherche de la bonne fenetre
 	let obj_fenetre;
-	for(let i=0; i<tab_fenetre_red.length;i++){
-		if(type_traj.localeCompare(tab_fenetre_red[i].attr("attr_type_traj"))==0){
-			obj_fenetre = tab_fenetre_red[i];
+	for(let i=0; i<gloabl_tabFenetreReduite.length;i++){
+		if(type_traj.localeCompare(gloabl_tabFenetreReduite[i].attr("attr_type_traj"))==0){
+			obj_fenetre = gloabl_tabFenetreReduite[i];
 		}
 	}
 
 	//on recupere l'indice de la fenetre
 	let indice_fenetre = obj_fenetre.attr("attr_indice");
-	// p("indice obj_fenetre:");
-	// p(indice_fenetre);
+
 	//on recupere toute les fenetres
 	let tab_fenetre = $(".body_boite");
-	// p(tab_fenetre);
-	// let col_cible = $(".fenetre_traj").filter("[indice='" + indice_fenetre + "']");
 	let indice_tab=0;
 	let nb_fenetre = 0;
 	let bool_place = false;
 	while(nb_fenetre<tab_fenetre.length+1){
-		// p("indice de la col:");
-		// p(nb_fenetre);
+
 		let col_cible = $(".fenetre_traj").filter("[indice='" + (parseInt(nb_fenetre)) + "']");
 		let temp_obj_fenetre = $(tab_fenetre[indice_tab]);
 		// p("indice temp_obj_f:");
@@ -631,46 +669,68 @@ function agrandire(div_onglet){
 	onglet_fenetre.addClass("couleur_onglet");
 }
 
+//Fonctions menu boutons mouvement
 function mouvement_haut(p_this){
 	
 	let obj_fenetre = $(p_this).parent().parent().parent();
 	let obj_col = obj_fenetre.parent();
+	let obj_type = obj_fenetre.attr("attr_type_traj");
 	let col_indice = obj_col.attr("indice");
-	// p(obj_fenetre);
-	// p(obj_col);
-	// p(obj_fenetre.attr("attr_indice"));
-	// p(obj_col.attr("indice"));
+
 	//on verifie si la fenetre est au bord
 	if(obj_col.attr("indice") == 0 || obj_col.attr("indice") == 1){
 		p("impossible de monter");
 		return ;
 	}
 
-
+	//onrecupere la col cible à echanger
 	let col_cible =  $(".fenetre_traj").filter("[indice='" + (parseInt(col_indice) - 2) + "']");
 	if(col_cible.attr("attr_estVide")==="true"){
 		p("mouvement impossible");
 		return;
 	}
+	//on recupere la fenetre cible à echanger
 	let fenetre_cible = col_cible.children();
-
+	let type_cible = fenetre_cible.attr("attr_type_traj");
+	//on met la fenetre dans la col cible
 	col_cible.empty().append(obj_fenetre);
+	//on met la fenetre cible dans la col
 	obj_col.empty().append(fenetre_cible);
 
+
+	//on remet les bon indices
 	obj_fenetre.attr("attr_indice",(parseInt(col_indice) - 2));
 	fenetre_cible.attr("attr_indice",col_indice);
 
+	//on change de place les boutons footer
+	let div_footer_cible = $(".onglet_fenetre").filter("[attr_type_traj='"+type_cible+"']");
+	let div_footer_obj = $(".onglet_fenetre").filter("[attr_type_traj='"+obj_type+"']");
+	let prev_footer_cible=div_footer_cible.prev();
+	let prev_footer_obj=div_footer_obj.prev();
+	p("prev_cible");
+	p(prev_footer_cible);
+	p("prev_obj");
+	p(prev_footer_obj);
+	if(prev_footer_cible.length==0){//pas de previous
+		$("#footer").prepend(div_footer_obj);
+	}
+	else{
+		div_footer_obj.insertAfter(prev_footer_cible);
+	}
 
+	if(prev_footer_obj.length==0){//pas de previous
+		$("#footer").prepend(div_footer_cible);
+	}
+	else{
+		div_footer_cible.insertAfter(prev_footer_obj);
+		
+	}
 }
 
 function mouvement_lateral(p_this){
 	let obj_fenetre = $(p_this).parent().parent().parent();
 	let obj_col = obj_fenetre.parent();
 	let col_indice = obj_col.attr("indice");
-	// p(obj_fenetre);
-	// p(obj_col);
-	// p(obj_fenetre.attr("attr_indice"));
-	// p(obj_col.attr("indice"));
 
 	let col_cible;
 	let fenetre_cible;
@@ -697,17 +757,38 @@ function mouvement_lateral(p_this){
 	col_cible.empty().append(obj_fenetre);
 	obj_col.empty().append(fenetre_cible);
 
+	//on change de place les boutons footer
+	let obj_type = obj_fenetre.attr("attr_type_traj");
+	let type_cible = fenetre_cible.attr("attr_type_traj");
+	let div_footer_cible = $(".onglet_fenetre").filter("[attr_type_traj='"+type_cible+"']");
+	let div_footer_obj = $(".onglet_fenetre").filter("[attr_type_traj='"+obj_type+"']");
+	let prev_footer_cible=div_footer_cible.prev();
+	let prev_footer_obj=div_footer_obj.prev();
+	p("prev_cible");
+	p(prev_footer_cible);
+	p("prev_obj");
+	p(prev_footer_obj);
+	if(prev_footer_cible.length==0){//pas de previous
+		$("#footer").prepend(div_footer_obj);
+	}
+	else{
+		div_footer_obj.insertAfter(prev_footer_cible);
+	}
+
+	if(prev_footer_obj.length==0){//pas de previous
+		$("#footer").prepend(div_footer_cible);
+	}
+	else{
+		div_footer_cible.insertAfter(prev_footer_obj);
+		
+	}
+
 }
 
 function mouvement_bas(p_this){
 	let obj_fenetre = $(p_this).parent().parent().parent();
 	let obj_col = obj_fenetre.parent();
 	let col_indice = obj_col.attr("indice");
-	// p(obj_fenetre);
-	// p(obj_col);
-	// p(obj_fenetre.attr("attr_indice")==="true");
-	// p(obj_col.attr("indice"));
-	//on verifie si la fenetre est au bord
 	if(obj_col.attr("indice") == 2 || obj_col.attr("indice") == 3){
 		p("impossible de monter");
 		return ;
@@ -725,8 +806,34 @@ function mouvement_bas(p_this){
 
 	obj_fenetre.attr("attr_indice",(parseInt(col_indice) + 2));
 	fenetre_cible.attr("attr_indice",col_indice);
-}
 
+	//on change de place les boutons footer
+	let obj_type = obj_fenetre.attr("attr_type_traj");
+	let type_cible = fenetre_cible.attr("attr_type_traj");
+	let div_footer_cible = $(".onglet_fenetre").filter("[attr_type_traj='"+type_cible+"']");
+	let div_footer_obj = $(".onglet_fenetre").filter("[attr_type_traj='"+obj_type+"']");
+	let prev_footer_cible=div_footer_cible.prev();
+	let prev_footer_obj=div_footer_obj.prev();
+	if(prev_footer_cible.length==0){//pas de previous
+		// div_footer_obj.remove();
+		$("#footer").prepend(div_footer_obj);
+	}
+	else{
+		// div_footer_obj.remove();
+		div_footer_obj.insertAfter(prev_footer_cible);
+	}
+
+	if(prev_footer_obj.length==0){//pas de previous
+		// div_footer_cible.remove();
+		$("#footer").prepend(div_footer_cible);
+	}
+	else{
+		// div_footer_cible.remove();
+		div_footer_cible.insertAfter(prev_footer_obj);
+		
+	}
+}
+//FIN Fonctions menu boutons mouvement
 
 function reduire_menu(div_reduire_menu){
 	//on recupere le bon menu à réduire

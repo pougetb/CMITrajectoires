@@ -388,6 +388,43 @@ body>div{
 .well{
 	flex-shrink: 1;
 }
+
+/* popup */
+.popup_content{
+	display:flex;
+	flex-direction:column;
+}
+.popup_content>div{
+	margin:4% 0%;
+}
+.popup_infos{
+	display:flex;
+	flex-direction:row;
+}
+.popup_lineseparator{
+	margin:5% 10%;
+	border:0.5px solid grey;
+
+}
+.container_textInfoTraj{
+	display:flex;
+	flex-direction: column;
+}
+.popup_boutonHide{
+	border:1px solid #33658A;
+	color:#33658A;
+	text-align:center;
+	border-radius:4px;
+}
+.popup_boutonHide:hover{
+	border:1px solid white;
+	color:white;
+	background-color:#33658A;
+
+}
+.popup_labels{
+	color:#33658A;
+}
 /*---FIN Map Leaflet---*/
 
 /*---Fin Fenetre---*/
