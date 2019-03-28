@@ -117,9 +117,7 @@ global_tabMap["map_raw_fullscreen"]=map_raw_fullscreen;
 
 function initMaps(){
 	map_raw.setView([41.147519, -8.610814], 12);
-	L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}",{
-		// attribution:'&Tiles by <a href="http://mapc.org">MAPC</a> &Data by <a href="http://mass.gov/mgis">MassGIS</a>',
-	}).addTo(map_raw);
+	L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}").addTo(map_raw);
 	
 	map_closedswarm.setView([41.147519, -8.610814], 13);
 	L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}').addTo(map_closedswarm);
@@ -133,7 +131,7 @@ function initMaps(){
 	map_convergent.setView([41.147519, -8.610814], 13);
 	L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}').addTo(map_convergent);
 
-	map_raw_fullscreen.setView([41.147519, -8.610814], 13);
+	map_raw_fullscreen.setView([41.147519, -8.610814], 12);
 	L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}').addTo(map_raw_fullscreen);
 }
 
@@ -184,8 +182,6 @@ function genereListeTrajectoires(p_type,p_fullscreen=false){
 			generePolyline(p_type,obj_id,color,isPattern,p_fullscreen);
 		}
 	}
-	p('global_tabPolyline["raw"]');
-	p(global_tabPolyline["raw"]);
 }
 
 function generePolyline(p_type_traj,p_id_traj, p_color_traj,p_isPattern,p_fullscreen){
@@ -743,6 +739,7 @@ function mouvement_lateral(p_this){
 		}
 		obj_fenetre.attr("attr_indice",(parseInt(col_indice) + 1));
 		fenetre_cible = col_cible.children();	
+		fenetre_cible.attr("attr_indice",(parseInt(col_indice)));
 	}
 	else{//deplacement à gauche
 		col_cible =  $(".fenetre_traj").filter("[indice='" + (parseInt(col_indice) - 1) + "']");
@@ -752,6 +749,7 @@ function mouvement_lateral(p_this){
 		}
 		obj_fenetre.attr("attr_indice",(parseInt(col_indice) - 1));
 		fenetre_cible = col_cible.children();
+		fenetre_cible.attr("attr_indice",(parseInt(col_indice)));
 	}
 
 	col_cible.empty().append(obj_fenetre);
@@ -789,7 +787,7 @@ function mouvement_bas(p_this){
 	let obj_fenetre = $(p_this).parent().parent().parent();
 	let obj_col = obj_fenetre.parent();
 	let col_indice = obj_col.attr("indice");
-	if(obj_col.attr("indice") == 2 || obj_col.attr("indice") == 3){
+	if(obj_col.attr("indice") == 4 || obj_col.attr("indice") == 5){
 		p("impossible de monter");
 		return ;
 	}

@@ -437,8 +437,6 @@
 			<!-- PAGE RAW -->
 			<div id="raw" class="tab-pane fade ">
 
-				<div class="titre_fichier">Tajectories of Portos taxis : Raws</div>
-
 				<div class="fenetre_fullscreen" attr_type_traj="raw">
 					<div class="bouton_reduire_menu" onclick="reduire_menu(this)"><div class="logo_reduire_menu"><img src="Images/Icons/chevron-left.svg"></div></div>
 					<div class="menu_boite">
@@ -447,30 +445,21 @@
 						</div>
 						
 						
-						<div class="menu_bouton_affichage">
-							<div class="bouton_full_screen" onclick="full_screen()"><i class="tiny material-icons">open_in_new</i></div>
-						</div>
+						
+						<div class="newWindowButton_fullscreen" onclick="full_screen()"><i class="tiny material-icons">open_in_new</i></div>
+						
 												
 
 						
-						<div class="menu_choix_traj">
-							
-							<div class="bouton-select_traj" onclick="reverse_dropdown(this)"  data-toggle="collapse" data-target="#collapse_list_traj-convoy" aria-expanded="true" aria-controls="collapse_list_traj-convoy">
-								<div class="label_select_trajectory">Select Trajectory</div>
+						<div class="menu_choix_traj fullscreen">
+							<div class="label_select_trajectory">Select Trajectory</div>
+							<ul class="list_traj fullscreen" attr_fullscreen="true" attr_type="raw">
+								<li class="bouton_select_all-none" onclick=selectAll(this)><i class="material-icons">check_box</i><div class="label_select_traj">: All</div></li>
+								<li class="bouton_select_all-none" onclick=unselectAll(this)><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">: None</div></li>
+								<li class="unselectable li_search"><input type="text" placeholder="Search" class="input_bouton-select_traj" onkeyup=search(this)></li>
+								<li class="unselectable li_separator"></li>
+							</ul>
 								
-								<i class="material-icons">arrow_drop_down</i>
-							</div>
-							<div id="collapse_list_traj-raw" class="collapse collapse_list_traj">
-								<div class="card-body">
-									<ul class="list_traj" attr_fullscreen="true" attr_type="raw">
-										<li class="bouton_select_all-none" onclick=selectAll(this)><i class="material-icons">check_box</i><div class="label_select_traj">: All</div></li>
-										<li class="bouton_select_all-none" onclick=unselectAll(this)><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">: None</div></li>
-										<li class="unselectable li_search"><input type="text" placeholder="Search" class="input_bouton-select_traj" onkeyup=search(this)></li>
-										<li class="unselectable li_separator"></li>
-									</ul>
-								</div>
-							</div>
-							
 						</div>
 
 					</div>

@@ -415,6 +415,8 @@ body>div{
 	color:#33658A;
 	text-align:center;
 	border-radius:4px;
+	margin:4% auto !important;
+	padding:0 5%;
 }
 .popup_boutonHide:hover{
 	border:1px solid white;
@@ -488,3 +490,7 @@ body>div{
 	margin: 0 10%;
 }
 /*FIN Style (barre, separator, etc...)*/
+
+.tab-content>div{
+	flex-grow:1;
+}
