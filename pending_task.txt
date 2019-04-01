@@ -1,3 +1,4 @@
 -> onglet agrandi
 -> nouvelle fenetre full screen
--> augmenter/deplacer une fenetre focus l'écran dessus
+-> augmenter/deplacer une fenetre focus l'Ã©cran dessus
+-> utiliser les triggers/binds pour invalidStatChange
