@@ -73,6 +73,31 @@ body>div{
 .espace{
 	width:0.5em;
 }
+
+.submenu{
+	display: none;
+	width:max-content;
+}
+
+.submenu li{
+	background-color: #D6E0E5;
+}
+
+.submenu a{
+	color: rgb(33, 37, 41);
+}
+
+.nav li:hover .submenu{
+	display:inline-block;
+	position:absolute;
+	top:100%;
+	left:0px;
+	padding:0px;
+	z-index:10000;
+}
+
+
+
 /* ---===FIN nav bar===--- */
 
 
@@ -493,4 +518,11 @@ body>div{
 
 .tab-content>div{
 	flex-grow:1;
+}
+
+
+/* Modal */
+
+.modal{
+	font-size: 16px;
 }
