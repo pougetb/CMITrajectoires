@@ -166,6 +166,7 @@ body>div{
 	text-align: center;
 	background-color:#86BBD8;
 	border-bottom:1px solid black;
+	height:5%;
 }
 
 /*---Menu des boutons réduire/fullscreen---*/
@@ -173,6 +174,7 @@ body>div{
 	display:flex;
 	flex-direction: row;
 	padding: 8% 5% 4% 5%;
+	height:10%
 	
 }
 .menu_bouton_affichage>div{
@@ -203,7 +205,7 @@ body>div{
 	/* border-bottom:1px solid black; */
 	padding: 4% 5%;
 	border-radius:4px;
-
+	height:25%;
 }
 
 .menu_bouton_mouvement>div{
@@ -261,7 +263,8 @@ body>div{
 	flex-shrink:1;
 	flex-grow:1; 
 	flex-basis: 100px;
-	max-height:100% !important;
+	height:60%;
+	max-height:60% !important;
 	margin:0 !important;
 	padding:5% 5% !important;
 	display:flex;
@@ -308,7 +311,7 @@ body>div{
 
 .collapse_list_traj{
 	overflow:auto;
-	height:50%;
+	/* height:50%; */
 }
 .header_bouton-select_traj{
 	display:flex;
