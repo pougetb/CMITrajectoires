@@ -132,7 +132,7 @@ body>div{
 }
 
 .col-{
-	height:50vh;
+	height:60vh;
 	width:50%;
 	padding-right : 0.75%; 
 	/* margin-right:0.5%; */
@@ -195,6 +195,10 @@ body>div{
 .menu_bouton_affichage>div:hover{
 	background-color: #33658A;
 	color:#f0f6fd;
+}
+
+.newWindowButton_fullscreen{
+	height:10%;
 }
 /*---FIN Menu des boutons réduire/fullscreen---*/
 
@@ -310,7 +314,8 @@ body>div{
 
 
 .collapse_list_traj{
-	overflow:auto;
+	overflow-y:auto;
+	overflow-x:hidden;
 	/* height:50%; */
 }
 .header_bouton-select_traj{

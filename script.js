@@ -759,8 +759,6 @@ function search(p_this){
 	for(let i=0;i<tab_li.length;i++){
 		let li = $(tab_li[i]);
 		let content_li = $(li).children(".label_select_traj").html();
-		p(content_li.match(new RegExp(content,'i')));
-		p(new RegExp(content),"gi");
 		if(!(content_li.match(new RegExp(content,'i')))){
 			li.hide();
 		}
