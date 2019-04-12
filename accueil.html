@@ -36,7 +36,7 @@
 </head>
 
 <body>
-
+  
 	<!-- nav bar -->
 	<div class="">
 
@@ -49,6 +49,7 @@
 					<div class="espace"> </div>
 					<div>File</div>
 				</div>
+
 				<ul class="submenu">
 					<li class="disabled onglet_options">
 						<div class="label_nav_options">
@@ -71,6 +72,7 @@
 						</div>
 					</li>
 				</ul>
+
 			</li>
 			<!-- string logo download: get_app -->
 			<li class="disabled onglet_options">
@@ -101,34 +103,20 @@
 			</li>
 			<!-- Fin Menu des options -->
 			<li class="disabled li_vide"></li>
-			<li class="active onglet_fullscreen"><a data-toggle="tab" href="#all_trajectories">All Trajectories</a></li>
-			<li class="onglet_fullscreen"><a data-toggle="tab" href="#raw">Raws</a></li>
-			<li class="onglet_fullscreen"><a data-toggle="tab" href="#closedswarm">Closed Swarms</a></li>
-			<li class="onglet_fullscreen"><a data-toggle="tab" href="#convoy">Convoys</a></li>
-			<li class="onglet_fullscreen"><a data-toggle="tab" href="#divergent">Divergents</a></li>
-			<li class="onglet_fullscreen"><a data-toggle="tab" href="#convergent">Convergents</a></li>
-			
-		</ul>
 
-		<!-- <div class="nav_clusters">
-			<div class="bouton_cluster_fullscreen">All</div>
-			<div class="vertical_separator_grey"></div>
-			<div class="bouton_cluster_fullscreen">Closed Swarms</div>
-			<div class="vertical_separator_grey"></div>
-			<div class="bouton_cluster_fullscreen">Convoy</div>
-			<div class="vertical_separator_grey"></div>
-			<div class="bouton_cluster_fullscreen">Convergents</div>
-			<div class="vertical_separator_grey"></div>
-			<div class="bouton_cluster_fullscreen">Divergents</div>
-			
-		</div> -->
-		
+			<li class="active onglet_fullscreen"><a data-toggle="tab" attr_type="all" class="nav_fullscreen" id="nav_all">All Trajectories</a></li>
+			<li class="onglet_fullscreen"><a data-toggle="tab" attr_type="raw" class="nav_fullscreen" id="nav_raw">Raws</a></li>
+			<li class="onglet_fullscreen"><a data-toggle="tab" attr_type="closedswarm" class="nav_fullscreen" id="nav_closedswarm">Closed Swarms</a></li>
+			<li class="onglet_fullscreen"><a data-toggle="tab" attr_type="convoy" class="nav_fullscreen" id="nav_convoy">Convoys</a></li>
+			<li class="onglet_fullscreen"><a data-toggle="tab" attr_type="divergent" class="nav_fullscreen" id="nav_divergent">Divergents</a></li>
+			<li class="onglet_fullscreen"><a data-toggle="tab" attr_type="convergent" class="nav_fullscreen" id="nav_convergent">Convergents</a></li>			
+		</ul>
 	</div>
 	<!-- FIN nav bar -->
 	<div class="tab-content">
 		
 			<!-- PAGE ALL TRAJECTORIES -->
-			<div id="all_trajectories" class="tab-pane fade in active">
+			<div id="all" class="tab-pane active">
 				<div class="titre_fichier">Tajectories of Portos taxis</div>
 				<div class="container_fenetre">
 					<div class="row">
@@ -142,8 +130,6 @@
 										<strong>Raws</strong>	    				
 									</div>
 									
-									
-									
 									<div class="menu_bouton_affichage">
 										<div class="bouton_reduire" onclick="reduire(this)"><i class="tiny material-icons">remove</i></div>
 										<div class="bouton_full_screen" onclick="full_screen()"><i class="tiny material-icons">open_in_new</i></div>
@@ -154,14 +140,8 @@
 										<div class="bouton_mouvement_lateral" onclick="mouvement_lateral(this)"><i class="tiny material-icons">code</i></div>
 										<div class="bouton_mouvement_bas" onclick="mouvement_bas(this)"><i class="tiny material-icons">keyboard_arrow_down</i></div>
 									</div>
-															
-			
 									
 									<div class="menu_choix_traj">
-
-										
-										<!-- <div class="label_select_trajectory">Select Trajectory</div> -->
-										<!-- <div class="label_select_trajectory">Select Trajectory</div> -->
 										
 										<div class="bouton-select_traj" onclick="reverse_dropdown(this)"  data-toggle="collapse" data-target="#collapse_list_traj-raw" aria-expanded="true" aria-controls="collapse_list_traj-raw">
 											<div class="label_select_trajectory">Select Trajectory</div>
@@ -175,24 +155,6 @@
 													<li class="bouton_select_all-none" onclick=unselectAll(this)><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">: None</div></li>
 													<li class="unselectable li_search"><input type="text" placeholder="Search" class="input_bouton-select_traj" onkeyup=search(this)></li>
 													<li class="unselectable li_separator"></li>
-													<!-- <li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">Taxis 1</div></li>
-													<li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">Taxis 2</div></li>
-													<li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">Taxis 3</div></li>
-													<li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">Taxis 4</div></li>
-													<li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">Taxis 5</div></li>
-													<li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">Taxis 6</div></li>
-													<li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">Taxis 7</div></li>
-													<li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">Taxis 8</div></li>
-													<li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">Taxis 9</div></li>
-													<li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">Taxis 10</div></li>
-													<li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">Taxis 11</div></li>
-													<li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">Taxis 12</div></li>
-													<li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">Taxis 13</div></li>
-													<li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">Taxis 14</div></li>
-													<li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">Taxis 15</div></li>
-													<li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">Taxis 16</div></li>
-													<li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">Taxis 17</div></li>
-													<li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">Taxis1800000000</div></li> -->
 												</ul>
 											</div>
 										</div>
@@ -231,10 +193,6 @@
 			
 									
 									<div class="menu_choix_traj">
-
-										
-										<!-- <div class="label_select_trajectory">Select Trajectory</div> -->
-										<!-- <div class="label_select_trajectory">Select Trajectory</div> -->
 										
 										<div class="bouton-select_traj" onclick="reverse_dropdown(this)"  data-toggle="collapse" data-target="#collapse_list_traj-closedswarm" aria-expanded="true" aria-controls="collapse_list_traj-closedswarm">
 											<div class="label_select_trajectory">Select Trajectory</div>
@@ -248,10 +206,6 @@
 													<li class="bouton_select_all-none" onclick=unselectAll(this)><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">: None</div></li>
 													<li class="unselectable li_search"><input type="text" placeholder="Search" class="input_bouton-select_traj" onkeyup=search(this) onkeyup=search(this)></li>
 													<li class="unselectable li_separator"></li>
-													<!-- <li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">closedswarm 1</div></li>
-													<li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">closedswarm 2</div></li>
-													<li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">closedswarm 3</div></li>
-													<li class="li_select_traj" onclick="toggleSelected(this)"><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">closedswarm 4</div></li> -->
 												</ul>
 											</div>
 										</div>
@@ -463,8 +417,7 @@
 			</div>
 
 			<!-- PAGE RAW -->
-			<div id="raw" class="tab-pane fade ">
-
+			<div id="raw" class="tab-pane active">
 				<div class="fenetre_fullscreen" attr_type_traj="raw">
 					<div class="bouton_reduire_menu" onclick="reduire_menu(this)"><div class="logo_reduire_menu"><img src="Images/Icons/chevron-left.svg"></div></div>
 					<div class="menu_boite">
@@ -498,9 +451,44 @@
 			</div>
 
 			<!-- PAGE CLOSEDSWARM -->
-			<div id="closedswarm" class="tab-pane fade">
+			<div id="closedswarm" class="tab-pane">
 
-				<div class="fenetre_fullscreen" attr_indice="2" attr_type_traj="convoy">
+				<div class="fenetre_fullscreen" attr_type_traj="closedswarm">
+					<div class="bouton_reduire_menu" onclick="reduire_menu(this)"><div class="logo_reduire_menu"><img src="Images/Icons/chevron-left.svg"></div></div>
+					<div class="menu_boite">
+						<div class="titre_boite">
+							<strong>Closed Swarms</strong>	    				
+						</div>
+						
+						
+						
+						<div class="newWindowButton_fullscreen" onclick="full_screen()"><i class="tiny material-icons">open_in_new</i></div>
+						
+												
+
+						
+						<div class="menu_choix_traj fullscreen">
+							<div class="label_select_trajectory">Select Trajectory</div>
+							<ul class="list_traj fullscreen" attr_fullscreen="true" attr_type="closedswarm">
+								<li class="bouton_select_all-none" onclick=selectAll(this)><i class="material-icons">check_box</i><div class="label_select_traj">: All</div></li>
+								<li class="bouton_select_all-none" onclick=unselectAll(this)><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">: None</div></li>
+								<li class="unselectable li_search"><input type="text" placeholder="Search" class="input_bouton-select_traj" onkeyup=search(this)></li>
+								<li class="unselectable li_separator"></li>
+							</ul>
+								
+						</div>
+
+					</div>
+					<div class="map">
+						<div id="map_closedswarm_fullscreen" class="div_map" attr_type_traj="closedswarm"></div>
+					</div>
+				</div>
+
+			</div>
+
+			<!-- PAGE CONVOY -->
+			<div id="convoy" class="tab-pane">
+				<div class="fenetre_fullscreen" attr_type_traj="convoy">
 					<div class="bouton_reduire_menu" onclick="reduire_menu(this)"><div class="logo_reduire_menu"><img src="Images/Icons/chevron-left.svg"></div></div>
 					<div class="menu_boite">
 						<div class="titre_boite">
@@ -508,64 +496,100 @@
 						</div>
 						
 						
-						<div class="menu_bouton_affichage">
-							<div class="bouton_reduire" onclick="reduire(this)"><i class="tiny material-icons">remove</i></div>
-							<div class="bouton_full_screen" onclick="full_screen()"><i class="tiny material-icons">open_in_new</i></div>
-						</div>
 						
-						<div class="menu_bouton_mouvement">
-							<div class="bouton_mouvement_haut" onclick="mouvement_haut(this)"><i class="tiny material-icons">keyboard_arrow_up</i></div>
-							<div class="bouton_mouvement_lateral" onclick="mouvement_lateral(this)"><i class="tiny material-icons">code</i></div>
-							<div class="bouton_mouvement_bas" onclick="mouvement_bas(this)"><i class="tiny material-icons">keyboard_arrow_down</i></div>
-						</div>
+						<div class="newWindowButton_fullscreen" onclick="full_screen()"><i class="tiny material-icons">open_in_new</i></div>
+						
 												
 
 						
-						<div class="menu_choix_traj">
-							
-							<div class="bouton-select_traj" onclick="reverse_dropdown(this)"  data-toggle="collapse" data-target="#collapse_list_traj-convoy" aria-expanded="true" aria-controls="collapse_list_traj-convoy">
-								<div class="label_select_trajectory">Select Trajectory</div>
+						<div class="menu_choix_traj fullscreen">
+							<div class="label_select_trajectory">Select Trajectory</div>
+							<ul class="list_traj fullscreen" attr_fullscreen="true" attr_type="convoy">
+								<li class="bouton_select_all-none" onclick=selectAll(this)><i class="material-icons">check_box</i><div class="label_select_traj">: All</div></li>
+								<li class="bouton_select_all-none" onclick=unselectAll(this)><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">: None</div></li>
+								<li class="unselectable li_search"><input type="text" placeholder="Search" class="input_bouton-select_traj" onkeyup=search(this)></li>
+								<li class="unselectable li_separator"></li>
+							</ul>
 								
-								<i class="material-icons">arrow_drop_down</i>
-							</div>
-							<div id="collapse_list_traj-convoy" class="collapse collapse_list_traj">
-								<div class="card-body">
-									<ul class="list_traj" attr_fullscreen="true" attr_type="convoy">
-										<li class="bouton_select_all-none" onclick=selectAll(this)><i class="material-icons">check_box</i><div class="label_select_traj">: All</div></li>
-										<li class="bouton_select_all-none" onclick=unselectAll(this)><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">: None</div></li>
-										<li class="unselectable li_search"><input type="text" placeholder="Search" class="input_bouton-select_traj" onkeyup=search(this)></li>
-										<li class="unselectable li_separator"></li>
-								</div>
-							</div>
-							
 						</div>
 
 					</div>
 					<div class="map">
-						<div id="" class="div_map" attr_type_traj="convoy"></div>
+						<div id="map_convoy_fullscreen" class="div_map" attr_type_traj="convoy"></div>
 					</div>
 				</div>
-
-			</div>
-
-			<!-- PAGE CONVOY -->
-			<div id="convoy" class="tab-pane fade">
-				<div>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</div>
 			</div>
 
 			<!-- PAGE DIVERGENT -->
-			<div id="divergent" class="tab-pane fade">
-				<div>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</div>
+			<div id="divergent" class="tab-pane">
+				<div class="fenetre_fullscreen" attr_type_traj="divergent">
+					<div class="bouton_reduire_menu" onclick="reduire_menu(this)"><div class="logo_reduire_menu"><img src="Images/Icons/chevron-left.svg"></div></div>
+					<div class="menu_boite">
+						<div class="titre_boite">
+							<strong>Divergents</strong>	    				
+						</div>
+						
+						
+						
+						<div class="newWindowButton_fullscreen" onclick="full_screen()"><i class="tiny material-icons">open_in_new</i></div>
+						
+												
+
+						
+						<div class="menu_choix_traj fullscreen">
+							<div class="label_select_trajectory">Select Trajectory</div>
+							<ul class="list_traj fullscreen" attr_fullscreen="true" attr_type="divergent">
+								<li class="bouton_select_all-none" onclick=selectAll(this)><i class="material-icons">check_box</i><div class="label_select_traj">: All</div></li>
+								<li class="bouton_select_all-none" onclick=unselectAll(this)><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">: None</div></li>
+								<li class="unselectable li_search"><input type="text" placeholder="Search" class="input_bouton-select_traj" onkeyup=search(this)></li>
+								<li class="unselectable li_separator"></li>
+							</ul>
+								
+						</div>
+
+					</div>
+					<div class="map">
+						<div id="map_divergent_fullscreen" class="div_map" attr_type_traj="divergent"></div>
+					</div>
+				</div>
 			</div>
 
 			<!-- PAGE CONVERGENT -->
-			<div id="convergent" class="tab-pane fade">
-				<div>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</div>
+			<div id="convergent" class="tab-pane">
+				<div class="fenetre_fullscreen" attr_type_traj="convergent">
+					<div class="bouton_reduire_menu" onclick="reduire_menu(this)"><div class="logo_reduire_menu"><img src="Images/Icons/chevron-left.svg"></div></div>
+					<div class="menu_boite">
+						<div class="titre_boite">
+							<strong>Convergents</strong>	    				
+						</div>
+						
+						
+						
+						<div class="newWindowButton_fullscreen" onclick="full_screen()"><i class="tiny material-icons">open_in_new</i></div>
+						
+												
+
+						
+						<div class="menu_choix_traj fullscreen">
+							<div class="label_select_trajectory">Select Trajectory</div>
+							<ul class="list_traj fullscreen" attr_fullscreen="true" attr_type="convergent">
+								<li class="bouton_select_all-none" onclick=selectAll(this)><i class="material-icons">check_box</i><div class="label_select_traj">: All</div></li>
+								<li class="bouton_select_all-none" onclick=unselectAll(this)><i class="material-icons">check_box_outline_blank</i><div class="label_select_traj">: None</div></li>
+								<li class="unselectable li_search"><input type="text" placeholder="Search" class="input_bouton-select_traj" onkeyup=search(this)></li>
+								<li class="unselectable li_separator"></li>
+							</ul>
+								
+						</div>
+
+					</div>
+					<div class="map">
+						<div id="map_convergent_fullscreen" class="div_map" attr_type_traj="convergent"></div>
+					</div>
+				</div>
 			</div>
 	</div>
-	<!-- <div id="titre_fichier"><strong>Trajectories of Porto taxis</strong></div> -->
-	
-	
+
+
 </body>
 <!-- Modal -->
 	<div class="modal fade" id="openModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -594,8 +618,10 @@
 
 <!-- Fonctions principales -->
 <!-- <script src="data.json"></script> -->
+
 <script src="pattern.js"></script>
 <script src="raws.js"></script>
+    
 <script src="script.js"></script>
 
 <!-- Fonctions d'affichage -->
