@@ -126,13 +126,13 @@ body>div{
 }
 
 .row{
-	height: 500px;
 	max-width:100%;
 	margin: 0 !important;
 	padding: 0 0 0.75% 0.75%;
 }
 
 .col-{
+	height:50vh;
 	width:50%;
 	padding-right : 0.75%; 
 	/* margin-right:0.5%; */
@@ -308,7 +308,7 @@ body>div{
 
 .collapse_list_traj{
 	overflow:auto;
-	height:85%;
+	height:50%;
 }
 .header_bouton-select_traj{
 	display:flex;
@@ -402,201 +402,6 @@ body>div{
 
 /*---FIN Menu des Fenetres*/
 
-.menu_bouton_mouvement>div{
-	flex-grow: 1;
-	text-align:center;
-	background-color: white;
-	opacity: 1;
-	margin:1%;
-	border-radius: 6px;
-}
-.menu_bouton_mouvement>div:hover{
-	background-color: #33658A;
-	color:#f0f6fd;
-}
-/*---FIN Menu boutons mouvements fenetre---*/
-
-/* Menu Select trajectoires */
-.item-list-traj{
-	margin: 1% 0 !important;
-	padding: 5% 5% !important;
-	
-}
-.item-list-traj>i,.item-list-traj>div{
-	display:inline;
-	font-size:14px;
-}
-
-.options_list_traj{
-	display:flex;
-	flex-direction: row;	
-	margin:0 auto;
-}
-.all-selected{
-	display:flex;
-	flex-direction:row;
-	margin-right:2%;
-}
-.all-selected:hover{
-	color:#789ba6;
-}
-.not-selected{
-	display:flex;
-	flex-direction:row;
-	margin-left:2%;
-}
-.not-selected:hover{
-	color:#789ba6;
-}
-
-
-.input_bouton-select_traj{
-	width:100%;
-}
-.menu_choix_traj{
-	flex-shrink:1;
-	flex-grow:1; 
-	flex-basis: 100px;
-	max-height:100% !important;
-	margin:0 !important;
-	padding:5% 5% !important;
-	display:flex;
-	flex-direction:column;
-	/* border-radius:6px; */
-}
-.card-body{
-	background-color:white;
-}
-.bouton-select_traj{
-	width:100%;
-	height:15%;
-	padding:0% !important;
-	box-sizing: content-box;
-	background-color:white !important;
-	border-radius:2px;
-	display:flex;
-	flex-direction:column;
-	
-	padding:1% 50%;
-}
-.bouton-select_traj>img{
-	font-size:250%;
-}
-.bouton-select_traj>div{
-	margin:2% 0;
-}
-.bouton-select_traj>i,.bouton-select_traj>img{
-	text-align: center;
-	margin:0 auto;
-	
-}
-.label_select_trajectory{
-	text-align: center;
-}
-.bouton-select_traj>img:hover{
-	opacity: 0;
-}
-.list_traj{
-	/* background-color:white; */
-	padding:0!important;
-}
-
-
-.collapse_list_traj{
-	overflow:auto;
-	height:85%;
-}
-.header_bouton-select_traj{
-	display:flex;
-	flex-direction:column;
-}
-.header_bouton-select_traj>div{
-	
-}
-.li_select_traj{
-	display:flex;
-	flex-direction:row;
-	border:1px solid #33658A;
-	color:#33658A;
-	border-radius:4px;
-	list-style: none;
-}
-.bouton_select_all-none{
-	display:flex;
-	flex-direction:row;
-	border:1px solid #33658A;
-	color:#33658A;
-	border-radius:4px;
-	list-style: none;
-}
-.bouton_select_all-none:hover{
-	border-color: #33658A;
-	color:white;
-	background-color:#33658A;
-}
-/* .li_select_traj:hover{
-	border:1px solid white;
-	color:white;
-	background-color:#33658A;
-} */
-.li_select_traj.selected{
-	border-color: #33658A;
-	color:white;
-	background-color:#33658A;
-}
-/* .li_select_traj.selected:hover{
-	border-color: #33658A;
-	color:#33658A;
-	background-color:white;
-} */
-.label_select_traj{
-	margin:auto 0;
-}
-.list_traj>li{
-	margin-top:2%;
-	margin-bottom:2%;
-}
-.li_search{
-	margin-top:15% !important;
-	list-style: none;
-}
-.li_separator{
-	list-style: none;
-	border-bottom:1px solid black;
-	margin:5% 20% 5% 20% !important;
-}
-
-.rotated-180{
-	-webkit-transform: rotate(180deg);
-    -moz-transform: rotate(180deg);
-    -ms-transform: rotate(180deg);
-    -o-transform: rotate(180deg);
-    transform: rotate(180deg); 
-}
-/* Fin Menu Select trajectoires */
-
-/*---Bouton réduire menu fenetre---*/
-.bouton_reduire_menu{
-	display:flex;
-	width:2%;
-	max-width:5%;
-	border-right:1px black solid;
-	background-color:#86BBD8
-}
-.bouton_reduire_menu:hover{
-	background-color: #33658A;
-	color:#f0f6fd;
-}
-.bouton_reduire_menu_actif{
-	background-color: #33658A;
-	color:white;
-}
-.logo_reduire_menu{
-	margin: auto;
-}
-/*---FIN Bouton réduire menu fenetre---*/
-
-/*---FIN Menu des Fenetres*/
 
 /*---Map Leaflet---*/
 .map{
