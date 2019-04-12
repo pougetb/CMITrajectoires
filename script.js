@@ -5,6 +5,7 @@ function p(truc){
 	console.log(truc);
 }
 
+
 /* ---===Variables Globales===---*/
 
 /* ---tableau contenant les objets fenetres réduites--- */
@@ -91,7 +92,6 @@ global_tabMap["map_convergent_fullscreen"] = L.map('map_convergent_fullscreen');
 
 
 function initMaps(){
-
 	/* **maps all traj** */
 	global_tabMap["map_raw"].setView([41.147519, -8.610814], 12);
 	L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}").addTo(global_tabMap["map_raw"]);
@@ -123,6 +123,7 @@ function initMaps(){
 	
 	global_tabMap["map_convergent_fullscreen"].setView([41.147519, -8.610814], 13);
 	L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}').addTo(global_tabMap["map_convergent_fullscreen"]);
+
 }
 
 /* Test Leaflet Simon*/
@@ -138,6 +139,7 @@ function genereListeTrajectoires(p_type,p_fullscreen=false){
 		
 		//on recherche la liste correspondante
 		let list = $(".list_traj").filter("[attr_type='"+p_type+"']").filter("[attr_fullscreen='"+p_fullscreen+"']");
+
 		for(let obj_id in tab_traj){
 
 			//generation d'une couleur aléatoire
@@ -176,11 +178,13 @@ function genereListeTrajectoires(p_type,p_fullscreen=false){
 
 function generePolyline(p_type_traj,p_id_traj, p_color_traj,p_isPattern,p_fullscreen){
 
+
 	//fullscreen
 	let str_fullscreen = "";
 	if(p_fullscreen){
 		str_fullscreen="_fullscreen";
 	}
+
 	//verif s'il s'agit d'un patern
 	if(p_isPattern){//Methode de generation des patterns
 		// p("il s'agit d'un pattern");
@@ -200,6 +204,7 @@ function generePolyline(p_type_traj,p_id_traj, p_color_traj,p_isPattern,p_fullsc
 			clickable:true,
 			attr_id:p_id_traj,
 		});
+
 		global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj].addTo(global_tabMap["map_" + p_type_traj+str_fullscreen]);
 
 		var dateDebut = new Date(myNewJSON[p_type_traj][p_id_traj].start_date / 1000000000);
@@ -208,6 +213,7 @@ function generePolyline(p_type_traj,p_id_traj, p_color_traj,p_isPattern,p_fullsc
 		dateFin = dateFin.toDateString();
 
 		global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj].on('click', function(event) {
+
 			let popupContent = 
 			"<div class='popup_content'>"
 			+ "<div class='popup_infos'><div class='popup_labels'>id : </div> " + event.sourceTarget.options.attr_id + "</div>"
@@ -226,6 +232,7 @@ function generePolyline(p_type_traj,p_id_traj, p_color_traj,p_isPattern,p_fullsc
 				}
 			]
 		});
+  
 		global_tabPolyline[p_type_traj+str_fullscreen]["decorator"][p_id_traj].addTo(global_tabMap["map_" + p_type_traj + str_fullscreen]);
 	}
 	else{//Methode de generation des trajectoires simples
@@ -240,6 +247,7 @@ function generePolyline(p_type_traj,p_id_traj, p_color_traj,p_isPattern,p_fullsc
 			clickable:true,
 			attr_id:p_id_traj,
 		});
+    
 		global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj].addTo(global_tabMap["map_" + p_type_traj+str_fullscreen]);
 		global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj].on('click', function(event) {
 			let popupContent = 
@@ -261,6 +269,7 @@ function generePolyline(p_type_traj,p_id_traj, p_color_traj,p_isPattern,p_fullsc
 				}
 			]
 		});
+
 		global_tabPolyline[p_type_traj+str_fullscreen]["decorator"][p_id_traj].addTo(global_tabMap["map_" + p_type_traj+str_fullscreen]);
 	}
 	
@@ -279,8 +288,8 @@ function hideTraj(p_this){
 	let li_traj = list_traj.find(".li_select_traj").filter("[attr_id='" + id_traj + "']");
 
 	hideShowTraj(li_traj);
-
 }
+
 
 function hideShowTraj(div_li){
 	/**
@@ -319,32 +328,6 @@ function hideShowTraj(div_li){
 	toggleSelected(div_li);
 }
 
-function afficherClosedSwarm(n){
-	if(polylineClosedSwarm){
-		polylineClosedSwarm.remove();
-	}
-	var latlngs = new Array();
-
-	for(var i=0 ; i<myNewJSON.closedswarm.length ; i++){//recupere les swarms
-		if(i==n){
-			break;
-		}
-
-		latlngs[i] = new Array();
-		for(var j=0 ; j<myNewJSON.closedswarm[i].objects.length ; j++){//recupere les objets du swarm
-			var taxi = myNewJSON.closedswarm[i].objects[j];
-			for(var k=0 ; k<myNewJSON.raw[taxi].positions.length ; k++){
-				if(myNewJSON.raw[taxi].positions[k].timestamp >= myNewJSON.closedswarm[i].start_date 
-					&& myNewJSON.raw[taxi].positions[k].timestamp <= myNewJSON.closedswarm[i].end_date){
-
-					latlngs[i][j] = [myNewJSON.raw[taxi].positions[k].lat, myNewJSON.raw[taxi].positions[k].lon];
-				}
-			}
-		}
-	}
-	polylineClosedSwarm = L.polyline(latlngs, {color: 'blue', weight:1.5}).addTo(map_closedswarm);
-	map_closedswarm.fitBounds(polylineClosedSwarm.getBounds());
-}	
 
 genereListeTrajectoires("raw");
 genereListeTrajectoires("convoy");
@@ -730,7 +713,6 @@ function toggleSelected(p_this){
 }
 /* select All/None */
 function selectAll(p_this){
-	
 	let bouton_selectAll = $(p_this);
 	let tab_li = bouton_selectAll.siblings(".li_select_traj");
 	for(let i=0;i<tab_li.length;i++){
@@ -772,7 +754,6 @@ function search(p_this){
 
 initMaps();
 
-
 /*FIX REFRESH FULLSCREEN MAP NAV*/
 $(".nav_fullscreen").on("click",function(p_this){
 	let type = $(p_this.currentTarget).attr("attr_type");
@@ -787,4 +768,3 @@ $(".nav_fullscreen").on("click",function(p_this){
 	});
 });
 /*FIN FIX REFRESH FULLSCREEN MAP NAV*/
-
