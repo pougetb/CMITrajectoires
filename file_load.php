@@ -12,7 +12,8 @@ if(!is_dir("wd")){
 if(!isset($_SESSION["working"])) {
     if(isset($_FILES["sheet"])) {
         $file_name = $_FILES["sheet"]["name"];
-        $new_file_name = session_id()."___".$file_name;
+        //$new_file_name = session_id()."___".$file_name;
+        $new_file_name = $file_name;
         $file_tmp_name = $_FILES["sheet"]["tmp_name"];
         $file_ext = strtolower(end(explode('.',$_FILES["sheet"]["name"])));
 
@@ -22,14 +23,6 @@ if(!isset($_SESSION["working"])) {
 
         if(empty($errors)==true) {
             move_uploaded_file($file_tmp_name, "sheets/".$new_file_name);
-            $data_file = __DIR__."/sheets/".$new_file_name;
-            $_SESSION["working"] = 1;
-            $command = 
-                "{$python_bin} {$main_exec} ".
-                "{$_POST["start-date"]} {$_POST["end-date"]} ".
-                "{$_POST["interval"]} {$_POST["epsilon"]} {$_POST["mint"]} ".
-                "{$data_file}";
-            exec("nohup ".escapeshellcmd($command)." > /dev/null 2> error_log.txt &");
             $_SESSION["errors"] = $errors;
             header("Location: appli.php");
             exit();
