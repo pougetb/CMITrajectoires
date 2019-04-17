@@ -104,8 +104,8 @@
 			<!-- Fin Menu des options -->
 			<li class="disabled li_vide"></li>
 
-			<li class="active onglet_fullscreen"><a data-toggle="tab" attr_type="all" class="nav_fullscreen" id="nav_all">All Trajectories</a></li>
-			<li class="onglet_fullscreen"><a data-toggle="tab" attr_type="raw" class="nav_fullscreen" id="nav_raw">Raws</a></li>
+			<li class="onglet_fullscreen"><a data-toggle="tab" attr_type="all" class="nav_fullscreen" id="nav_all">All Trajectories</a></li>
+			<li class="active onglet_fullscreen"><a data-toggle="tab" attr_type="raw" class="nav_fullscreen" id="nav_raw">Raws</a></li>
 			<li class="onglet_fullscreen"><a data-toggle="tab" attr_type="closedswarm" class="nav_fullscreen" id="nav_closedswarm">Closed Swarms</a></li>
 			<li class="onglet_fullscreen"><a data-toggle="tab" attr_type="convoy" class="nav_fullscreen" id="nav_convoy">Convoys</a></li>
 			<li class="onglet_fullscreen"><a data-toggle="tab" attr_type="divergent" class="nav_fullscreen" id="nav_divergent">Divergents</a></li>
@@ -116,8 +116,11 @@
 	<div class="tab-content">
 		
 			<!-- PAGE ALL TRAJECTORIES -->
-			<div id="all" class="tab-pane active">
-				<div class="titre_fichier">Tajectories of Portos taxis</div>
+			<div id="all" class="tab-pane">
+				<div id="info_fichier">
+					<div class="titre_fichier">Trajectories : </div>
+					<div class="param_fichier"></div>
+				</div>
 				<div class="container_fenetre">
 					<div class="row">
 			

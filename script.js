@@ -8,24 +8,6 @@ function p(truc){
 
 /* ---===Variables Globales===---*/
 
-/* ---JSON--- */
-//data : variable json contenant toutes les données
-var data = new Array();
-function remplieJSON(p_json,is_raws=false){
-	
-	if(is_raws){
-		data.raw=p_json;
-	}
-	else{
-		for(let obj in p_json){
-			data[obj] = p_json[obj];
-		}
-	}
-	
-}
-remplieJSON(raw,true);
-remplieJSON(pattern);
-
 /* ---tableau contenant les objets fenetres réduites--- */
 var gloabl_tabFenetreReduite = Array();
 
@@ -144,6 +126,23 @@ function initMaps(){
 
 }
 
+
+function ajoutFichier(){
+	$(".titre_fichier").append(raw.filename);
+}
+ajoutFichier();
+
+function ajoutParam(){
+	var start = new Date(raw.start / 1000000);
+	var end = new Date (raw.end / 1000000);
+	var timestep = 15;
+	var timestep_unit = "seconds";
+	$(".param_fichier").html("Start date : " + start.toLocaleString() + " | End date : " + end.toLocaleString() + "</br> Timestep : " + timestep +" " + timestep_unit);
+
+}
+ajoutParam();
+
+
 /* Test Leaflet Simon*/
 function genereListeTrajectoires(p_type,p_fullscreen=false){
 
@@ -152,7 +151,7 @@ function genereListeTrajectoires(p_type,p_fullscreen=false){
 	if(p_type==="raw"){
 		isPattern = false;
 	}
-	let tab_traj=data[p_type];
+	let tab_traj=myNewJSON[p_type];
 	if(tab_traj){//verif si la colonne json existe
 		
 		//on recherche la liste correspondante
@@ -210,11 +209,11 @@ function generePolyline(p_type_traj,p_id_traj, p_color_traj,p_isPattern,p_fullsc
 
 		var objet_src_trgt = new Array();
 
-		objet_src_trgt[0] = data[p_type_traj][p_id_traj].source_id;
-		objet_src_trgt[1] = data[p_type_traj][p_id_traj].target_id;
+		objet_src_trgt[0] = myNewJSON[p_type_traj][p_id_traj].source_id;
+		objet_src_trgt[1] = myNewJSON[p_type_traj][p_id_traj].target_id;
 
-		latlngs.push([data.clusters[objet_src_trgt[0]].lat, data.clusters[objet_src_trgt[0]].lon]);
-		latlngs.push([data.clusters[objet_src_trgt[1]].lat, data.clusters[objet_src_trgt[1]].lon]);
+		latlngs.push([myNewJSON.clusters[objet_src_trgt[0]].lat, myNewJSON.clusters[objet_src_trgt[0]].lon]);
+		latlngs.push([myNewJSON.clusters[objet_src_trgt[1]].lat, myNewJSON.clusters[objet_src_trgt[1]].lon]);
 		
 		global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj]=L.polyline(latlngs, {
 			color: p_color_traj,
@@ -225,17 +224,17 @@ function generePolyline(p_type_traj,p_id_traj, p_color_traj,p_isPattern,p_fullsc
 
 		global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj].addTo(global_tabMap["map_" + p_type_traj+str_fullscreen]);
 
-		var dateDebut = new Date(data[p_type_traj][p_id_traj].start_date / 1000000000);
-		dateDebut = dateDebut.toDateString();
-		var dateFin = new Date(data[p_type_traj][p_id_traj].end_date / 1000000000);
-		dateFin = dateFin.toDateString();
+		var dateDebut = new Date(myNewJSON[p_type_traj][p_id_traj].start_date / 1000000);
+		dateDebut = dateDebut.toLocaleString();
+		var dateFin = new Date(myNewJSON[p_type_traj][p_id_traj].end_date / 1000000);
+		dateFin = dateFin.toLocaleString();
 
 		global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj].on('click', function(event) {
 
 			let popupContent = 
 			"<div class='popup_content'>"
 			+ "<div class='popup_infos'><div class='popup_labels'>id : </div> " + event.sourceTarget.options.attr_id + "</div>"
-			+ "<div class='container_textInfoTraj'><div class='popup_labels'>Infos :</div> Taxis : " + data[p_type_traj][p_id_traj].objects.join(", ") + "</br>Start date : " + dateDebut + "</br>End date : " + dateFin + " </div>"
+			+ "<div class='container_textInfoTraj'><div class='popup_labels'>Infos :</div> Taxis : " + myNewJSON[p_type_traj][p_id_traj].objects.join(", ") + "</br>Start date : " + dateDebut + "</br>End date : " + dateFin + " </div>"
 			+ "<div class='popup_boutonHide' onclick='hideTraj(this)' attr_id_traj='" + p_id_traj + "' attr_type_traj='" + p_type_traj + "' attr_fullscreen='" + p_fullscreen + "'>Hide this trajectorie</div>"
 			+ "</div>";
 			event.target.bindPopup(popupContent).openPopup();
@@ -255,7 +254,7 @@ function generePolyline(p_type_traj,p_id_traj, p_color_traj,p_isPattern,p_fullsc
 	}
 	else{//Methode de generation des trajectoires simples
 		let latlngs = new Array();
-		let tab_traj=data[p_type_traj][p_id_traj].positions;
+		let tab_traj=myNewJSON[p_type_traj][p_id_traj].positions;
 		for(let pos in tab_traj){
 			latlngs.push([tab_traj[pos].lat,tab_traj[pos].lon]);
 		}
@@ -323,7 +322,6 @@ function hideShowTraj(div_li){
 	if(is_fullscreen==="true"){
 		str_fullscreen="_fullscreen";
 	}
-	p(str_fullscreen);
 
 	//affichage leaflet
 	
@@ -409,8 +407,6 @@ function reduire(div_red){
 			$(tab_col[i]).attr("attr_estVide","true");
 		}
 	}
-	p("tabfenetrereduite");
-	p(gloabl_tabFenetreReduite);
 }
 
 function agrandire(div_onglet){
@@ -451,14 +447,12 @@ function agrandire(div_onglet){
 		// p(temp_obj_fenetre);
 		if(!bool_place){
 			if((parseInt(temp_obj_fenetre.attr("attr_indice")) < indice_fenetre)){
-				p("indice plus grand, pas sa place");
 				col_cible.empty();
 				col_cible.append(temp_obj_fenetre);
 				indice_tab++;
 				nb_fenetre++;
 			}
 			else{
-				p("indice moins grand, sa place");
 				col_cible.empty();
 				col_cible.append(obj_fenetre);
 				nb_fenetre++;
@@ -466,7 +460,6 @@ function agrandire(div_onglet){
 			}
 		}
 		else{
-			p("objet déjà placé");
 			col_cible.empty();
 			col_cible.append(temp_obj_fenetre);
 			indice_tab++;
@@ -502,14 +495,12 @@ function mouvement_haut(p_this){
 
 	//on verifie si la fenetre est au bord
 	if(obj_col.attr("indice") == 0 || obj_col.attr("indice") == 1){
-		p("impossible de monter");
 		return ;
 	}
 
 	//onrecupere la col cible à echanger
 	let col_cible =  $(".fenetre_traj").filter("[indice='" + (parseInt(col_indice) - 2) + "']");
 	if(col_cible.attr("attr_estVide")==="true"){
-		p("mouvement impossible");
 		return;
 	}
 	//on recupere la fenetre cible à echanger
@@ -530,10 +521,6 @@ function mouvement_haut(p_this){
 	let div_footer_obj = $(".onglet_fenetre").filter("[attr_type_traj='"+obj_type+"']");
 	let prev_footer_cible=div_footer_cible.prev();
 	let prev_footer_obj=div_footer_obj.prev();
-	p("prev_cible");
-	p(prev_footer_cible);
-	p("prev_obj");
-	p(prev_footer_obj);
 	if(prev_footer_cible.length==0){//pas de previous
 		$("#footer").prepend(div_footer_obj);
 	}
@@ -561,7 +548,6 @@ function mouvement_lateral(p_this){
 	if((parseInt(col_indice)%2) == 0){
 		col_cible =  $(".fenetre_traj").filter("[indice='" + (parseInt(col_indice) + 1) + "']");
 		if(col_cible.attr("attr_estVide")==="true"){
-			p("mouvement impossible");
 			return;
 		}
 		obj_fenetre.attr("attr_indice",(parseInt(col_indice) + 1));
@@ -571,7 +557,6 @@ function mouvement_lateral(p_this){
 	else{//deplacement à gauche
 		col_cible =  $(".fenetre_traj").filter("[indice='" + (parseInt(col_indice) - 1) + "']");
 		if(col_cible.attr("attr_estVide")==="true"){
-			p("mouvement impossible");
 			return;
 		}
 		obj_fenetre.attr("attr_indice",(parseInt(col_indice) - 1));
@@ -589,10 +574,6 @@ function mouvement_lateral(p_this){
 	let div_footer_obj = $(".onglet_fenetre").filter("[attr_type_traj='"+obj_type+"']");
 	let prev_footer_cible=div_footer_cible.prev();
 	let prev_footer_obj=div_footer_obj.prev();
-	p("prev_cible");
-	p(prev_footer_cible);
-	p("prev_obj");
-	p(prev_footer_obj);
 	if(prev_footer_cible.length==0){//pas de previous
 		$("#footer").prepend(div_footer_obj);
 	}
@@ -615,13 +596,11 @@ function mouvement_bas(p_this){
 	let obj_col = obj_fenetre.parent();
 	let col_indice = obj_col.attr("indice");
 	if(obj_col.attr("indice") == 4 || obj_col.attr("indice") == 5){
-		p("impossible de monter");
 		return ;
 	}
-	p("on echange");
+
 	let col_cible =  $(".fenetre_traj").filter("[indice='" + (parseInt(col_indice) + 2) + "']");
 	if(col_cible.attr("attr_estVide")==="true"){
-		p("mouvement impossible");
 		return;
 	}
 	let fenetre_cible = col_cible.children();
