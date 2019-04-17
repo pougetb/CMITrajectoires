@@ -22,8 +22,6 @@ if(!isset($_SESSION["working"])) {
 
         if(empty($errors)==true) {
             move_uploaded_file($file_tmp_name, "sheets/".$new_file_name);
-            $python_bin = "C:\ProgramData\Anaconda3\python.exe";
-            $main_exec = "C:\ProjetCMI\cmi-pattern-detect-master\main.py";
             $data_file = __DIR__."/sheets/".$new_file_name;
             $_SESSION["working"] = 1;
             $command = 
