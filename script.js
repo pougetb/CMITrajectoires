@@ -7,22 +7,50 @@ function p(truc){
 
 /* ---JSON--- */
 //data : variable json contenant toutes les données
-var data = new Array();
-function remplieJSON(p_json,is_raws=false){
 
+function recupJSON(type="raws"){
+	p("yo");
+	$.ajax({
+		url: "get_data.php?type=" + type, 
+		success: function(result){
+			if(type === "raws"){
+				remplieData(result, true);
+			}else{
+				remplieData(result);
+			}
+	}});
+}
+
+
+var data = new Array();
+function remplieData(p_json,is_raws=false){
+	p_json = JSON.stringify(p_json);
+	p_json = JSON.parse(p_json);
+	p(typeof p_json);
 	if(is_raws){
 		data.raw=p_json;
+		genereListeTrajectoires("raw");
+		genereListeTrajectoires("raw", true);
 	}
 	else{
 		for(let obj in p_json){
 			data[obj] = p_json[obj];
 		}
+		genereListeTrajectoires("convoy");
+		genereListeTrajectoires("closedswarm");
+		genereListeTrajectoires("convergent");
+		genereListeTrajectoires("divergent");
+
+		genereListeTrajectoires("convoy",true);
+		genereListeTrajectoires("closedswarm",true);
+		genereListeTrajectoires("convergent",true);
+		genereListeTrajectoires("divergent",true);
 	}
 
 }
-remplieJSON(raw,true);
-remplieJSON(pattern);
 
+recupJSON();
+recupJSON("patterns");
 
 /* ---tableau contenant les objets fenetres réduites--- */
 var gloabl_tabFenetreReduite = Array();
@@ -358,19 +386,6 @@ function hideShowTraj(div_li){
 	//chanagement de l'affichage de l'élement li
 	toggleSelected(div_li);
 }
-
-
-genereListeTrajectoires("raw");
-genereListeTrajectoires("convoy");
-genereListeTrajectoires("closedswarm");
-genereListeTrajectoires("convergent");
-genereListeTrajectoires("divergent");
-
-genereListeTrajectoires("raw",true);
-genereListeTrajectoires("convoy",true);
-genereListeTrajectoires("closedswarm",true);
-genereListeTrajectoires("convergent",true);
-genereListeTrajectoires("divergent",true);
 
 /* FIN Test Leaflet Simon*/
 
