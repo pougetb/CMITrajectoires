@@ -23,8 +23,6 @@ function recupJSON(type="raws"){
 
 var data = new Array();
 function remplieData(p_json,is_raws=false){
-	p_json = JSON.stringify(p_json);
-	p_json = JSON.parse(p_json);
 	p(typeof p_json);
 	if(is_raws){
 		data.raw=p_json;
@@ -137,35 +135,35 @@ global_tabMap["map_convergent_fullscreen"] = L.map('map_convergent_fullscreen');
 
 function initMaps(){
 	/* **maps all traj** */
-	// global_tabMap["map_raw"].setView([41.147519, -8.610814], 12);
+	global_tabMap["map_raw"].setView([41.147519, -8.610814], 12);
 	L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}").addTo(global_tabMap["map_raw"]);
 	
-	// global_tabMap["map_closedswarm"].setView([41.147519, -8.610814], 13);
+	global_tabMap["map_closedswarm"].setView([41.147519, -8.610814], 13);
 	L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}').addTo(global_tabMap["map_closedswarm"]);
 	
-	// global_tabMap["map_convoy"].setView([41.147519, -8.610814], 13);
+	global_tabMap["map_convoy"].setView([41.147519, -8.610814], 13);
 	L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}').addTo(global_tabMap["map_convoy"]);
 	
-	// global_tabMap["map_divergent"].setView([41.147519, -8.610814], 13);
+	global_tabMap["map_divergent"].setView([41.147519, -8.610814], 13);
 	L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}').addTo(global_tabMap["map_divergent"]);
 	
-	// global_tabMap["map_convergent"].setView([41.147519, -8.610814], 13);
+	global_tabMap["map_convergent"].setView([41.147519, -8.610814], 13);
 	L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}').addTo(global_tabMap["map_convergent"]);
 
 	/* **maps fullscreen** */
-	// global_tabMap["map_raw_fullscreen"].setView([41.147519, -8.610814], 12);
+	global_tabMap["map_raw_fullscreen"].setView([41.147519, -8.610814], 12);
 	L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}').addTo(global_tabMap["map_raw_fullscreen"]);
 
-	// global_tabMap["map_closedswarm_fullscreen"].setView([41.147519, -8.610814], 13);
+	global_tabMap["map_closedswarm_fullscreen"].setView([41.147519, -8.610814], 13);
 	L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}').addTo(global_tabMap["map_closedswarm_fullscreen"]);
 	
-	// global_tabMap["map_convoy_fullscreen"].setView([41.147519, -8.610814], 13);
+	global_tabMap["map_convoy_fullscreen"].setView([41.147519, -8.610814], 13);
 	L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}').addTo(global_tabMap["map_convoy_fullscreen"]);
 	 
-	// global_tabMap["map_divergent_fullscreen"].setView([41.147519, -8.610814], 13);
+	global_tabMap["map_divergent_fullscreen"].setView([41.147519, -8.610814], 13);
 	L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}').addTo(global_tabMap["map_divergent_fullscreen"]);
 	
-	// global_tabMap["map_convergent_fullscreen"].setView([41.147519, -8.610814], 13);
+	global_tabMap["map_convergent_fullscreen"].setView([41.147519, -8.610814], 13);
 	L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}').addTo(global_tabMap["map_convergent_fullscreen"]);
 
 }
@@ -245,7 +243,7 @@ function generePolyline(p_type_traj,p_id_traj, p_color_traj,p_isPattern,p_fullsc
 		str_fullscreen="_fullscreen";
 	}
 
-	let tab_all_polyline = new Array();
+	
 	//verif s'il s'agit d'un patern
 	if(p_isPattern){//Methode de generation des patterns
 		// p("il s'agit d'un pattern");
@@ -258,7 +256,7 @@ function generePolyline(p_type_traj,p_id_traj, p_color_traj,p_isPattern,p_fullsc
 
 		latlngs.push([data.clusters[objet_src_trgt[0]].lat, data.clusters[objet_src_trgt[0]].lon]);
 		latlngs.push([data.clusters[objet_src_trgt[1]].lat, data.clusters[objet_src_trgt[1]].lon]);
-		tab_all_polyline.push(latlngs);
+		
 		global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj]=L.polyline(latlngs, {
 			color: p_color_traj,
 			weight:3,
@@ -302,7 +300,7 @@ function generePolyline(p_type_traj,p_id_traj, p_color_traj,p_isPattern,p_fullsc
 		for(let pos in tab_traj){
 			latlngs.push([tab_traj[pos].lat,tab_traj[pos].lon]);
 		}
-		tab_all_polyline.push(latlngs);
+		
 		global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj]=L.polyline(latlngs, {
 			color: p_color_traj,
 			weight:3,
@@ -334,7 +332,7 @@ function generePolyline(p_type_traj,p_id_traj, p_color_traj,p_isPattern,p_fullsc
 
 		global_tabPolyline[p_type_traj+str_fullscreen]["decorator"][p_id_traj].addTo(global_tabMap["map_" + p_type_traj+str_fullscreen]);
 	}
-	global_tabMap["map_" + p_type_traj+str_fullscreen].setview(tab_all_polyline);
+	
 
 }
 
@@ -704,8 +702,8 @@ function toggleClassActive(p_this){
 }
 /*FIN MODIF*/
 // function initFenetreLeaflet(ind_map){
-	let map_add = L.map(ind_map);
-	map_add.setView([41.147519, -8.610814], 13);
+	// let map_add = L.map(ind_map);
+	// map_add.setView([41.147519, -8.610814], 13);
 // 	L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}').addTo(map_add);
 // }
 
