@@ -6,8 +6,6 @@ function find_data($type) {
     $cdir = scandir(__DIR__."/wd");
     foreach ($cdir as $key => $value) {
         if (!in_array($value,array(".",".."))) {
-          //$test = explode("___",$value, 2);
-          //if ($test[0] == $type."_".session_id()) {
           if ($value == $type."_data.json") {
               $result = json_decode(file_get_contents("./wd/".$value), true);
               return $result;
