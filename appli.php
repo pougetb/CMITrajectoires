@@ -47,7 +47,7 @@ unset($_SESSION["working"]);
 		<ul class="nav nav-tabs">
 			
 			<!-- Menu des options -->
-			<li class="disabled onglet_options">
+			<li class="onglet_options">
 				<div class="label_nav_options">
 					<img class="logo_nav_options" src="Images/Icons/file.svg">
 					<div class="espace"> </div>
@@ -55,22 +55,22 @@ unset($_SESSION["working"]);
 				</div>
 
 				<ul class="submenu">
-					<li class="disabled onglet_options">
+					<li class="onglet_options">
 						<div class="label_nav_options">
 							<a href="#" data-toggle="modal" data-target="#openModal">Open</a>
 						</div>
 					</li>
-					<li class="disabled onglet_options">
+					<li class="onglet_options">
 						<div class="label_nav_options">
 							<a href="#">Import</a>
 						</div>
 					</li>
-					<li class="disabled onglet_options">
+					<li class="onglet_options">
 						<div class="label_nav_options">
-							<a href="#">Save</a>
+							<a href="#" id="downloadAnchorElem">Save</a>
 						</div>
 					</li>
-					<li class="disabled onglet_options">
+					<li class="onglet_options">
 						<div class="label_nav_options">
 							<a href="#">Quit session</a>
 						</div>
@@ -79,26 +79,26 @@ unset($_SESSION["working"]);
 
 			</li>
 			<!-- string logo download: get_app -->
-			<li class="disabled onglet_options">
+			<li class="onglet_options">
 				<div class="label_nav_options">
 					<img class="logo_nav_options" src="Images/Icons/search.svg">
 					<div class="espace"> </div>
 					<div>GetMove</div>
 				</div>
 				<ul class="submenu">
-					<li class="disabled onglet_options">
+					<li class="onglet_options">
 						<div class="label_nav_options">
-							<a href="#">Set parameters</a>
+							<a href="#" data-toggle="modal" data-target="#setParamModal">Set parameters</a>
 						</div>
 					</li>
-					<li class="disabled onglet_options">
+					<li class="onglet_options">
 						<div class="label_nav_options">
 							<a href="#">View parameters</a>
 						</div>
 					</li>
 				</ul>
 			</li>
-			<li class="disabled onglet_options">
+			<li class="onglet_options">
 				<div class="label_nav_options">
 					<img class="logo_nav_options" src="Images/Icons/info.svg">
 					<div class="espace"> </div>
@@ -609,11 +609,39 @@ unset($_SESSION["working"]);
 	        </button>
 	      </div>
 	      <div class="modal-body">
-	        Veuillez selectionner un fichier
+	        <form action="file_load.php" method="POST" enctype="multipart/form-data">
+            	Your file: <input type="file" name="sheet" /><br/>
+            	<input type="submit" name="submit" value="upload"/>
+       		</form>
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-	        <button type="button" class="btn btn-primary">Submit</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+	<div class="modal fade" id="setParamModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h3 class="modal-title" id="exampleModalLabel">Set parameters</h3>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        <form action="run.php" method="POST" enctype="multipart/form-data">
+	            Start date (YYYY-MM-DD): <input type="text" name="start-date"/><br/>
+	            End date (YYYY-MM-DD): <input type="text" name="end-date"/><br/>
+	            Clustering period: <input type="text" name="interval"/><br/>
+	            DBSCAN epsilon: <input type="text" name="epsilon" value="0.7"/><br/>
+	            DBSCAN min_t: <input type="text" name="mint" value="5"/><br/>
+	            <input type="submit" name="submit" value="run"/>
+	        </form>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 	      </div>
 	    </div>
 	  </div>

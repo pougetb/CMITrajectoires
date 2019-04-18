@@ -15,6 +15,9 @@ function recupJSON(type="raws"){
 			initMaps();
 			if(type === "raws"){
 				remplieData(result, true);
+				saveButton();
+				ajoutFichier();
+				ajoutParam();
 			}else{
 				remplieData(result);
 			}
@@ -49,6 +52,14 @@ function remplieData(p_json,is_raws=false){
 
 recupJSON();
 recupJSON("patterns");
+
+function saveButton(){
+	var filenameDL = data.raw.filename + ".json";
+	var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data));
+	var dlAnchorElem = document.getElementById('downloadAnchorElem');
+	dlAnchorElem.setAttribute("href", dataStr);
+	dlAnchorElem.setAttribute("download", filenameDL);
+}
 
 
 /* ---tableau contenant les objets fenetres réduites--- */
@@ -189,19 +200,17 @@ function initMaps(){
 
 
 function ajoutFichier(){
-	$(".titre_fichier").append(raw.filename);
+	$(".titre_fichier").append(data.raw.filename);
 }
-ajoutFichier();
 
 function ajoutParam(){
-	var start = new Date(raw.start / 1000000);
-	var end = new Date (raw.end / 1000000);
+	var start = new Date(data.raw.start / 1000000);
+	var end = new Date (data.raw.end / 1000000);
 	var timestep = 15;
 	var timestep_unit = "seconds";
 	$(".param_fichier").html("Start date : " + start.toLocaleString() + " | End date : " + end.toLocaleString() + "</br> Timestep : " + timestep +" " + timestep_unit);
 
 }
-ajoutParam();
 
 
 /* Test Leaflet Simon*/
