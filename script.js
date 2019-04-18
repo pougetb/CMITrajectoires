@@ -24,8 +24,6 @@ function recupJSON(type="raws"){
 
 var data = new Array();
 function remplieData(p_json,is_raws=false){
-	p_json = JSON.stringify(p_json);
-	p_json = JSON.parse(p_json);
 	p(typeof p_json);
 	if(is_raws){
 		data.raw=p_json;
