@@ -1,4 +1,9 @@
--> onglet agrandi
--> nouvelle fenetre full screen
+﻿-> onglet agrandi
+
+
 -> augmenter/deplacer une fenetre focus l'écran dessus
--> utiliser les triggers/binds pour .invalidateSize() les div_map
+
+
+-> reduire menu fullscreen --> refresh map
+
+-> centrer map
