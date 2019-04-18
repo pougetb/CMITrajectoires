@@ -624,12 +624,16 @@ unset($_SESSION["working"]);
 	<div class="modal fade" id="setParamModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h3 class="modal-title" id="exampleModalLabel">Set parameters</h3>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
+	      	<div class="modal-header">
+	        	<h3 class="modal-title" id="exampleModalLabel">Set parameters</h3>
+	        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	        	  <span aria-hidden="true">&times;</span>
+	        	</button>
+	      	</div>
+	      	<div class="modal-body file_info_modal">
+	      		<span id="fileSetParam">File : </span><br>
+	      		<span id="startSetParam">Start : </span><span id="endSetParam">End : </span>
+	      	</div>
 	      <div class="modal-body">
 	        <form action="run.php" method="POST" enctype="multipart/form-data">
 	            Start date (YYYY-MM-DD): <input type="text" name="start-date"/><br/>

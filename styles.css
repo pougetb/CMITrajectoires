@@ -11,6 +11,10 @@
 }
 
 /* ---===Body===--- */
+body{
+	padding-right: 0 !important
+}
+
 body>div{
 	display:block;
 	/* background-color: #ecf8fc */
@@ -751,4 +755,8 @@ body>div{
 
 .footer_modal{
 	text-align: right;
+}
+
+.file_info_modal{
+	border-bottom: 1px solid #e9ecef;
 }

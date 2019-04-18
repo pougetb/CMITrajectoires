@@ -200,6 +200,7 @@ function initMaps(){
 
 function ajoutFichier(){
 	$(".titre_fichier").append(data.raw.filename);
+	$("#fileSetParam").append(data.raw.filename);
 }
 
 function ajoutParam(){
@@ -208,7 +209,8 @@ function ajoutParam(){
 	var timestep = 15;
 	var timestep_unit = "seconds";
 	$(".param_fichier").html("Start date : " + start.toLocaleString() + " | End date : " + end.toLocaleString() + "</br> Timestep : " + timestep +" " + timestep_unit);
-
+	$("#startSetParam").append(start.toLocaleString() + " - ");
+	$("#endSetParam").append(end.toLocaleString());
 }
 
 
