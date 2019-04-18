@@ -14,7 +14,7 @@ function recupJSON(type="raws"){
 		success: function(result){
 			if(type === "raws"){
 				remplieData(result, true);
-				importButton();
+				saveButton();
 				ajoutFichier();
 				ajoutParam();
 			}else{
@@ -52,7 +52,7 @@ function remplieData(p_json,is_raws=false){
 recupJSON();
 recupJSON("patterns");
 
-function importButton(){
+function saveButton(){
 	var filenameDL = data.raw.filename + ".json";
 	var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data));
 	var dlAnchorElem = document.getElementById('downloadAnchorElem');

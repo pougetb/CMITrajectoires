@@ -62,12 +62,12 @@ unset($_SESSION["working"]);
 					</li>
 					<li class="onglet_options">
 						<div class="label_nav_options">
-							<a href="#" id="downloadAnchorElem">Import</a>
+							<a href="#">Import</a>
 						</div>
 					</li>
 					<li class="onglet_options">
 						<div class="label_nav_options">
-							<a href="#">Save</a>
+							<a href="#" id="downloadAnchorElem">Save</a>
 						</div>
 					</li>
 					<li class="onglet_options">
