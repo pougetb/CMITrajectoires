@@ -263,8 +263,6 @@ function genereListeTrajectoires(p_type,p_fullscreen=false){
 			//affichage de la traj
 			generePolyline(p_type,obj_id,color,isPattern,p_fullscreen);
 		}
-		p("global_tab_all_polyline["+p_type+str_fullscreen+"]");
-		p(global_tab_all_polyline[p_type+str_fullscreen]);
 
 		//fait concorder la map avec l'ensemble des traj
 		// global_tabMap["map_"+p_type+str_fullscreen].setView(global_tab_all_polyline[p_type+str_fullscreen][0][0],13);
@@ -286,7 +284,7 @@ function generePolyline(p_type_traj,p_id_traj, p_color_traj,p_isPattern,p_fullsc
 	
 	//verif s'il s'agit d'un patern
 	if(p_isPattern){//Methode de generation des patterns
-		// p("il s'agit d'un pattern");
+
 		let latlngs = new Array();
 
 		var objet_src_trgt = new Array();
@@ -341,7 +339,7 @@ function generePolyline(p_type_traj,p_id_traj, p_color_traj,p_isPattern,p_fullsc
 		for(let pos in tab_traj){
 			latlngs.push([tab_traj[pos].lat,tab_traj[pos].lon]);
 		}
-		// p(latlngs);
+		
 		global_tab_all_polyline[p_type_traj+str_fullscreen].push(latlngs);
 		global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj]=L.polyline(latlngs, {
 			color: p_color_traj,
