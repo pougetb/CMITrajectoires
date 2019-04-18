@@ -748,3 +748,7 @@ body>div{
 .modal{
 	font-size: 16px;
 }
+
+.footer_modal{
+	text-align: right;
+}

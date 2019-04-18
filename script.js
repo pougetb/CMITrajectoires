@@ -27,7 +27,6 @@ function recupJSON(type="raws"){
 
 var data = new Array();
 function remplieData(p_json,is_raws=false){
-	p(typeof p_json);
 	if(is_raws){
 		data.raw=p_json;
 		genereListeTrajectoires("raw");
@@ -315,7 +314,7 @@ function generePolyline(p_type_traj,p_id_traj, p_color_traj,p_isPattern,p_fullsc
 			let popupContent = 
 			"<div class='popup_content'>"
 			+ "<div class='popup_infos'><div class='popup_labels'>id : </div> " + event.sourceTarget.options.attr_id + "</div>"
-			+ "<div class='container_textInfoTraj'><div class='popup_labels'>Infos :</div> Taxis : " + data[p_type_traj][p_id_traj].objects.join(", ") + "</br>Start date : " + dateDebut + "</br>End date : " + dateFin + " </div>"
+			+ "<div class='container_textInfoTraj'><div class='popup_labels'>Infos :</div> Objects : " + data[p_type_traj][p_id_traj].objects.join(", ") + "</br>Start date : " + dateDebut + "</br>End date : " + dateFin + " </div>"
 			+ "<div class='popup_boutonHide' onclick='hideTraj(this)' attr_id_traj='" + p_id_traj + "' attr_type_traj='" + p_type_traj + "' attr_fullscreen='" + p_fullscreen + "'>Hide this trajectorie</div>"
 			+ "</div>";
 			event.target.bindPopup(popupContent).openPopup();
@@ -339,7 +338,7 @@ function generePolyline(p_type_traj,p_id_traj, p_color_traj,p_isPattern,p_fullsc
 		for(let pos in tab_traj){
 			latlngs.push([tab_traj[pos].lat,tab_traj[pos].lon]);
 		}
-		
+
 		global_tab_all_polyline[p_type_traj+str_fullscreen].push(latlngs);
 		global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj]=L.polyline(latlngs, {
 			color: p_color_traj,

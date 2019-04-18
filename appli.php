@@ -611,11 +611,11 @@ unset($_SESSION["working"]);
 	      <div class="modal-body">
 	        <form action="file_load.php" method="POST" enctype="multipart/form-data">
             	Your file: <input type="file" name="sheet" /><br/>
-            	<input type="submit" name="submit" value="upload"/>
+            	<div class="footer_modal">
+	            	<button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">Cancel</button>
+	            	<input type="submit" class="btn btn-info btn-lg" name="submit" value="Upload"/>
+	            </div>
        		</form>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 	      </div>
 	    </div>
 	  </div>
@@ -637,11 +637,11 @@ unset($_SESSION["working"]);
 	            Clustering period: <input type="text" name="interval"/><br/>
 	            DBSCAN epsilon: <input type="text" name="epsilon" value="0.7"/><br/>
 	            DBSCAN min_t: <input type="text" name="mint" value="5"/><br/>
-	            <input type="submit" name="submit" value="run"/>
+	            <div class="footer_modal">
+	            	<button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">Cancel</button>
+	            	<input type="submit" class="btn btn-info btn-lg" name="submit" value="Upload"/>
+	            </div>
 	        </form>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 	      </div>
 	    </div>
 	  </div>
