@@ -12,54 +12,36 @@ function recupJSON(type="raws"){
 	$.ajax({
 		url: "get_data.php?type=" + type, 
 		success: function(result){
-			initMaps();
 			if(type === "raws"){
 				remplieData(result, true);
-				saveButton();
 				ajoutFichier();
-				ajoutParam();
 			}else{
 				remplieData(result);
+				ajoutParam();
 			}
 	}});
 }
 
 
-var data = new Array();
+var data = {};
 function remplieData(p_json,is_raws=false){
 	if(is_raws){
-		data.raw=p_json;
-		genereListeTrajectoires("raw");
-		genereListeTrajectoires("raw", true);
+		data.raw=p_json.objects;
+		data.fileInfos= {};
+		data.fileInfos.end = p_json.end;
+		data.fileInfos.start = p_json.start;
+		data.fileInfos.filename = p_json.filename;
+		data.fileInfos.timestep = p_json.timestep;
+		genereRaws();
 	}
 	else{
 		for(let obj in p_json){
 			data[obj] = p_json[obj];
 		}
-		genereListeTrajectoires("convoy");
-		genereListeTrajectoires("closedswarm");
-		genereListeTrajectoires("convergent");
-		genereListeTrajectoires("divergent");
-
-		genereListeTrajectoires("convoy",true);
-		genereListeTrajectoires("closedswarm",true);
-		genereListeTrajectoires("convergent",true);
-		genereListeTrajectoires("divergent",true);
+		generePatterns();
 	}
 
 }
-
-recupJSON();
-recupJSON("patterns");
-
-function saveButton(){
-	var filenameDL = data.raw.filename + ".json";
-	var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data));
-	var dlAnchorElem = document.getElementById('downloadAnchorElem');
-	dlAnchorElem.setAttribute("href", dataStr);
-	dlAnchorElem.setAttribute("download", filenameDL);
-}
-
 
 /* ---tableau contenant les objets fenetres réduites--- */
 var gloabl_tabFenetreReduite = Array();
@@ -69,49 +51,48 @@ var gloabl_tabFenetreReduite = Array();
 //global_tabPolyline : indexé  par le type_traj
 var global_tabPolyline=new Array();
 
-//global_tabPolyline[type_traj]["traj"] : contient les objets polylines, indéxé par leur id
-//global_tabPolyline[type_traj]["decorator"] : contient les objets polylineDecorator, indéxé par les id des traj correspondantes
-global_tabPolyline["raw"]=new Array();
-global_tabPolyline["raw"]["traj"]=new Array();
-global_tabPolyline["raw"]["decorator"]=new Array();
+function initTabPolyline(){
+	global_tabPolyline["raw"]=new Array();
+	global_tabPolyline["raw"]["traj"]=new Array();
+	global_tabPolyline["raw"]["decorator"]=new Array();
 
-global_tabPolyline["closedswarm"]=new Array();
-global_tabPolyline["closedswarm"]["traj"]=new Array();
-global_tabPolyline["closedswarm"]["decorator"]=new Array();
+	global_tabPolyline["closedswarm"]=new Array();
+	global_tabPolyline["closedswarm"]["traj"]=new Array();
+	global_tabPolyline["closedswarm"]["decorator"]=new Array();
 
-global_tabPolyline["convoy"]=new Array();
-global_tabPolyline["convoy"]["traj"]=new Array();
-global_tabPolyline["convoy"]["decorator"]=new Array();
+	global_tabPolyline["convoy"]=new Array();
+	global_tabPolyline["convoy"]["traj"]=new Array();
+	global_tabPolyline["convoy"]["decorator"]=new Array();
 
-global_tabPolyline["divergent"]=new Array();
-global_tabPolyline["divergent"]["traj"]=new Array();
-global_tabPolyline["divergent"]["decorator"]=new Array();
+	global_tabPolyline["divergent"]=new Array();
+	global_tabPolyline["divergent"]["traj"]=new Array();
+	global_tabPolyline["divergent"]["decorator"]=new Array();
 
-global_tabPolyline["convergent"]=new Array();
-global_tabPolyline["convergent"]["traj"]=new Array();
-global_tabPolyline["convergent"]["decorator"]=new Array();
+	global_tabPolyline["convergent"]=new Array();
+	global_tabPolyline["convergent"]["traj"]=new Array();
+	global_tabPolyline["convergent"]["decorator"]=new Array();
 
-/* **fullscreen** */
-global_tabPolyline["raw_fullscreen"]=new Array();
-global_tabPolyline["raw_fullscreen"]["traj"]=new Array();
-global_tabPolyline["raw_fullscreen"]["decorator"]=new Array();
+	/* **fullscreen** */
+	global_tabPolyline["raw_fullscreen"]=new Array();
+	global_tabPolyline["raw_fullscreen"]["traj"]=new Array();
+	global_tabPolyline["raw_fullscreen"]["decorator"]=new Array();
 
-global_tabPolyline["closedswarm_fullscreen"]=new Array();
-global_tabPolyline["closedswarm_fullscreen"]["traj"]=new Array();
-global_tabPolyline["closedswarm_fullscreen"]["decorator"]=new Array();
+	global_tabPolyline["closedswarm_fullscreen"]=new Array();
+	global_tabPolyline["closedswarm_fullscreen"]["traj"]=new Array();
+	global_tabPolyline["closedswarm_fullscreen"]["decorator"]=new Array();
 
-global_tabPolyline["convoy_fullscreen"]=new Array();
-global_tabPolyline["convoy_fullscreen"]["traj"]=new Array();
-global_tabPolyline["convoy_fullscreen"]["decorator"]=new Array();
+	global_tabPolyline["convoy_fullscreen"]=new Array();
+	global_tabPolyline["convoy_fullscreen"]["traj"]=new Array();
+	global_tabPolyline["convoy_fullscreen"]["decorator"]=new Array();
 
-global_tabPolyline["divergent_fullscreen"]=new Array();
-global_tabPolyline["divergent_fullscreen"]["traj"]=new Array();
-global_tabPolyline["divergent_fullscreen"]["decorator"]=new Array();
+	global_tabPolyline["divergent_fullscreen"]=new Array();
+	global_tabPolyline["divergent_fullscreen"]["traj"]=new Array();
+	global_tabPolyline["divergent_fullscreen"]["decorator"]=new Array();
 
-global_tabPolyline["convergent_fullscreen"]=new Array();
-global_tabPolyline["convergent_fullscreen"]["traj"]=new Array();
-global_tabPolyline["convergent_fullscreen"]["decorator"]=new Array();
-
+	global_tabPolyline["convergent_fullscreen"]=new Array();
+	global_tabPolyline["convergent_fullscreen"]["traj"]=new Array();
+	global_tabPolyline["convergent_fullscreen"]["decorator"]=new Array();
+}
 /* ---FIN Tab Polyline--- */
 
 /* ---global_tabMap--- */
@@ -143,76 +124,145 @@ global_tabMap["map_convergent_fullscreen"] = L.map('map_convergent_fullscreen');
 /* ---tab_all_polyline--- */
 //tab_all_polyline : conteient une polyline regroupant toutes les polylines de chaque type
 let global_tab_all_polyline = new Array();
-global_tab_all_polyline["raw"] = new Array();
-global_tab_all_polyline["closedswarm"] = new Array();
-global_tab_all_polyline["convoy"] = new Array();
-global_tab_all_polyline["divergent"] = new Array();
-global_tab_all_polyline["convergent"] = new Array();
 
-global_tab_all_polyline["raw_fullscreen"] = new Array();
-global_tab_all_polyline["closedswarm_fullscreen"] = new Array();
-global_tab_all_polyline["convoy_fullscreen"] = new Array();
-global_tab_all_polyline["divergent_fullscreen"] = new Array();
-global_tab_all_polyline["convergent_fullscreen"] = new Array();
+function initTabAllPolyline(){
+	global_tab_all_polyline["raw"] = new Array();
+	global_tab_all_polyline["closedswarm"] = new Array();
+	global_tab_all_polyline["convoy"] = new Array();
+	global_tab_all_polyline["divergent"] = new Array();
+	global_tab_all_polyline["convergent"] = new Array();
+
+	global_tab_all_polyline["raw_fullscreen"] = new Array();
+	global_tab_all_polyline["closedswarm_fullscreen"] = new Array();
+	global_tab_all_polyline["convoy_fullscreen"] = new Array();
+	global_tab_all_polyline["divergent_fullscreen"] = new Array();
+	global_tab_all_polyline["convergent_fullscreen"] = new Array();
+}
+
 /* ---FIN tab_all_polyline--- */
 
 /* ---===FIN variables globales===--- */
 
-
-
-
-
 function initMaps(){
 	/* **maps all traj** */
-	// global_tabMap["map_raw"].setView([41.147519, -8.610814], 12);
 	L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}").addTo(global_tabMap["map_raw"]);
-	
-	// global_tabMap["map_closedswarm"].setView([41.147519, -8.610814], 13);
 	L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}').addTo(global_tabMap["map_closedswarm"]);
-	
-	// global_tabMap["map_convoy"].setView([41.147519, -8.610814], 13);
 	L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}').addTo(global_tabMap["map_convoy"]);
-	
-	// global_tabMap["map_divergent"].setView([41.147519, -8.610814], 13);
 	L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}').addTo(global_tabMap["map_divergent"]);
-	
-	// global_tabMap["map_convergent"].setView([41.147519, -8.610814], 13);
 	L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}').addTo(global_tabMap["map_convergent"]);
-
+	
 	/* **maps fullscreen** */
-	// global_tabMap["map_raw_fullscreen"].setView([41.147519, -8.610814], 12);
 	L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}').addTo(global_tabMap["map_raw_fullscreen"]);
-
-	// global_tabMap["map_closedswarm_fullscreen"].setView([41.147519, -8.610814], 13);
 	L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}').addTo(global_tabMap["map_closedswarm_fullscreen"]);
-	
-	// global_tabMap["map_convoy_fullscreen"].setView([41.147519, -8.610814], 13);
 	L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}').addTo(global_tabMap["map_convoy_fullscreen"]);
-	 
-	// global_tabMap["map_divergent_fullscreen"].setView([41.147519, -8.610814], 13);
 	L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}').addTo(global_tabMap["map_divergent_fullscreen"]);
-	
-	// global_tabMap["map_convergent_fullscreen"].setView([41.147519, -8.610814], 13);
 	L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}').addTo(global_tabMap["map_convergent_fullscreen"]);
-
 }
 
+function resetViews(){
+	global_tabMap["map_raw"].setView([0, 0], 1.5);	
+	global_tabMap["map_closedswarm"].setView([0, 0], 1.5);	
+	global_tabMap["map_convoy"].setView([0, 0], 1.5);	
+	global_tabMap["map_divergent"].setView([0, 0], 1.5);
+	global_tabMap["map_convergent"].setView([0, 0], 1.5);
+	global_tabMap["map_raw_fullscreen"].setView([0, 0], 1.5);
+	global_tabMap["map_closedswarm_fullscreen"].setView([0, 0], 1.5);
+	global_tabMap["map_convoy_fullscreen"].setView([0, 0], 1.5);
+	global_tabMap["map_divergent_fullscreen"].setView([0, 0], 1.5);
+	global_tabMap["map_convergent_fullscreen"].setView([0, 0], 1.5);
+}
+
+function timestepToString(ts){
+	var rep = "";
+	if(ts.days != 0){
+		rep = rep + ts.days + " days";
+	}
+	if(ts.hours != 0){
+		rep = rep + ts.hours + " hours";
+	}
+	if(ts.minutes != 0){
+		rep = rep + ts.minutes + " minutes";
+	}
+	if(ts.seconds != 0){
+		rep = rep + ts.seconds + " seconds";
+	}
+	return rep;
+}
 
 function ajoutFichier(){
-	$(".titre_fichier").append(data.raw.filename);
-	$("#fileSetParam").append(data.raw.filename);
+	$(".titre_fichier").html("Trajectories : " + data.fileInfos.filename);
+	$("#fileSetParam").html(data.fileInfos.filename);
+	var start = new Date(data.fileInfos.start / 1000000);
+	var end = new Date (data.fileInfos.end / 1000000);
+	var timestep = timestepToString(data.fileInfos.timestep);
+	$(".param_fichier").html("Start date : " + start.toLocaleString() + " | End date : " + end.toLocaleString() + "</br> Timestep : " + timestep);
+	$("#dateSetParam").html("Start : " + start.toLocaleString() + " - End : " + end.toLocaleString());
 }
 
 function ajoutParam(){
-	var start = new Date(data.raw.start / 1000000);
-	var end = new Date (data.raw.end / 1000000);
-	var timestep = 15;
-	var timestep_unit = "seconds";
-	$(".param_fichier").html("Start date : " + start.toLocaleString() + " | End date : " + end.toLocaleString() + "</br> Timestep : " + timestep +" " + timestep_unit);
-	$("#startSetParam").append(start.toLocaleString() + " - ");
-	$("#endSetParam").append(end.toLocaleString());
+	$("#infosParam").html(
+			"Start date : " + data.infos.start + 
+			"<br/> End date : " + data.infos.end + 
+			"<br/> Clustering period : " + timestepToString(data.infos.clustering_period) + 
+			"<br/> DBSCAN epsilon : " + data.infos.epsilon + 
+			"<br/> DBSCAN min_t : " + data.infos.min_t
+		)
 }
 
+/* ----- Import button ----- */
+$("#submitJSON").click(function(event){
+	event.preventDefault();
+	var reader = new FileReader();
+	var file = document.getElementById('jsonFile').files[0];
+	
+	reader.addEventListener('load', function() {
+        data = JSON.parse(reader.result);
+        ajoutFichier();
+        genereRaws();
+        generePatterns();
+    });
+
+	reader.readAsText(file);
+});
+
+// ----- Save button ----- // 
+$("#downloadAnchorElem").click(function(){
+	var filenameDL = data.fileInfos.filename + ".json";
+	var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data));
+	download(dataStr, filenameDL, "text/json");
+});
+
+/* ----- Quit session button ----- */
+$("#quitSession").click(function(event){
+	for (var map_name in global_tabMap){
+		global_tabMap[map_name].eachLayer(function(layer) {
+    		global_tabMap[map_name].removeLayer(layer);
+    	});
+	}
+	initMaps();
+	resetViews();
+	initTabPolyline();
+	initTabAllPolyline();
+	
+	data = {};
+});
+
+
+function genereRaws(){
+	genereListeTrajectoires("raw");
+	genereListeTrajectoires("raw", true);
+}
+function generePatterns(){
+	genereListeTrajectoires("convoy");
+	genereListeTrajectoires("closedswarm");
+	genereListeTrajectoires("convergent");
+	genereListeTrajectoires("divergent");
+
+	genereListeTrajectoires("convoy",true);
+	genereListeTrajectoires("closedswarm",true);
+	genereListeTrajectoires("convergent",true);
+	genereListeTrajectoires("divergent",true);
+}
 
 /* Test Leaflet Simon*/
 function genereListeTrajectoires(p_type,p_fullscreen=false){
@@ -373,8 +423,6 @@ function generePolyline(p_type_traj,p_id_traj, p_color_traj,p_isPattern,p_fullsc
 
 		global_tabPolyline[p_type_traj+str_fullscreen]["decorator"][p_id_traj].addTo(global_tabMap["map_" + p_type_traj+str_fullscreen]);
 	}
-	
-
 }
 
 function hideTraj(p_this){
@@ -660,7 +708,6 @@ function mouvement_lateral(p_this){
 		div_footer_cible.insertAfter(prev_footer_obj);
 		
 	}
-
 }
 
 function mouvement_bas(p_this){
@@ -742,12 +789,6 @@ function toggleClassActive(p_this){
 	$(p_this).toggleClass("bouton-select_traj_active");
 }
 /*FIN MODIF*/
-// function initFenetreLeaflet(ind_map){
-	// let map_add = L.map(ind_map);
-	// map_add.setView([41.147519, -8.610814], 13);
-// 	L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}').addTo(map_add);
-// }
-
 
 /*--===Fonctions d'affichage===--*/
 
@@ -820,6 +861,10 @@ function search(p_this){
 }
 
 initMaps();
+initTabPolyline();
+initTabAllPolyline();
+recupJSON();
+recupJSON("patterns");
 
 /*FIX REFRESH FULLSCREEN MAP NAV*/
 $(".nav_fullscreen").on("click",function(p_this){
