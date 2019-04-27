@@ -44,7 +44,7 @@ function remplieData(p_json,is_raws=false){
 }
 
 /* ---tableau contenant les objets fenetres réduites--- */
-var gloabl_tabFenetreReduite = Array();
+var global_tabFenetreReduite = Array();
 
 /* ---Tab Polyline--- */
 
@@ -498,7 +498,7 @@ function reduire(div_red){
 	// p(tab_fenetre);
 
 	//on stock la fenetre dans la var globale
-	gloabl_tabFenetreReduite.push(obj_fenetre);
+	global_tabFenetreReduite.push(obj_fenetre);
 	
 	if(indice_fenetre == (tab_fenetre.length - 1)){
 		//c'est le dernier element, on le display none
@@ -543,9 +543,9 @@ function agrandire(div_onglet){
 
 	//recherche de la bonne fenetre
 	let obj_fenetre;
-	for(let i=0; i<gloabl_tabFenetreReduite.length;i++){
-		if(type_traj.localeCompare(gloabl_tabFenetreReduite[i].attr("attr_type_traj"))==0){
-			obj_fenetre = gloabl_tabFenetreReduite[i];
+	for(let i=0; i<global_tabFenetreReduite.length;i++){
+		if(type_traj.localeCompare(global_tabFenetreReduite[i].attr("attr_type_traj"))==0){
+			obj_fenetre = global_tabFenetreReduite[i];
 		}
 	}
 
@@ -869,13 +869,32 @@ recupJSON("patterns");
 $(".nav_fullscreen").on("click",function(p_this){
 	let type = $(p_this.currentTarget).attr("attr_type");
 	let tab_page_content = $(".tab-content>.tab-pane");
+
+	let str_fullscreen = "_fullscreen";
+	if(type === "all"){
+		str_fullscreen = "";
+	}
+
+	//on cache toute les pages
 	for(let i=0;i<tab_page_content.length;i++){
 		$(tab_page_content[i]).hide();
 	}
+	//on affiche la/les bonne(s) cartes
 	$("#"+type).fadeIn(200,function(){
+		
+		
 		for(let map in global_tabMap){
+			//refresh la map
 			global_tabMap[map].invalidateSize();
+			//recentre la map
+			let str_tab_all_poly = map.replace("map_","");
+			p(str_tab_all_poly);
+			global_tabMap[map].fitBounds(L.polyline(global_tab_all_polyline[str_tab_all_poly]).getBounds(),{
+				maxZoom : 13,
+			});
 		}
+		
+		
 	});
 });
 /*FIN FIX REFRESH FULLSCREEN MAP NAV*/
