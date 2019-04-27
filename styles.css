@@ -131,11 +131,13 @@ body>div{
 	width: 50%;
 	font-weight: normal;
 }
-
-
 /*---FIN Titre/Nom trajectoires---*/
 
 /*---Container des fenetres*/
+.row{
+	width: 100%;
+    padding-left: 2%;
+}
 .container_fenetre{
     width:100%;
 	margin: 0;
@@ -207,7 +209,6 @@ body>div{
 .newWindowButton_fullscreen{
 	height:10%;
 }
-
 /*---FIN Menu des boutons réduire/fullscreen---*/
 
 /*---Menu boutons mouvements fenetre---*/
