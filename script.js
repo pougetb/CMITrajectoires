@@ -375,7 +375,18 @@ function generePolyline(p_type_traj,p_id_traj, p_color_traj,p_isPattern,p_fullsc
 			+ "</div>";
 			event.target.bindPopup(popupContent).openPopup();
 		});
-
+		global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj].on('mouseover',function(){
+			
+			global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj].setStyle({
+				weight:5,
+			});
+		});
+		global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj].on('mouseout',function(){
+			
+			global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj].setStyle({
+				weight:3,
+			});
+		});
 		global_tabPolyline[p_type_traj+str_fullscreen]["decorator"][p_id_traj] = L.polylineDecorator(global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj], {
 			patterns: [
 				{
@@ -422,6 +433,18 @@ function generePolyline(p_type_traj,p_id_traj, p_color_traj,p_isPattern,p_fullsc
 			+ "</div>";
 			
 			event.target.bindPopup(popupContent).openPopup();
+		});
+		global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj].on('mouseover',function(){
+			
+			global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj].setStyle({
+				weight:5,
+			});
+		});
+		global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj].on('mouseout',function(){
+			
+			global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj].setStyle({
+				weight:3,
+			});
 		});
 
 		global_tabPolyline[p_type_traj+str_fullscreen]["decorator"][p_id_traj] = L.polylineDecorator(global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj], {
