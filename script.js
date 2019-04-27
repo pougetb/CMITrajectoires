@@ -1,5 +1,5 @@
 function p(truc){
-	console.log(truc);
+    console.log(truc);
 }
 
 
@@ -12,13 +12,17 @@ function recupJSON(type="raws"){
 	$.ajax({
 		url: "get_data.php?type=" + type, 
 		success: function(result){
-			if(type === "raws"){
-				remplieData(result, true);
-				ajoutFichier();
-			}else{
-				remplieData(result);
-				ajoutParam();
-			}
+            if(!("error" in result)) {
+                if(type === "raws"){
+                    remplieData(result, true);
+                    ajoutFichier();
+                }else{
+                    remplieData(result);
+                    ajoutParam();
+                }
+            } else {
+                p(result["error"]);
+            }
 	}});
 }
 
@@ -859,12 +863,6 @@ function search(p_this){
 	}
 }
 
-initMaps();
-initTabPolyline();
-initTabAllPolyline();
-recupJSON();
-recupJSON("patterns");
-
 /*FIX REFRESH FULLSCREEN MAP NAV*/
 $(".nav_fullscreen").on("click",function(p_this){
 	let type = $(p_this.currentTarget).attr("attr_type");
@@ -888,7 +886,7 @@ $(".nav_fullscreen").on("click",function(p_this){
 			global_tabMap[map].invalidateSize();
 			//recentre la map
 			let str_tab_all_poly = map.replace("map_","");
-			p(str_tab_all_poly);
+			//p(str_tab_all_poly);
 			global_tabMap[map].fitBounds(L.polyline(global_tab_all_polyline[str_tab_all_poly]).getBounds(),{
 				maxZoom : 13,
 			});
@@ -898,3 +896,12 @@ $(".nav_fullscreen").on("click",function(p_this){
 	});
 });
 /*FIN FIX REFRESH FULLSCREEN MAP NAV*/
+
+$(document).ready(function() {
+    resetViews();
+    initMaps();
+    initTabPolyline();
+    initTabAllPolyline();
+    //recupJSON();
+    //recupJSON("patterns");
+});
