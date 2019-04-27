@@ -367,7 +367,6 @@ function generePolyline(p_type_traj,p_id_traj, p_color_traj,p_isPattern,p_fullsc
 			"<div class='popup_content'>"
 			+ "<div class='popup_infos'><div class='popup_labels'>id : </div> " + event.sourceTarget.options.attr_id + "</div>"
 			+ "<div class='container_textInfoTraj'><div class='popup_labels'>Infos :</div> Objects : " + data[p_type_traj][p_id_traj].objects.join(", ") + "</br>Start date : " + dateDebut + "</br>End date : " + dateFin + " </div>"
-			+ "<div onclick='enregistreCommentaire(this)'>save comment</div>"
 			+ "<div class='popup_boutonHide' onclick='hideTraj(this)' attr_id_traj='" + p_id_traj + "' attr_type_traj='" + p_type_traj + "' attr_fullscreen='" + p_fullscreen + "'>Hide this trajectorie</div>"
 			+ "</div>";
 			event.target.bindPopup(popupContent).openPopup();
@@ -406,6 +405,7 @@ function generePolyline(p_type_traj,p_id_traj, p_color_traj,p_isPattern,p_fullsc
 			"<div class='popup_content'>"
 			+ "<div class='popup_infos'><div class='popup_labels'>id : </div> " + event.sourceTarget.options.attr_id + "</div>"
 			+ "<div class='container_textInfoTraj'><div class='popup_labels'>Infos :</div><textarea id='story' name='story' rows='5' cols='20'></textarea></div>"
+			+ "<div attr_id_traj='" + p_id_traj + "' attr_type_traj='" + p_type_traj +"onclick='enregistreCommentaire(this)'>save comment</div>"
 			+ "<div class='popup_boutonHide' onclick='hideTraj(this)' attr_id_traj='" + p_id_traj + "' attr_type_traj='" + p_type_traj + "' attr_fullscreen='" + p_fullscreen + "'>Hide this trajectorie</div>"
 			+ "</div>";
 			
@@ -904,5 +904,4 @@ $(".nav_fullscreen").on("click",function(p_this){
 });
 /*FIN FIX REFRESH FULLSCREEN MAP NAV*/
 function enregistreCommentaire(p_this){
-
 }
