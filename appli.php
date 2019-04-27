@@ -22,6 +22,9 @@ unset($_SESSION["working"]);
 	<!-- JQuery -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 
+	<!-- Download plugin -->
+	<script src="download.js"></script>
+
 	<!-- Bootstrap -->
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -62,17 +65,17 @@ unset($_SESSION["working"]);
 					</li>
 					<li class="onglet_options">
 						<div class="label_nav_options">
-							<a href="#">Import</a>
+							<a href="#" data-toggle="modal" data-target="#importModal">Import</a>
 						</div>
 					</li>
 					<li class="onglet_options">
 						<div class="label_nav_options">
-							<a href="#" id="downloadAnchorElem">Save</a>
+							<a href="#" data-toggle="modal" data-target="#saveModal">Save</a>
 						</div>
 					</li>
 					<li class="onglet_options">
 						<div class="label_nav_options">
-							<a href="#">Quit session</a>
+							<a href="#" data-toggle="modal" data-target="#quitModal">Quit session</a>
 						</div>
 					</li>
 				</ul>
@@ -93,7 +96,7 @@ unset($_SESSION["working"]);
 					</li>
 					<li class="onglet_options">
 						<div class="label_nav_options">
-							<a href="#">View parameters</a>
+							<a href="#" data-toggle="modal" data-target="#viewParamModal">View parameters</a>
 						</div>
 					</li>
 				</ul>
@@ -621,6 +624,68 @@ unset($_SESSION["working"]);
 	  </div>
 	</div>
 
+	<div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      	<div class="modal-header">
+	        	<h3 class="modal-title" id="exampleModalLabel">Import JSON file</h3>
+	        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	        	  <span aria-hidden="true">&times;</span>
+	        	</button>
+	      	</div>
+	      <div class="modal-body">
+	        <form method="POST" enctype="multipart/form-data">
+            	Your JSON file: <input id="jsonFile" type="file" name="jsonFile" /><br/>
+            	<div class="footer_modal">
+	            	<button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">Cancel</button>
+	            	<button type="button" id="submitJSON" class="btn btn-info btn-lg" data-dismiss="modal">Import</button>
+	            </div>
+       		</form>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+	<div class="modal fade" id="saveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h3 class="modal-title" id="exampleModalLabel">Save file</h3>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        Do you want to save the JSON file of your work to import it later ?
+	        <div class="footer_modal">
+            	<button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">Cancel</button>
+            	<button type="button" id="downloadAnchorElem" class="btn btn-info btn-lg" data-dismiss="modal">Save</button>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+	<div class="modal fade" id="quitModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h3 class="modal-title" id="exampleModalLabel">Quit session</h3>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        Do you really want to quit this session ? <br/> Remember to save before quit if you want to reuse those data.
+	        <div class="footer_modal">
+            	<button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">Cancel</button>
+            	<button type="button" id="quitSession" class="btn btn-info btn-lg" data-dismiss="modal">Quit session</button>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
 	<div class="modal fade" id="setParamModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
@@ -631,10 +696,11 @@ unset($_SESSION["working"]);
 	        	</button>
 	      	</div>
 	      	<div class="modal-body file_info_modal">
-	      		<span id="fileSetParam">File : </span><br>
-	      		<span id="startSetParam">Start : </span><span id="endSetParam">End : </span>
+	      		<span id="fileSetParam"></span><br>
+	      		<span id="dateSetParam"></span>
 	      	</div>
 	      <div class="modal-body">
+	      	Fill in the clustering parameters :
 	        <form action="run.php" method="POST" enctype="multipart/form-data">
 	            Start date (YYYY-MM-DD): <input type="text" name="start-date"/><br/>
 	            End date (YYYY-MM-DD): <input type="text" name="end-date"/><br/>
@@ -646,6 +712,26 @@ unset($_SESSION["working"]);
 	            	<input type="submit" class="btn btn-info btn-lg" name="submit" value="Upload"/>
 	            </div>
 	        </form>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+	<div class="modal fade" id="viewParamModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h3 class="modal-title" id="exampleModalLabel">View parameters</h3>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	      	Clustering parameters : 
+	        <div id="infosParam"></div>
+	        <div class="footer_modal">
+            	<button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">x</button>
+	        </div>
 	      </div>
 	    </div>
 	  </div>
