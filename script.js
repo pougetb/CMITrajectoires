@@ -888,9 +888,12 @@ $(".nav_fullscreen").on("click",function(p_this){
 			//recentre la map
 			let str_tab_all_poly = map.replace("map_","");
 			//p(str_tab_all_poly);
-			global_tabMap[map].fitBounds(L.polyline(global_tab_all_polyline[str_tab_all_poly]).getBounds(),{
-				maxZoom : 13,
-			});
+			if(global_tab_all_polyline[str_tab_all_poly].length !=0){
+				global_tabMap[map].fitBounds(L.polyline(global_tab_all_polyline[str_tab_all_poly]).getBounds(),{
+					maxZoom : 13,
+				});
+			}
+			
 		}
 		
 		
