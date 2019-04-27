@@ -371,6 +371,7 @@ function generePolyline(p_type_traj,p_id_traj, p_color_traj,p_isPattern,p_fullsc
 			"<div class='popup_content'>"
 			+ "<div class='popup_infos'><div class='popup_labels'>id : </div> " + event.sourceTarget.options.attr_id + "</div>"
 			+ "<div class='container_textInfoTraj'><div class='popup_labels'>Infos :</div> Objects : " + data[p_type_traj][p_id_traj].objects.join(", ") + "</br>Start date : " + dateDebut + "</br>End date : " + dateFin + " </div>"
+			+ "<div onclick='enregistreCommentaire(this)'>save comment</div>"
 			+ "<div class='popup_boutonHide' onclick='hideTraj(this)' attr_id_traj='" + p_id_traj + "' attr_type_traj='" + p_type_traj + "' attr_fullscreen='" + p_fullscreen + "'>Hide this trajectorie</div>"
 			+ "</div>";
 			event.target.bindPopup(popupContent).openPopup();
@@ -905,3 +906,7 @@ $(document).ready(function() {
     //recupJSON();
     //recupJSON("patterns");
 });
+
+function enregistreCommentaire(p_this){
+
+}
