@@ -779,9 +779,7 @@ function reduire_menu(div_reduire_menu){
 	let type_traj = "map_" + $(div_reduire_menu).parent().attr("attr_type_traj");
 	global_tabMap[type_traj].invalidateSize();
 }
-function full_screen(){
-	window.open('full_screen.html', 'window name', 'window settings');
-}
+
 
 
 /*MODIF*/
@@ -789,6 +787,7 @@ function toggleClassActive(p_this){
 	$(p_this).toggleClass("bouton-select_traj_active");
 }
 /*FIN MODIF*/
+
 
 /*--===Fonctions d'affichage===--*/
 
