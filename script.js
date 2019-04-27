@@ -353,7 +353,7 @@ function generePolyline(p_type_traj,p_id_traj, p_color_traj,p_isPattern,p_fullsc
 
 		global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj]=L.polyline(latlngs, {
 			color: p_color_traj,
-			weight:3,
+			weight:4,
 			clickable:true,
 			attr_id:p_id_traj,
 		});
@@ -409,7 +409,7 @@ function generePolyline(p_type_traj,p_id_traj, p_color_traj,p_isPattern,p_fullsc
 		global_tab_all_polyline[p_type_traj+str_fullscreen].push(latlngs);
 		global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj]=L.polyline(latlngs, {
 			color: p_color_traj,
-			weight:3,
+			weight:4,
 			clickable:true,
 			attr_id:p_id_traj,
 		});
