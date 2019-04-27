@@ -266,8 +266,13 @@ function recupJSON(p_type="raws"){
             p(type+":");
             p(result);
             if(p_type === "raws"){
-                data.raw = result;
-                genereListeTrajectoires(type,true);
+                data.raw=result.objects;
+				data.fileInfos= {};
+				data.fileInfos.end = result.end;
+				data.fileInfos.start = result.start;
+				data.fileInfos.filename = result.filename;
+				data.fileInfos.timestep = result.timestep;
+                genereListeTrajectoires("raw",true);
             }
             else{
                 for(let obj in result){
