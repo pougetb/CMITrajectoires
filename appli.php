@@ -132,7 +132,7 @@ unset($_SESSION["working"]);
 					<div>GetMove</div>
 				</div>
 			</li>
-			<li class="onglet_options">
+			<li class="onglet_options" attr_type="help">
 				<div class="label_nav_options">
 					<img class="logo_nav_options" src="Images/Icons/info.svg">
 					<div class="espace"> </div>
@@ -151,6 +151,7 @@ unset($_SESSION["working"]);
 		</ul>
 	</div>
 	<!-- FIN nav bar -->
+	
 	<div class="tab-content">
 		
 			<!-- PAGE ALL TRAJECTORIES -->
@@ -628,6 +629,9 @@ unset($_SESSION["working"]);
 					</div>
 				</div>
 			</div>
+
+			<!-- PAGE HELP -->
+			<div id="help" class="tab-pane">ceci est la page help</div>
 	</div>
 
 
