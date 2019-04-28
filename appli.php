@@ -173,7 +173,7 @@ unset($_SESSION["working"]);
 									
 									<div class="menu_bouton_affichage">
 										<div class="bouton_reduire" onclick="reduire(this)"><i class="tiny material-icons">remove</i></div>
-										<div class="bouton_full_screen" onclick="full_screen()"><i class="tiny material-icons">open_in_new</i></div>
+										<div class="bouton_full_screen" attr_type_traj="raw" onclick="full_screen(this)"><i class="tiny material-icons">open_in_new</i></div>
 									</div>
 									
 									<div class="menu_bouton_mouvement">
@@ -222,7 +222,7 @@ unset($_SESSION["working"]);
 									
 									<div class="menu_bouton_affichage">
 										<div class="bouton_reduire" onclick="reduire(this)"><i class="tiny material-icons">remove</i></div>
-										<div class="bouton_full_screen" onclick="full_screen()"><i class="tiny material-icons">open_in_new</i></div>
+										<div class="bouton_full_screen" attr_type_traj="closedswarm" onclick="full_screen(this)"><i class="tiny material-icons">open_in_new</i></div>
 									</div>
 									
 									<div class="menu_bouton_mouvement">
@@ -276,7 +276,7 @@ unset($_SESSION["working"]);
 									
 									<div class="menu_bouton_affichage">
 										<div class="bouton_reduire" onclick="reduire(this)"><i class="tiny material-icons">remove</i></div>
-										<div class="bouton_full_screen" onclick="full_screen()"><i class="tiny material-icons">open_in_new</i></div>
+										<div class="bouton_full_screen" attr_type_traj="convoy" onclick="full_screen(this)"><i class="tiny material-icons">open_in_new</i></div>
 									</div>
 									
 									<div class="menu_bouton_mouvement">
@@ -335,7 +335,7 @@ unset($_SESSION["working"]);
 									
 									<div class="menu_bouton_affichage">
 										<div class="bouton_reduire" onclick="reduire(this)"><i class="tiny material-icons">remove</i></div>
-										<div class="bouton_full_screen" onclick="full_screen()"><i class="tiny material-icons">open_in_new</i></div>
+										<div class="bouton_full_screen" attr_type_traj="divergent" onclick="full_screen(this)"><i class="tiny material-icons">open_in_new</i></div>
 									</div>
 									
 									<div class="menu_bouton_mouvement">
@@ -397,7 +397,7 @@ unset($_SESSION["working"]);
 									
 									<div class="menu_bouton_affichage">
 										<div class="bouton_reduire" onclick="reduire(this)"><i class="tiny material-icons">remove</i></div>
-										<div class="bouton_full_screen" onclick="full_screen()"><i class="tiny material-icons">open_in_new</i></div>
+										<div class="bouton_full_screen" attr_type_traj="convergent" onclick="full_screen(this)"><i class="tiny material-icons">open_in_new</i></div>
 									</div>
 									
 									<div class="menu_bouton_mouvement">
@@ -468,7 +468,7 @@ unset($_SESSION["working"]);
 						
 						
 						
-						<div class="newWindowButton_fullscreen" onclick="full_screen()"><i class="tiny material-icons">open_in_new</i></div>
+						<div class="newWindowButton_fullscreen" attr_type_traj="raw" onclick="full_screen(this)"><i class="tiny material-icons">open_in_new</i></div>
 						
 												
 
@@ -503,7 +503,7 @@ unset($_SESSION["working"]);
 						
 						
 						
-						<div class="newWindowButton_fullscreen" onclick="full_screen()"><i class="tiny material-icons">open_in_new</i></div>
+						<div class="newWindowButton_fullscreen" attr_type_traj="closedswarm" onclick="full_screen(this)"><i class="tiny material-icons">open_in_new</i></div>
 						
 												
 
@@ -538,7 +538,7 @@ unset($_SESSION["working"]);
 						
 						
 						
-						<div class="newWindowButton_fullscreen" onclick="full_screen()"><i class="tiny material-icons">open_in_new</i></div>
+						<div class="newWindowButton_fullscreen" attr_type_traj="convoy" onclick="full_screen(this)"><i class="tiny material-icons">open_in_new</i></div>
 						
 												
 
@@ -572,7 +572,7 @@ unset($_SESSION["working"]);
 						
 						
 						
-						<div class="newWindowButton_fullscreen" onclick="full_screen()"><i class="tiny material-icons">open_in_new</i></div>
+						<div class="newWindowButton_fullscreen" attr_type_traj="divergent" onclick="full_screen(this)"><i class="tiny material-icons">open_in_new</i></div>
 						
 												
 
@@ -606,7 +606,7 @@ unset($_SESSION["working"]);
 						
 						
 						
-						<div class="newWindowButton_fullscreen" onclick="full_screen()"><i class="tiny material-icons">open_in_new</i></div>
+						<div class="newWindowButton_fullscreen" attr_type_traj="convergent" onclick="full_screen(this)"><i class="tiny material-icons">open_in_new</i></div>
 						
 												
 
@@ -779,7 +779,7 @@ unset($_SESSION["working"]);
 <script src="raws.js"></script>
     
 <script src="script.js"></script>
-
+<script src="createExternalWindow.js"></script>
 <!-- Fonctions d'affichage -->
 <!-- <script src="spript-affichage.js"></script> -->
 

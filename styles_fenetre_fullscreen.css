@@ -1,8 +1,5 @@
 .fenetre_fullscreen{
     margin:1% 1% 1% 1%;
-    flex-shrink:1;
-	flex-grow:1; 
-    flex-basis: 100px;
     border : solid 1px grey;
 	display:flex;
 	flex-direction: row;
@@ -12,10 +9,6 @@
 
 .menu_choix_traj.fullscreen{
 	border-radius:6px;
-	flex-shrink:1;
-	flex-grow:1; 
-	flex-basis: 100px;
-	max-height:100% !important;
 	margin:4% !important;
 	padding:2% 0% !important;
 	display:flex;

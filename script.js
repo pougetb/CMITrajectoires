@@ -1,5 +1,5 @@
 function p(truc){
-	console.log(truc);
+    console.log(truc);
 }
 
 
@@ -18,13 +18,17 @@ function recupJSON(type="raws"){
 	$.ajax({
 		url: "get_data.php?type=" + type, 
 		success: function(result){
-			if(type === "raws"){
-				remplieData(result, true);
-				ajoutFichier();
-			}else{
-				remplieData(result);
-				ajoutParam();
-			}
+            if(!("error" in result)) {
+                if(type === "raws"){
+                    remplieData(result, true);
+                    ajoutFichier();
+                }else{
+                    remplieData(result);
+                    ajoutParam();
+                }
+            } else {
+                p(result["error"]);
+            }
 	}});
 }
 
@@ -50,7 +54,7 @@ function remplieData(p_json,is_raws=false){
 }
 
 /* ---tableau contenant les objets fenetres réduites--- */
-var gloabl_tabFenetreReduite = Array();
+var global_tabFenetreReduite = Array();
 
 /* ---Tab Polyline--- */
 
@@ -397,7 +401,7 @@ function generePolyline(p_type_traj,p_id_traj, p_color_traj,p_isPattern,p_fullsc
 
 		global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj]=L.polyline(latlngs, {
 			color: p_color_traj,
-			weight:3,
+			weight:4,
 			clickable:true,
 			attr_id:p_id_traj,
 		});
@@ -419,15 +423,18 @@ function generePolyline(p_type_traj,p_id_traj, p_color_traj,p_isPattern,p_fullsc
 			+ "</div>";
 			event.target.bindPopup(popupContent).openPopup();
 		});
-
-		global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj].on('mouseover', function(event) {
-			this.setStyle({weight : 5});
+		global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj].on('mouseover',function(){
+			
+			global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj].setStyle({
+				weight:5,
+			});
 		});
-
-		global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj].on('mouseout', function(event) {
-			this.setStyle({weight : 3});
+		global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj].on('mouseout',function(){
+			
+			global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj].setStyle({
+				weight:3,
+			});
 		});
-
 		global_tabPolyline[p_type_traj+str_fullscreen]["decorator"][p_id_traj] = L.polylineDecorator(global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj], {
 			patterns: [
 				{
@@ -450,21 +457,42 @@ function generePolyline(p_type_traj,p_id_traj, p_color_traj,p_isPattern,p_fullsc
 		global_tab_all_polyline[p_type_traj+str_fullscreen].push(latlngs);
 		global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj]=L.polyline(latlngs, {
 			color: p_color_traj,
-			weight:3,
+			weight:4,
 			clickable:true,
 			attr_id:p_id_traj,
 		});
     	
 		global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj].addTo(global_tabMap["map_" + p_type_traj+str_fullscreen]);
+		
+		
 		global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj].on('click', function(event) {
+			p(data);
+			let comment = data[p_type_traj][p_id_traj].comment;
+			if(!comment){
+				comment ="";
+				p("aucun comment enregistré");
+			}
 			let popupContent = 
 			"<div class='popup_content'>"
 			+ "<div class='popup_infos'><div class='popup_labels'>id : </div> " + event.sourceTarget.options.attr_id + "</div>"
-			+ "<div class='container_textInfoTraj'><div class='popup_labels'>Infos :</div><textarea id='story' name='story' rows='5' cols='20'></textarea></div>"
+			+ "<div class='container_textInfoTraj'><div class='popup_labels'>Infos :</div><textarea id='story' name='story' rows='5' cols='20' >"+ comment +"	</textarea></div>"
+			+ "<div class='popup_boutonHide' attr_id_traj='" + p_id_traj + "' attr_type_traj='" + p_type_traj +"' onclick='enregistreCommentaire(this)'>save comment</div>"
 			+ "<div class='popup_boutonHide' onclick='hideTraj(this)' attr_id_traj='" + p_id_traj + "' attr_type_traj='" + p_type_traj + "' attr_fullscreen='" + p_fullscreen + "'>Hide this trajectorie</div>"
 			+ "</div>";
 			
 			event.target.bindPopup(popupContent).openPopup();
+		});
+		global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj].on('mouseover',function(){
+			
+			global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj].setStyle({
+				weight:5,
+			});
+		});
+		global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj].on('mouseout',function(){
+			
+			global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj].setStyle({
+				weight:3,
+			});
 		});
 
 		global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj].on('mouseover', function(event) {
@@ -562,7 +590,7 @@ function reduire(div_red){
 	// p(tab_fenetre);
 
 	//on stock la fenetre dans la var globale
-	gloabl_tabFenetreReduite.push(obj_fenetre);
+	global_tabFenetreReduite.push(obj_fenetre);
 	
 	if(indice_fenetre == (tab_fenetre.length - 1)){
 		//c'est le dernier element, on le display none
@@ -607,9 +635,9 @@ function agrandire(div_onglet){
 
 	//recherche de la bonne fenetre
 	let obj_fenetre;
-	for(let i=0; i<gloabl_tabFenetreReduite.length;i++){
-		if(type_traj.localeCompare(gloabl_tabFenetreReduite[i].attr("attr_type_traj"))==0){
-			obj_fenetre = gloabl_tabFenetreReduite[i];
+	for(let i=0; i<global_tabFenetreReduite.length;i++){
+		if(type_traj.localeCompare(global_tabFenetreReduite[i].attr("attr_type_traj"))==0){
+			obj_fenetre = global_tabFenetreReduite[i];
 		}
 	}
 
@@ -843,9 +871,7 @@ function reduire_menu(div_reduire_menu){
 	let type_traj = "map_" + $(div_reduire_menu).parent().attr("attr_type_traj");
 	global_tabMap[type_traj].invalidateSize();
 }
-function full_screen(){
-	window.open('full_screen.html', 'window name', 'window settings');
-}
+
 
 
 /*MODIF*/
@@ -853,6 +879,7 @@ function toggleClassActive(p_this){
 	$(p_this).toggleClass("bouton-select_traj_active");
 }
 /*FIN MODIF*/
+
 
 /*--===Fonctions d'affichage===--*/
 
@@ -924,23 +951,88 @@ function search(p_this){
 	}
 }
 
-initMaps();
-initTabPolyline();
-initTabAllPolyline();
-recupJSON();
-recupJSON("patterns");
-
 /*FIX REFRESH FULLSCREEN MAP NAV*/
 $(".nav_fullscreen").on("click",function(p_this){
 	let type = $(p_this.currentTarget).attr("attr_type");
 	let tab_page_content = $(".tab-content>.tab-pane");
+
+	let str_fullscreen = "_fullscreen";
+	if(type === "all"){
+		str_fullscreen = "";
+	}
+
+	//on cache toute les pages
 	for(let i=0;i<tab_page_content.length;i++){
 		$(tab_page_content[i]).hide();
 	}
+	//on affiche la/les bonne(s) cartes
+
 	$("#"+type).fadeIn(200,function(){
-		for(let map in global_tabMap){
-			global_tabMap[map].invalidateSize();
+		
+		if(type =="all"){
+			global_tabMap["map_raw"].invalidateSize();
+			if(global_tab_all_polyline["raw"].length !=0){
+				global_tabMap["map_raw"].fitBounds(L.polyline(global_tab_all_polyline["raw"]).getBounds(),{
+					maxZoom : 13,
+				});
+			}
+
+			global_tabMap["map_closedswarm"].invalidateSize();
+			if(global_tab_all_polyline["closedswarm"].length !=0){
+				global_tabMap["map_closedswarm"].fitBounds(L.polyline(global_tab_all_polyline["closedswarm"]).getBounds(),{
+					maxZoom : 13,
+				});
+			}
+
+			global_tabMap["map_convoy"].invalidateSize();
+			if(global_tab_all_polyline["convoy"].length !=0){
+				global_tabMap["map_convoy"].fitBounds(L.polyline(global_tab_all_polyline["convoy"]).getBounds(),{
+					maxZoom : 13,
+				});
+			}
+
+			global_tabMap["map_divergent"].invalidateSize();
+			if(global_tab_all_polyline["divergent"].length !=0){
+				global_tabMap["map_divergent"].fitBounds(L.polyline(global_tab_all_polyline["divergent"]).getBounds(),{
+					maxZoom : 13,
+				});
+			}
+
+			global_tabMap["map_convergent"].invalidateSize();
+			if(global_tab_all_polyline["convergent"].length !=0){
+				global_tabMap["map_convergent"].fitBounds(L.polyline(global_tab_all_polyline["convergent"]).getBounds(),{
+					maxZoom : 13,
+				});
+			}
 		}
+		else{
+			global_tabMap["map_"+type+"_fullscreen"].invalidateSize();
+			if(global_tab_all_polyline[type+"_fullscreen"].length !=0){
+				global_tabMap["map_"+type+"_fullscreen"].fitBounds(L.polyline(global_tab_all_polyline[type+"_fullscreen"]).getBounds(),{
+					maxZoom : 13,
+				});
+			}
+		}
+		
+		
 	});
 });
 /*FIN FIX REFRESH FULLSCREEN MAP NAV*/
+
+$(document).ready(function() {
+    resetViews();
+    initMaps();
+    initTabPolyline();
+    initTabAllPolyline();
+    recupJSON();
+    recupJSON("patterns");
+});
+
+function enregistreCommentaire(p_this){
+	let zoneText = $(p_this).siblings(".container_textInfoTraj").children("textarea");
+	let type = $(p_this).attr("attr_type_traj");
+	let id = $(p_this).attr("attr_id_traj");
+	let newComment = zoneText.val();
+	zoneText.val(newComment);
+	data[type][id]["comment"]=newComment;
+}
