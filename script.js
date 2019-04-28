@@ -471,21 +471,19 @@ function generePolyline(p_type_traj,p_id_traj, p_color_traj,p_isPattern,p_fullsc
 		
 		
 		global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj].on('click', function(event) {
-			p(data);
 			let comment = data[p_type_traj][p_id_traj].comment;
 			if(!comment){
 				comment ="";
-				p("aucun comment enregistré");
 			}
 			let popupContent = 
 			"<div class='popup_content'>"
 			+ "<div class='popup_infos'><div class='popup_labels'>id : </div> " + event.sourceTarget.options.attr_id + "</div>"
-			+ "<div class='container_textInfoTraj'><div class='popup_labels'>Infos :</div><textarea id='story' name='story' rows='5' cols='20' >"+ comment +"	</textarea></div>"
-			+ "<div class='popup_boutonHide' attr_id_traj='" + p_id_traj + "' attr_type_traj='" + p_type_traj +"' onclick='enregistreCommentaire(this)'>save comment</div>"
+			+ "<div class='container_textInfoTraj'><div class='popup_labels'>Infos :</div><textarea onchange='textupdate(this)' class='textarea' id='story' name='story' rows='5' cols='20' >"+ comment +"</textarea></div>"
+			+ "<div class='popup_bouton saved' attr_id_traj='" + p_id_traj + "' attr_type_traj='" + p_type_traj +"' onclick='enregistreCommentaire(this)'><div class='label_save_comment'>comment saved</div><i class='tiny material-icons'>check</i></div>"
 			+ "<div class='popup_boutonHide' onclick='hideTraj(this)' attr_id_traj='" + p_id_traj + "' attr_type_traj='" + p_type_traj + "' attr_fullscreen='" + p_fullscreen + "'>Hide this trajectorie</div>"
 			+ "</div>";
-			
 			event.target.bindPopup(popupContent).openPopup();
+			
 		});
 		global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj].on('mouseover',function(){
 			
@@ -1026,10 +1024,31 @@ $(document).ready(function() {
 });
 
 function enregistreCommentaire(p_this){
-	let zoneText = $(p_this).siblings(".container_textInfoTraj").children("textarea");
-	let type = $(p_this).attr("attr_type_traj");
-	let id = $(p_this).attr("attr_id_traj");
-	let newComment = zoneText.val();
-	zoneText.val(newComment);
-	data[type][id]["comment"]=newComment;
+	if(!($(p_this).hasClass("saved"))){
+		//on recupère le nouveau comment
+		let zoneText = $(p_this).siblings(".container_textInfoTraj").children("textarea");
+		let type = $(p_this).attr("attr_type_traj");
+		let id = $(p_this).attr("attr_id_traj");
+		let newComment = zoneText.val();
+		zoneText.val(newComment);
+		//on modifie le json
+		data[type][id]["comment"]=newComment;
+
+		//on ajoute les classes de style
+		let button_save = $(p_this);
+		button_save.addClass("saved");
+		button_save.children(".label_save_comment").html("comment saved");
+		button_save.children("i").html("check");
+	}
+	
 }
+
+function textupdate(p_this){
+	p("comment changed");
+	let button_save = $(p_this).parent().siblings(".popup_bouton");
+	button_save.removeClass("saved");
+	button_save.children(".label_save_comment").html("save changes");
+	button_save.children("i").html("more_horiz");
+
+}
+

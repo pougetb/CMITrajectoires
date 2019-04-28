@@ -464,6 +464,38 @@ body>div{
 	border-radius:4px;
 	margin:4% auto !important;
 	padding:0 5%;
+	display:flex;
+	flex-direction:row;
+}
+
+.popup_bouton{
+	border:1px solid #33658A;
+	color:#33658A;
+	text-align:center;
+	border-radius:4px;
+	margin:4% auto !important;
+	padding:0 5%;
+	display:flex;
+	flex-direction:row;
+}
+.popup_bouton:hover{
+	border:1px solid white;
+	color:white;
+	background-color:#33658A;
+}
+.saved{
+	border:1px solid #00B55D;
+	color:#00B55D;
+}
+.saved:hover{
+	border:1px solid #00B55D;
+	color:#00B55D;
+	background-color:white;
+}
+
+
+.label_save_comment{
+	margin:auto
 }
 .popup_boutonHide:hover{
 	border:1px solid white;
