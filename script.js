@@ -1014,6 +1014,23 @@ $(".nav_fullscreen").on("click",function(p_this){
 	});
 });
 /*FIN FIX REFRESH FULLSCREEN MAP NAV*/
+/* Affichage de la page help */
+$(".onglet_options").filter("[attr_type=help]").on("click",function(){
+	let tab_page_content = $(".tab-content>.tab-pane");
+
+	//on retire les class active des onglets
+	let tab_onglet_fullscreen = $("li.onglet_fullscreen");
+	for(let i=0;i<tab_onglet_fullscreen.length;i++){
+		$(tab_onglet_fullscreen[i]).removeClass("active");
+	}
+	//on cache toute les pages
+	for(let i=0;i<tab_page_content.length;i++){
+		$(tab_page_content[i]).hide();
+	}
+	$("#help").fadeIn(200);
+
+});
+/* FIN Affichage de la page help */
 
 $(document).ready(function() {
     resetViews();
