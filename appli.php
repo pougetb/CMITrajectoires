@@ -8,6 +8,8 @@ session_start();
 	<title>Trajectory viewer</title>
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	
 
 	<!-- Leaflet -->
@@ -19,7 +21,8 @@ session_start();
 	<script src="PolylineDecorator/leaflet.polylineDecorator.js"></script>
 
 	<!-- JQuery -->
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
 
 	<!-- Download plugin -->
 	<script src="download.js"></script>
@@ -27,7 +30,6 @@ session_start();
 	<!-- Bootstrap -->
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
@@ -754,8 +756,8 @@ session_start();
 	      <div class="modal-body">
 	      	Fill in the clustering parameters :
 	        <form action="run.php" method="POST" enctype="multipart/form-data">
-	            Start date (YYYY-MM-DD): <input type="text" name="start-date"/><br/>
-	            End date (YYYY-MM-DD): <input type="text" name="end-date"/><br/>
+	            Start date (YYYY-MM-DD): <input class="date-select" type="text" name="start-date"/><br/>
+	            End date (YYYY-MM-DD): <input class="date-select" type="text" name="end-date"/><br/>
 	            Clustering period: <input type="text" name="interval"/><br/>
 	            DBSCAN epsilon: <input type="text" name="epsilon" value="0.7"/><br/>
 	            DBSCAN min_t: <input type="text" name="mint" value="5"/><br/>

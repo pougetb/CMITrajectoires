@@ -24,6 +24,11 @@ function recupJSON(type="raws"){
                 if(type === "raws"){
                     remplieData(result, true);
                     ajoutFichier();
+                    let start = new Date(data.fileInfos.start / 1000000);
+                    let end = new Date(data.fileInfos.end / 1000000);
+                    $(".date-select").datepicker("option", "defaultDate", start);
+                    $(".date-select").datepicker("option", "minDate", start);
+                    $(".date-select").datepicker("option", "maxDate", end);
                     $("#fileload-notif").addClass("d-none");
                 }else{
                     remplieData(result);
@@ -1041,6 +1046,8 @@ $(document).ready(function() {
     initTabAllPolyline();
     recupJSON();
     recupJSON("patterns");
+
+    $(".date-select").datepicker({dateFormat:"yy-mm-dd"});
 });
 
 function enregistreCommentaire(p_this){
