@@ -58,31 +58,52 @@ unset($_SESSION["working"]);
 				</div>
 
 				<ul class="submenu">
-					<li class="onglet_options">
+					<li class="onglet_options linofile">
 						<div class="label_nav_options">
 							<a href="#" data-toggle="modal" data-target="#openModal">Open</a>
 						</div>
 					</li>
-					<li class="onglet_options">
+					<li class="onglet_options file">
+						<div class="label_nav_options">
+							Open
+						</div>
+					</li>
+					<li class="onglet_options linofile">
 						<div class="label_nav_options">
 							<a href="#" data-toggle="modal" data-target="#importModal">Import</a>
 						</div>
 					</li>
-					<li class="onglet_options">
+					<li class="onglet_options file">
+						<div class="label_nav_options">
+							Import
+						</div>
+					</li>
+
+					<li class="onglet_options lifile">
 						<div class="label_nav_options">
 							<a href="#" data-toggle="modal" data-target="#saveModal">Save</a>
 						</div>
 					</li>
-					<li class="onglet_options">
+					<li class="onglet_options nofile">
+						<div class="label_nav_options">
+							Save
+						</div>
+					</li>
+					<li class="onglet_options lifile">
 						<div class="label_nav_options">
 							<a href="#" data-toggle="modal" data-target="#quitModal">Quit session</a>
+						</div>
+					</li>
+					<li class="onglet_options nofile">
+						<div class="label_nav_options">
+							Quit session
 						</div>
 					</li>
 				</ul>
 
 			</li>
 			<!-- string logo download: get_app -->
-			<li class="onglet_options">
+			<li class="onglet_options lifile">
 				<div class="label_nav_options">
 					<img class="logo_nav_options" src="Images/Icons/search.svg">
 					<div class="espace"> </div>
@@ -94,12 +115,22 @@ unset($_SESSION["working"]);
 							<a href="#" data-toggle="modal" data-target="#setParamModal">Set parameters</a>
 						</div>
 					</li>
-					<li class="onglet_options">
+					<li class="onglet_options param">
 						<div class="label_nav_options">
 							<a href="#" data-toggle="modal" data-target="#viewParamModal">View parameters</a>
 						</div>
 					</li>
+					<li class="onglet_options noparam">
+							View parameters
+					</li>
 				</ul>
+			</li>
+			<li class="onglet_options nofile">
+				<div class="label_nav_options">
+					<img class="logo_nav_options" src="Images/Icons/search.svg">
+					<div class="espace"> </div>
+					<div>GetMove</div>
+				</div>
 			</li>
 			<li class="onglet_options">
 				<div class="label_nav_options">

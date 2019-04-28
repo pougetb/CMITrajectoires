@@ -5,6 +5,12 @@ function p(truc){
 
 /* ---===Variables Globales===---*/
 
+/* --- Statut de la page --- */
+var statut = [false, false];
+// statut[0] = true ssi un fichier est chargé
+// statut[1] = true ssi les parametres sont chargé
+
+
 /* ---JSON--- */
 //data : variable json contenant toutes les données
 
@@ -143,6 +149,46 @@ function initTabAllPolyline(){
 
 /* ---===FIN variables globales===--- */
 
+function setStatut(type){
+	if(type === "file"){
+		statut[0] = true;
+		unableMenu();
+	}else if(type === "param"){
+		statut[1] = true;
+		unableMenu();
+	}else if(type === "json"){
+		statut[0] = true;
+		statut[1] = true;
+		unableMenu();
+	}else if(type === "reset"){
+		statut[0] = false;
+		statut[1] = false;
+		unableMenu();
+	}else{
+		p("Erreur statut");
+	}
+}
+function unableMenu(){
+	if(statut[0] == true){
+		$(".file").show();
+		$(".nofile").hide();
+		$(".lifile").show();
+		$(".linofile").hide();
+	}else if(statut[0] == false){
+		$(".linofile").show();
+		$(".nofile").show();
+		$(".lifile").hide();
+		$(".file").hide();
+	}
+	if(statut[1] == true){
+		$(".param").show();
+		$(".noparam").hide();
+	}else if(statut[1] == false){
+		$(".noparam").show();
+		$(".param").hide();
+	}
+}
+
 function initMaps(){
 	/* **maps all traj** */
 	L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}").addTo(global_tabMap["map_raw"]);
@@ -197,6 +243,7 @@ function ajoutFichier(){
 	var timestep = timestepToString(data.fileInfos.timestep);
 	$(".param_fichier").html("Start date : " + start.toLocaleString() + " | End date : " + end.toLocaleString() + "</br> Timestep : " + timestep);
 	$("#dateSetParam").html("Start : " + start.toLocaleString() + " - End : " + end.toLocaleString());
+	setStatut("file");
 }
 
 function ajoutParam(){
@@ -206,7 +253,8 @@ function ajoutParam(){
 			"<br/> Clustering period : " + timestepToString(data.infos.clustering_period) + 
 			"<br/> DBSCAN epsilon : " + data.infos.epsilon + 
 			"<br/> DBSCAN min_t : " + data.infos.min_t
-		)
+		);
+	setStatut("param");
 }
 
 /* ----- Import button ----- */
@@ -220,6 +268,7 @@ $("#submitJSON").click(function(event){
         ajoutFichier();
         genereRaws();
         generePatterns();
+        setStatut("json");
     });
 
 	reader.readAsText(file);
@@ -243,10 +292,9 @@ $("#quitSession").click(function(event){
 	resetViews();
 	initTabPolyline();
 	initTabAllPolyline();
-	
 	data = {};
+	setStatut("reset");
 });
-
 
 function genereRaws(){
 	genereListeTrajectoires("raw");
@@ -372,6 +420,14 @@ function generePolyline(p_type_traj,p_id_traj, p_color_traj,p_isPattern,p_fullsc
 			event.target.bindPopup(popupContent).openPopup();
 		});
 
+		global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj].on('mouseover', function(event) {
+			this.setStyle({weight : 5});
+		});
+
+		global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj].on('mouseout', function(event) {
+			this.setStyle({weight : 3});
+		});
+
 		global_tabPolyline[p_type_traj+str_fullscreen]["decorator"][p_id_traj] = L.polylineDecorator(global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj], {
 			patterns: [
 				{
@@ -398,7 +454,7 @@ function generePolyline(p_type_traj,p_id_traj, p_color_traj,p_isPattern,p_fullsc
 			clickable:true,
 			attr_id:p_id_traj,
 		});
-    
+    	
 		global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj].addTo(global_tabMap["map_" + p_type_traj+str_fullscreen]);
 		global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj].on('click', function(event) {
 			let popupContent = 
@@ -409,6 +465,14 @@ function generePolyline(p_type_traj,p_id_traj, p_color_traj,p_isPattern,p_fullsc
 			+ "</div>";
 			
 			event.target.bindPopup(popupContent).openPopup();
+		});
+
+		global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj].on('mouseover', function(event) {
+			this.setStyle({weight : 5});
+		});
+
+		global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj].on('mouseout', function(event) {
+			this.setStyle({weight : 3});
 		});
 
 		global_tabPolyline[p_type_traj+str_fullscreen]["decorator"][p_id_traj] = L.polylineDecorator(global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj], {
