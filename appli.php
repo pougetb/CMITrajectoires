@@ -131,7 +131,7 @@ session_start();
 					<div>GetMove</div>
 				</div>
 			</li>
-			<li class="onglet_options">
+			<li class="onglet_options" attr_type="help">
 				<div class="label_nav_options">
 					<img class="logo_nav_options" src="Images/Icons/info.svg">
 					<div class="espace"> </div>
@@ -593,6 +593,8 @@ session_start();
 					</div>
 				</div>
 			</div>
+
+			<div id="help" class="tab-pane">Aled</div>
 
 			<!-- PAGE CONVERGENT -->
 			<div id="convergent" class="tab-pane">
