@@ -286,8 +286,15 @@ function recupJSON(p_type="raws"){
         }
     });
 }
-recupJSON();
-recupJSON("patterns");
+function initAjax(p_type){
+	if(p_type === "raw"){
+		recupJSON("raws");
+	}
+	else{
+		recupJSON("patterns");
+	}
+}
+initAjax(type);
 /* Ajout de class selected au li */
 function toggleSelected(p_this){
 

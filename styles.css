@@ -27,6 +27,11 @@ body>div{
 	width:100%;
 	background-color:#86BBD8;
 }
+
+.nav>li {
+	display:flex;
+}
+
 .nav-tabs{
 	border-color: grey !important;
 }
@@ -54,7 +59,7 @@ body>div{
 .onglet_options{
 	/* margin-left:1%; */
 	padding-top: 0.25%;
-	display:flex !important;
+	display:flex;
 	flex-grow:75;
 	text-align:center;
 }
@@ -104,7 +109,12 @@ body>div{
 	z-index:10000;
 }
 
-
+/* fake menu */
+.nofile, .file, .noparam{
+	background-color: #6c94ab !important;
+	color: grey !important;
+	pointer-events:none;
+}
 
 /* ---===FIN nav bar===--- */
 

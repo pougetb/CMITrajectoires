@@ -4,7 +4,7 @@ function p(truc){
 function full_screen(p_this){
     let type = $(p_this).attr("attr_type_traj");
     //on recupère les paramètres (type traj, données);
-    
+    p(type);
     let str_page =
     "<?php"+
     "session_start();"+
