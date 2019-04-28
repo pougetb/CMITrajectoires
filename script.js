@@ -1018,9 +1018,9 @@ $(".onglet_options").filter("[attr_type=help]").on("click",function(){
 	let tab_page_content = $(".tab-content>.tab-pane");
 
 	//on retire les class active des onglets
-	let tab_onglet_fullscreen = $(".onglet_fullscreen");
-	for(let onglet in tab_onglet_fullscreen){
-		$(tab_onglet_fullscreen[onglet]).removeClass("active");
+	let tab_onglet_fullscreen = $("li.onglet_fullscreen");
+	for(let i=0;i<tab_onglet_fullscreen.length;i++){
+		$(tab_onglet_fullscreen[i]).removeClass("active");
 	}
 	//on cache toute les pages
 	for(let i=0;i<tab_page_content.length;i++){
