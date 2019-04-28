@@ -401,7 +401,7 @@ function generePolyline(p_type_traj,p_id_traj, p_color_traj,p_isPattern,p_fullsc
 
 		global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj]=L.polyline(latlngs, {
 			color: p_color_traj,
-			weight:4,
+			weight:3,
 			clickable:true,
 			attr_id:p_id_traj,
 		});
@@ -457,7 +457,7 @@ function generePolyline(p_type_traj,p_id_traj, p_color_traj,p_isPattern,p_fullsc
 		global_tab_all_polyline[p_type_traj+str_fullscreen].push(latlngs);
 		global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj]=L.polyline(latlngs, {
 			color: p_color_traj,
-			weight:4,
+			weight:3,
 			clickable:true,
 			attr_id:p_id_traj,
 		});
@@ -493,14 +493,6 @@ function generePolyline(p_type_traj,p_id_traj, p_color_traj,p_isPattern,p_fullsc
 			global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj].setStyle({
 				weight:3,
 			});
-		});
-
-		global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj].on('mouseover', function(event) {
-			this.setStyle({weight : 5});
-		});
-
-		global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj].on('mouseout', function(event) {
-			this.setStyle({weight : 3});
 		});
 
 		global_tabPolyline[p_type_traj+str_fullscreen]["decorator"][p_id_traj] = L.polylineDecorator(global_tabPolyline[p_type_traj+str_fullscreen]["traj"][p_id_traj], {
