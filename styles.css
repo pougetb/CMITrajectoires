@@ -508,6 +508,17 @@ body>div{
 }
 /* ---===FIN Footer===--- */
 
+/* ---===DEBUT Notifications===--- */
+#notification-zone{
+    padding:5px;
+    background-color:grey;
+    position:fixed;
+    z-index:999;
+    bottom:5%;
+    right:5%;
+}
+/* ---===FIN Notifications===--- */
+
 /*Style (barre, separator, etc...)*/
 .vertical_separator_grey{
 	border-left:1px solid #d5f5ff;

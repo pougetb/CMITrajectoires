@@ -7,21 +7,25 @@ function p(truc){
 
 /* ---JSON--- */
 //data : variable json contenant toutes les données
-
+timeoutIDS = {"raws":0, "patterns":0};
 function recupJSON(type="raws"){
 	$.ajax({
 		url: "get_data.php?type=" + type, 
 		success: function(result){
             if(!("error" in result)) {
+                p(type + "json ok")
+		        clearTimeout(timeoutIDS[type]);
                 if(type === "raws"){
                     remplieData(result, true);
                     ajoutFichier();
                 }else{
+                    $("#getmove-notif").addClass("d-none");
                     remplieData(result);
                     ajoutParam();
                 }
             } else {
-                p(result["error"]);
+                p(type + "json not ok")
+                timeoutIDS[type] = setTimeout(function(){recupJSON(type);}, 10000);
             }
 	}});
 }
@@ -906,8 +910,8 @@ $(document).ready(function() {
     initMaps();
     initTabPolyline();
     initTabAllPolyline();
-    //recupJSON();
-    //recupJSON("patterns");
+    recupJSON();
+    recupJSON("patterns");
 });
 
 function enregistreCommentaire(p_this){

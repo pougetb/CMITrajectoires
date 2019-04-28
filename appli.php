@@ -1,6 +1,5 @@
 <?php
 session_start();
-unset($_SESSION["working"]);
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -599,6 +598,20 @@ unset($_SESSION["working"]);
 			</div>
 	</div>
 
+    <div id="notification-zone" class="d-flex flex-column<?php if(!isset($_SESSION["errors"])) { ?> d-none <?php } ?>">
+
+        <?php if(isset($_SESSION["errors"])) { ?>
+        <div id="errors-php" class="d-flex flex-column">
+            <?php foreach($_SESSION["errors"] as $value) { ?>
+            <div> <?php echo $value; ?> </div>
+            <?php } ?>
+        </div>
+        <?php unset($_SESSION["errors"]); } ?>
+        
+        <div id="notifications-other" class="d-flex flex-column">
+        </div>
+    </div>
+
 
 </body>
 <!-- Modal -->
@@ -712,6 +725,12 @@ unset($_SESSION["working"]);
 	            	<input type="submit" class="btn btn-info btn-lg" name="submit" value="Upload"/>
 	            </div>
 	        </form>
+            <div id="getmove-notif" class="<?php if(!isset($_SESSION["working"])){ ?>d-none<?php } ?>">
+                <div class="d-flex flex-row">
+                    <div><?php echo file_get_contents("Images/roll-load.svg"); ?></div>
+                    <div>Your file is being processed ...</div>
+                </div>
+            </div>
 	      </div>
 	    </div>
 	  </div>
