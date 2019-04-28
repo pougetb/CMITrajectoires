@@ -192,6 +192,7 @@ function unableMenu(){
 		$(".param").hide();
 	}
 }
+unableMenu();
 
 function initMaps(){
 	/* **maps all traj** */
