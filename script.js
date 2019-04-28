@@ -257,9 +257,11 @@ function ajoutFichier(){
 }
 
 function ajoutParam(){
+	var start = new Date(data.infos.start / 1000000);
+	var end = new Date (data.infos.end / 1000000);
 	$("#infosParam").html(
-			"Start date : " + data.infos.start + 
-			"<br/> End date : " + data.infos.end + 
+			"Start date : " + start.toLocaleString() + 
+			"<br/> End date : " + end.toLocaleString() + 
 			"<br/> Clustering period : " + timestepToString(data.infos.clustering_period) + 
 			"<br/> DBSCAN epsilon : " + data.infos.epsilon + 
 			"<br/> DBSCAN min_t : " + data.infos.min_t
