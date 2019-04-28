@@ -131,7 +131,7 @@ session_start();
 					<div>GetMove</div>
 				</div>
 			</li>
-			<li class="onglet_options" attr_type="help">
+			<li class="onglet_options">
 				<div class="label_nav_options">
 					<img class="logo_nav_options" src="Images/Icons/info.svg">
 					<div class="espace"> </div>
@@ -150,7 +150,6 @@ session_start();
 		</ul>
 	</div>
 	<!-- FIN nav bar -->
-	
 	<div class="tab-content">
 		
 			<!-- PAGE ALL TRAJECTORIES -->
@@ -628,12 +627,9 @@ session_start();
 					</div>
 				</div>
 			</div>
-
-			<!-- PAGE HELP -->
-			<div id="help" class="tab-pane">ceci est la page help</div>
 	</div>
 
-    <div id="notification-zone" class="d-flex flex-column<?php if(!isset($_SESSION["errors"])) { ?> d-none <?php } ?>">
+    <div id="notification-zone" class="<?php if(!isset($_SESSION["errors"])) { echo "d-none"; } else { echo "d-flex flex-column"; }?>">
 
         <?php if(isset($_SESSION["errors"])) { ?>
         <div id="errors-php" class="d-flex flex-column">
@@ -667,6 +663,12 @@ session_start();
 	            	<input type="submit" class="btn btn-info btn-lg" name="submit" value="Upload"/>
 	            </div>
        		</form>
+            <div id="fileload-notif" class="<?php if(!isset($_SESSION["uploading"])){ echo "d-none"; unset($_SESSION["uploading"]);} ?>">
+                <div class="d-flex flex-row align-items-center">
+                    <div><?php echo file_get_contents("Images/roll-load.svg"); ?></div>
+                    <div>Your file is being processed...</div>
+                </div>
+            </div>
 	      </div>
 	    </div>
 	  </div>
@@ -760,10 +762,10 @@ session_start();
 	            	<input type="submit" class="btn btn-info btn-lg" name="submit" value="Upload"/>
 	            </div>
 	        </form>
-            <div id="getmove-notif" class="<?php if(!isset($_SESSION["working"])){ ?>d-none<?php } ?>">
-                <div class="d-flex flex-row">
+            <div id="getmove-notif" class="<?php if(!isset($_SESSION["working"])){ echo "d-none"; } ?>">
+                <div class="d-flex flex-row align-items-center">
                     <div><?php echo file_get_contents("Images/roll-load.svg"); ?></div>
-                    <div>Your file is being processed ...</div>
+                    <div>Your file is being processed...</div>
                 </div>
             </div>
 	      </div>
