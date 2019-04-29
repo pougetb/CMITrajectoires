@@ -758,7 +758,14 @@ session_start();
 	        <form action="run.php" method="POST" enctype="multipart/form-data">
 	            Start date (YYYY-MM-DD): <input class="date-select" type="text" name="start-date"/><br/>
 	            End date (YYYY-MM-DD): <input class="date-select" type="text" name="end-date"/><br/>
-	            Clustering period: <input type="text" name="interval"/><br/>
+                Clustering period: <input type="number" name="interval_value"/>
+                <select name="interval_type">
+                    <option value="D">Day</option>
+                    <option value="H">Hour</option>
+                    <option value="T">Minute</option>
+                    <option value="S">Second</option>
+                </select>
+                <br/>
 	            DBSCAN epsilon: <input type="text" name="epsilon" value="0.7"/><br/>
 	            DBSCAN min_t: <input type="text" name="mint" value="5"/><br/>
 	            <div class="footer_modal">
